@@ -1,5 +1,4 @@
 # Svg Editor
-## Installation
 A simple React Svg editor
 
 install node packages
