@@ -1,0 +1,5 @@
+export const CHANGE_COLOR = 'CHANGE_COLOR'
+export const CHANGE_RADIUS = 'CHANGE_RADIUS'
+export const CHANGE_TEXT = 'CHANGE_TEXT'
+export const CHANGE_X = 'CHANGE_X'
+export const CHANGE_Y = 'CHANGE_Y'

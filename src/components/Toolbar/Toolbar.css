@@ -1,0 +1,6 @@
+.toolContainer{
+  flex-direction: column;
+}
+.toolContainer > .row {
+  margin-top: 10px
+}
