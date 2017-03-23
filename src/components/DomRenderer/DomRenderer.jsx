@@ -6,6 +6,12 @@ import "./DomRenderer.css";
 class DomRenderer extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.handleClick(this.props.data);
   }
 
   render() {
@@ -16,7 +22,7 @@ class DomRenderer extends Component {
 
   renderLeafDom(data) {
     return (
-      <li className="tree-item">
+      <li className="tree-item" onClick={this.handleClick}>
         <span> {data instanceof Circle ? "Circle" : "Rectangle"} </span>
       </li>
     );
@@ -36,7 +42,11 @@ class DomRenderer extends Component {
         </div>
         <ol ref="svg" className="tree">
           {svg.children.map((child, index) => (
-            <DomRenderer key={index} data={child} />
+            <DomRenderer
+              key={index}
+              data={child}
+              handleClick={this.props.handleClick}
+            />
           ))}
         </ol>
       </li>
@@ -45,7 +55,8 @@ class DomRenderer extends Component {
 }
 
 DomRenderer.propTypes = {
-  data: PropTypes.instanceOf(Svg)
+  data: PropTypes.instanceOf(Svg),
+  handleClick: PropTypes.func.isRequired
 };
 
 export default DomRenderer;

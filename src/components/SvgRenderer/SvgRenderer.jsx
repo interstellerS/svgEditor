@@ -6,6 +6,12 @@ import "./SvgRenderer.css";
 class SvgRenderer extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.handleClick(this.props.data);
   }
 
   render() {
@@ -17,13 +23,20 @@ class SvgRenderer extends Component {
   renderLeafSvg(svg) {
     const isCircle = svg instanceof Circle;
     const jsx = isCircle
-      ? <circle r={svg.r} cx={svg.cx} cy={svg.cy} fill={svg.fill} />
+      ? <circle
+          r={svg.r}
+          cx={svg.cx}
+          cy={svg.cy}
+          fill={svg.fill}
+          onClick={this.handleClick}
+        />
       : <rect
           x={svg.x}
           y={svg.y}
           width={svg.width}
           height={svg.height}
           fill={svg.fill}
+          onClick={this.handleClick}
         />;
     return jsx;
   }
@@ -31,7 +44,11 @@ class SvgRenderer extends Component {
     return (
       <svg ref="svg" className="svgRendered">
         {svg.children.map((child, index) => (
-          <SvgRenderer key={index} data={child} />
+          <SvgRenderer
+            key={index}
+            data={child}
+            handleClick={this.props.handleClick}
+          />
         ))}
       </svg>
     );
@@ -39,7 +56,8 @@ class SvgRenderer extends Component {
 }
 
 SvgRenderer.propTypes = {
-  data: PropTypes.instanceOf(Svg)
+  data: PropTypes.instanceOf(Svg),
+  handleClick: PropTypes.func.isRequired
 };
 
 export default SvgRenderer;

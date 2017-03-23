@@ -11,15 +11,24 @@ class UnitRenderer extends Component {
     const { data, index } = this.props;
     const isDom = !!this.props.isDom;
     return isDom
-      ? <DomRenderer data={data} index={index} />
-      : <SvgRenderer data={data} index={index} />;
+      ? <DomRenderer
+          data={data}
+          index={index}
+          handleClick={this.props.handleClick}
+        />
+      : <SvgRenderer
+          data={data}
+          index={index}
+          handleClick={this.props.handleClick}
+        />;
   }
 }
 
 UnitRenderer.propTypes = {
   svg: PropTypes.instanceOf(Svg),
   index: React.PropTypes.number,
-  isDom: React.PropTypes.bool
+  isDom: React.PropTypes.bool,
+  handleClick: PropTypes.func.isRequired
 };
 
 export default UnitRenderer;

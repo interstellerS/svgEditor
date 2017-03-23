@@ -11,12 +11,19 @@ class Tree extends Component {
 
   render() {
     const { svg } = this.props;
-    return <UnitRenderer data={svg} isDom={true} />;
+    return (
+      <UnitRenderer
+        data={svg}
+        isDom={true}
+        handleClick={this.props.handleClick}
+      />
+    );
   }
 }
 
 Tree.propTypes = {
-  svg: PropTypes.instanceOf(Svg)
+  svg: PropTypes.instanceOf(Svg),
+  handleClick: PropTypes.func.isRequired
 };
 
 export default Tree;

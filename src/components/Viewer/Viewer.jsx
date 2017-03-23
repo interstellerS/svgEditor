@@ -11,12 +11,19 @@ class Viewer extends Component {
 
   render() {
     const { width, height, svg } = this.props;
-    return <UnitRenderer data={svg} isDom={false} />;
+    return (
+      <UnitRenderer
+        data={svg}
+        isDom={false}
+        handleClick={this.props.handleClick}
+      />
+    );
   }
 }
 
 Viewer.propTypes = {
-  svg: PropTypes.instanceOf(Svg)
+  svg: PropTypes.instanceOf(Svg),
+  handleClick: PropTypes.func.isRequired
 };
 
 export default Viewer;
