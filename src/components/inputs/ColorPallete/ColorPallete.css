@@ -1,0 +1,17 @@
+
+.pallete {
+  display: inline-block;
+  margin: 4px;
+  border: 6px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pallete:hover {
+  border: 6px solid #EEEEEE;
+}
+
+.pallete-active {
+  composes: pallete;
+  border: 6px solid #E0E0E0;
+}
