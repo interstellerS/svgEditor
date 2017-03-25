@@ -1,48 +1,52 @@
-import React, { Component, PropTypes } from 'react'
-import  SvgShape  from './SvgShape';
+import React, { Component, PropTypes } from "react";
+import SvgShape from "./SvgShape";
 
 export default class Circle extends SvgShape {
+  constructor(options) {
+    super(options);
+  }
 
-    constructor( options ) {
-        super ( options )
-    }
+  get r() {
+    return this.get("r");
+  }
 
-    get r () {
-        return this.get('r')
-    }
+  set r(value) {
+    this.set("r", value);
+  }
 
-    set r (value) {
-        this.set( 'r', value )
-    }
+  get fill() {
+    return this.get("fill");
+  }
 
-    get fill () {
-        return this.get('fill')
-    }
+  set fill(value) {
+    this.set("fill", value);
+  }
 
-    set fill (value) {
-        this.set( 'fill', value )
-    }
+  get cx() {
+    return this.get("cx");
+  }
 
-    get cx () {
-        return this.get('cx')
-    }
+  set cx(value) {
+    this.set("cx", value);
+  }
 
-    set cx (value) {
-        this.set( 'cx', value )
-    }
+  get cy() {
+    return this.get("cy");
+  }
 
-    get cy () {
-        return this.get('cy')
-    }
+  set cy(value) {
+    this.set("cy", value);
+  }
 
-    set cy (value) {
-        this.set( 'cy', value )
-    }
-
-    toJSX() {
-      return (
-          <circle r={this.r}  cx={this.cx} cy={this.cy} fill={this.fill} key={ this.r + this.cx + this.cy } />
-      )
-    }
-
+  toJSX() {
+    return (
+      <circle
+        r={this.r}
+        cx={this.cx}
+        cy={this.cy}
+        fill={this.fill}
+        key={this.r + this.cx + this.cy}
+      />
+    );
+  }
 }

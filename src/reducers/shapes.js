@@ -1,4 +1,5 @@
 import { List } from "immutable";
+import * as shortid from "shortid";
 import { Svg, Circle, Rectangle } from "units";
 
 import * as colors from "data/colors";
@@ -11,19 +12,9 @@ export const CHANGE_Y = "CHANGE_Y";
 
 const update = (state, mutations) => Object.assign({}, state, mutations);
 
-/*
-const initialState = {
-    color: colors.ACACIA,
-    radius: 50,
-    text: '9',
-    x: 100,
-    y: 40,
-};
-*/
-
 const initSvg = new Svg({ name: "svg", expanded: true, children: List([]) });
 const circle = new Circle({
-  name: "circle",
+  name: "circle" + "_" + shortid.generate(),
   cx: 50,
   cy: 40,
   r: 10,
@@ -31,7 +22,7 @@ const circle = new Circle({
   children: List([])
 });
 const rectangle = new Rectangle({
-  name: "rectangle",
+  name: "rectangle" + "_" + shortid.generate(),
   x: 60,
   y: 10,
   width: 30,
@@ -40,7 +31,7 @@ const rectangle = new Rectangle({
   children: List([])
 });
 const circle2 = new Circle({
-  name: "circle",
+  name: "circle" + "_" + shortid.generate(),
   cx: 10,
   cy: 10,
   r: 10,

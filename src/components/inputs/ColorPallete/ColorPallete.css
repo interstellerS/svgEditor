@@ -12,6 +12,5 @@
 }
 
 .pallete-active {
-  composes: pallete;
   border: 6px solid #E0E0E0;
 }

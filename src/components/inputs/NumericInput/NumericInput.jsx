@@ -32,7 +32,7 @@ export default class NumericInput extends Component {
     if (this.props.value !== this.state.value) {
       const { value } = this.state;
       const parsedValue = value ? parseFloat(value) : "";
-      this.props.onBlur(parsedValue);
+      this.props.onBlur(this.props.name, this.props.attribute, parsedValue);
     }
   }
 
@@ -51,6 +51,8 @@ export default class NumericInput extends Component {
 }
 
 NumericInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  attribute: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   className: PropTypes.string,
   placeholder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

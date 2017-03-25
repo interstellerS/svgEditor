@@ -1,55 +1,46 @@
 import React, { Component, PropTypes } from "react";
 import { SvgShape } from "units";
+import { NumericInput } from "components/inputs";
 import style from "./CircleDetails.css";
 
 export default class CircleDetails extends Component {
   constructor(props) {
     super(props);
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnBlur = this.handleOnBlur.bind(this);
-
-    this.state = {
-      value: props.value
-    };
+    this.handleInputBlur = this.handleInputBlur.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      this.setState({ value: nextProps.value });
-    }
-  }
-
-  handleOnChange(event) {
-    const newValue = event.target.value;
-    if (/^[+-]?\d*(\.\d*)?$/.test(newValue)) {
-      this.setState({ value: newValue || "" });
-    } else {
-      this.setState({ value: this.state.value || "" });
-    }
-  }
-
-  handleOnBlur() {
-    if (this.props.value !== this.state.value) {
-      const { value } = this.state;
-      const parsedValue = value ? parseFloat(value) : "";
-      this.props.onBlur(parsedValue);
-    }
+  handleInputBlur(name, attribute, value) {
+    this.props.onBlur(name, attribute, value);
   }
 
   render() {
+    const circle = this.props.data;
     return (
-      <input
-        type="text"
-        className={style[this.props.className]}
-        value={this.state.value}
-        onChange={this.handleOnChange}
-        onBlur={this.handleOnBlur}
-        placeholder={this.props.placeholder}
-      />
+      <div className="details">
+        <NumericInput
+          name={circle.name}
+          attribute="r"
+          value={circle.r}
+          onBlur={this.handleInputBlur}
+        />
+        <NumericInput
+          name={circle.name}
+          attribute="cx"
+          value={circle.cx}
+          onBlur={this.handleInputBlur}
+        />
+        <NumericInput
+          name={circle.name}
+          attribute="cy"
+          value={circle.cy}
+          onBlur={this.handleInputBlur}
+        />
+      </div>
     );
   }
 }
 
 CircleDetails.propTypes = {
-  data: PropTypes.instanceOf(SvgShape)
+  data: PropTypes.instanceOf(SvgShape),
+  onBlur: PropTypes.func.isRequired
 };
