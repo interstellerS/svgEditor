@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { Toolbar } from "components";
-import { Rectangle, Circle } from "units";
+import { Rectangle, Circle, SvgShape } from "units";
 import { RectangleDetails, CircleDetails } from "components/details";
 
 class DetailContainer extends Component {
@@ -10,20 +10,23 @@ class DetailContainer extends Component {
   }
 
   render() {
-    const { selectItem } = this.props;
+    const { selectedItem } = this.props;
 
-    const isCircle = selectItem instanceof Circle;
-    const isRectangle = selectItem instanceof Rectangle;
+    const isCircle = selectedItem instanceof Circle;
+    const isRectangle = selectedItem instanceof Rectangle;
 
-    if (isCircle) return <RectangleDetails data={selectItem} />;
-    if (isRectangle) return <CircleDetails data={selectItem} />;
+    if (isCircle) return <CircleDetails data={selectedItem} />;
+    if (isRectangle) return <RectangleDetails data={selectedItem} />;
 
     return null;
   }
 }
 
 function mapStateToProps(state) {
-  return state.selectItem;
+  return { selectedItem: state.svg.selectedItem };
 }
+DetailContainer.propTypes = {
+  selectedItem: PropTypes.instanceOf(SvgShape)
+};
 
 export default connect(mapStateToProps)(DetailContainer);

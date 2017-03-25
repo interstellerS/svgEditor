@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 
-import style from "./Rectangle.css";
+import style from "./RectangleDetails.css";
 
 export default class Rectangle extends Component {
   constructor(props) {

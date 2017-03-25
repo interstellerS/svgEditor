@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from "react";
-import { Svg } from "units";
+import { SvgShape } from "units";
 import style from "./CircleDetails.css";
 
 export default class CircleDetails extends Component {
@@ -51,5 +51,5 @@ export default class CircleDetails extends Component {
 }
 
 CircleDetails.propTypes = {
-  data: PropTypes.instanceOf(Svg)
+  data: PropTypes.instanceOf(SvgShape)
 };

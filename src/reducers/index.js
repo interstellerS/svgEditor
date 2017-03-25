@@ -3,7 +3,7 @@ import shapes from "./shapes";
 
 const rootReducer = combineReducers({
   svg: shapes,
-  selected: {}
+  selectedItem: {}
 });
 
 export default rootReducer;

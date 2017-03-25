@@ -51,7 +51,7 @@ const svg = initSvg.addChild(circle).addChild(circle2).addChild(rectangle);
 
 const initialState = {
   svg,
-  selected: circle2
+  selectedItem: circle2
 };
 
 export default function toolbar(state = initialState, action = {}) {

@@ -11,7 +11,6 @@
 }
 
 .table-input {
-  composes: input;
   border: 0 !important;
   border-radius: 0 !important;
 }
