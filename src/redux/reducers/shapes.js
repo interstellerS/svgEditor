@@ -5,6 +5,20 @@ import * as constants from "../constants/ActionTypes";
 import * as colors from "data/colors";
 
 const update = (state, mutations) => Object.assign({}, state, mutations);
+const updateAttribute = (state, name, attribute, value) => {
+  const newSvg = state.svg.update(svg => {
+    let newChildren = svg.children.update(
+      svg.children.findIndex(function(item) {
+        return item.get("name") === name;
+      }),
+      function(item) {
+        return item.set(attribute, value);
+      }
+    );
+    return svg.set("children", newChildren);
+  });
+  return update(state, { svg: newSvg });
+};
 
 const initSvg = new Svg({ name: "svg", expanded: true, children: List([]) });
 const circle = new Circle({
@@ -32,17 +46,25 @@ const circle2 = new Circle({
   fill: colors.LILAS,
   children: List([])
 });
-const svg = initSvg.addChild(circle).addChild(circle2).addChild(rectangle);
+//const svg = initSvg.addChild(circle).addChild(circle2).addChild(rectangle);
+const svg = initSvg.addChild(circle).addChild(rectangle);
 
 const initialState = {
   svg,
   selectedItem: circle2
 };
 
-export default function toolbar(state = initialState, action = {}) {
+export default function shapes(state = initialState, action = {}) {
   switch (action.type) {
     case constants.SELECT_ITEM:
       return update(state, { selectedItem: action.item });
+    case constants.ATTR_CHANGE:
+      return updateAttribute(
+        state,
+        action.name,
+        action.attribute,
+        action.value
+      );
     default:
       return state;
   }
