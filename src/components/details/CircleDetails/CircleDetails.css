@@ -14,3 +14,11 @@
   border: 0 !important;
   border-radius: 0 !important;
 }
+.details{
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.CircleDetails{
+
+}

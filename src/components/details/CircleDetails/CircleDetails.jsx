@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { SvgShape } from "units";
-import { NumericInput } from "components/inputs";
+import { NumericInput, ColorPallete } from "components/inputs";
+import * as colors from "data/colors";
 import style from "./CircleDetails.css";
 
 export default class CircleDetails extends Component {
@@ -17,6 +18,7 @@ export default class CircleDetails extends Component {
     const circle = this.props.data;
     return (
       <div className="details">
+        <h4 className="CircleDetails">Circle Details</h4>
         <NumericInput
           name={circle.name}
           attribute="r"
@@ -34,6 +36,13 @@ export default class CircleDetails extends Component {
           attribute="cy"
           value={circle.cy}
           onBlur={this.handleInputBlur}
+        />
+        <ColorPallete
+          name={circle.name}
+          attribute="fill"
+          value={circle.fill}
+          pallete={Object.values(colors)}
+          palletePicked={this.handleInputBlur}
         />
       </div>
     );

@@ -14,3 +14,28 @@
   border: 0 !important;
   border-radius: 0 !important;
 }
+.input-label {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  display: block;
+  margin: 0 5px 5px 0;
+}
+
+.input-label span{
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  text-align: left;
+}
+.input-label input{
+  border: 0;
+  background: transparent;
+  font: 24px/normal sans-serif;
+  text-align: center;
+  padding: 30px 0 16px;
+  width: 100%;
+  height: 24px;
+  position: relative;
+}

@@ -38,14 +38,17 @@ export default class NumericInput extends Component {
 
   render() {
     return (
-      <input
-        type="text"
-        className={style[this.props.className]}
-        value={this.state.value}
-        onChange={this.handleOnChange}
-        onBlur={this.handleOnBlur}
-        placeholder={this.props.placeholder}
-      />
+      <label className="input-label">
+        <span>{this.props.attribute}</span>
+        <input
+          type="text"
+          className={style[this.props.className]}
+          value={this.state.value}
+          onChange={this.handleOnChange}
+          onBlur={this.handleOnBlur}
+          placeholder={this.props.placeholder}
+        />
+      </label>
     );
   }
 }

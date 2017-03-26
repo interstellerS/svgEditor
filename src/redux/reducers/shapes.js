@@ -26,7 +26,7 @@ const circle = new Circle({
   cx: 50,
   cy: 40,
   r: 10,
-  fill: colors.ACACIA,
+  fill: colors.COQUELICOT,
   children: List([])
 });
 const rectangle = new Rectangle({
@@ -46,8 +46,7 @@ const circle2 = new Circle({
   fill: colors.LILAS,
   children: List([])
 });
-//const svg = initSvg.addChild(circle).addChild(circle2).addChild(rectangle);
-const svg = initSvg.addChild(circle).addChild(rectangle);
+const svg = initSvg.addChild(circle).addChild(circle2).addChild(rectangle);
 
 const initialState = {
   svg,
