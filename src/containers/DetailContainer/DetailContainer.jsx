@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Toolbar } from "components";
 import { Rectangle, Circle, SvgShape } from "units";
 import { RectangleDetails, CircleDetails } from "components/details";
-import { changeSvgDetail } from "redux/actions/svgActions";
+import { changeSvgDetail, selectItem } from "redux/actions/svgActions";
 
 class DetailContainer extends Component {
   constructor(props) {

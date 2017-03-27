@@ -8,16 +8,13 @@ const update = (state, mutations) => Object.assign({}, state, mutations);
 const updateAttribute = (state, name, attribute, value) => {
   const newSvg = state.svg.update(svg => {
     let newChildren = svg.children.update(
-      svg.children.findIndex(function(item) {
-        return item.get("name") === name;
-      }),
-      function(item) {
-        return item.set(attribute, value);
-      }
+      svg.children.findIndex(item => item.get("name") === name),
+      item => item.set(attribute, value)
     );
     return svg.set("children", newChildren);
   });
-  return update(state, { svg: newSvg });
+  let selectedItem = newSvg.children.find(item => item.get("name") === name);
+  return update(state, { svg: newSvg, selectedItem: selectedItem });
 };
 
 const initSvg = new Svg({ name: "svg", expanded: true, children: List([]) });
@@ -30,7 +27,7 @@ const circle = new Circle({
   children: List([])
 });
 const rectangle = new Rectangle({
-  ame: "rectangle" + "_" + shortid.generate(),
+  name: "rectangle" + "_" + shortid.generate(),
   x: 60,
   y: 10,
   width: 30,

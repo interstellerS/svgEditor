@@ -1,62 +1,66 @@
 import React, { Component, PropTypes } from "react";
-
+import { SvgShape } from "units";
+import { NumericInput, ColorPallete } from "components/inputs";
+import * as colors from "data/colors";
 import style from "./RectangleDetails.css";
 
 export default class Rectangle extends Component {
   constructor(props) {
     super(props);
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnBlur = this.handleOnBlur.bind(this);
-
-    this.state = {
-      value: props.value
-    };
+    this.handleInputBlur = this.handleInputBlur.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      this.setState({ value: nextProps.value });
-    }
-  }
-
-  handleOnChange(event) {
-    const newValue = event.target.value;
-    if (/^[+-]?\d*(\.\d*)?$/.test(newValue)) {
-      this.setState({ value: newValue || "" });
-    } else {
-      this.setState({ value: this.state.value || "" });
-    }
-  }
-
-  handleOnBlur() {
-    if (this.props.value !== this.state.value) {
-      const { value } = this.state;
-      const parsedValue = value ? parseFloat(value) : "";
-      this.props.onBlur(parsedValue);
-    }
+  handleInputBlur(name, attribute, value) {
+    this.props.onBlur(name, attribute, value);
   }
 
   render() {
+    const rectangle = this.props.data;
     return (
-      <input
-        type="text"
-        className={style[this.props.className]}
-        value={this.state.value}
-        onChange={this.handleOnChange}
-        onBlur={this.handleOnBlur}
-        placeholder={this.props.placeholder}
-      />
+      <div className="details">
+        <h4 className="CircleDetails">Rectangle Details</h4>
+        <div className="inputs">
+          <NumericInput
+            name={rectangle.name}
+            attribute="x"
+            value={rectangle.x}
+            onBlur={this.handleInputBlur}
+          />
+          <NumericInput
+            name={rectangle.name}
+            attribute="y"
+            value={rectangle.y}
+            onBlur={this.handleInputBlur}
+          />
+          <NumericInput
+            name={rectangle.name}
+            attribute="width"
+            value={rectangle.width}
+            onBlur={this.handleInputBlur}
+          />
+          <NumericInput
+            name={rectangle.name}
+            attribute="height"
+            value={rectangle.height}
+            onBlur={this.handleInputBlur}
+          />
+        </div>
+        <div className="colors">
+          <span>fill</span>
+          <ColorPallete
+            name={rectangle.name}
+            attribute="fill"
+            value={rectangle.fill}
+            pallete={Object.values(colors)}
+            palletePicked={this.handleInputBlur}
+          />
+        </div>
+      </div>
     );
   }
 }
 
 Rectangle.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  className: PropTypes.string,
-  placeholder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  data: PropTypes.instanceOf(SvgShape),
   onBlur: PropTypes.func.isRequired
-};
-
-Rectangle.defaultProps = {
-  className: "input"
 };

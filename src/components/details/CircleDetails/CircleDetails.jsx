@@ -17,33 +17,39 @@ export default class CircleDetails extends Component {
   render() {
     const circle = this.props.data;
     return (
-      <div className="details">
+      <div>
         <h4 className="CircleDetails">Circle Details</h4>
-        <NumericInput
-          name={circle.name}
-          attribute="r"
-          value={circle.r}
-          onBlur={this.handleInputBlur}
-        />
-        <NumericInput
-          name={circle.name}
-          attribute="cx"
-          value={circle.cx}
-          onBlur={this.handleInputBlur}
-        />
-        <NumericInput
-          name={circle.name}
-          attribute="cy"
-          value={circle.cy}
-          onBlur={this.handleInputBlur}
-        />
-        <ColorPallete
-          name={circle.name}
-          attribute="fill"
-          value={circle.fill}
-          pallete={Object.values(colors)}
-          palletePicked={this.handleInputBlur}
-        />
+        <div className="inputs">
+          <NumericInput
+            name={circle.name}
+            attribute="r"
+            value={circle.r}
+            onBlur={this.handleInputBlur}
+          />
+          <NumericInput
+            name={circle.name}
+            attribute="cx"
+            value={circle.cx}
+            onBlur={this.handleInputBlur}
+          />
+          <NumericInput
+            name={circle.name}
+            attribute="cy"
+            value={circle.cy}
+            onBlur={this.handleInputBlur}
+          />
+        </div>
+        <div className="colors">
+          <span>fill</span>
+          <ColorPallete
+            name={circle.name}
+            attribute="fill"
+            value={circle.fill}
+            pallete={Object.values(colors)}
+            palletePicked={this.handleInputBlur}
+          />
+        </div>
+
       </div>
     );
   }

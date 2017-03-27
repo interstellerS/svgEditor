@@ -42,7 +42,6 @@ export default class NumericInput extends Component {
         <span>{this.props.attribute}</span>
         <input
           type="text"
-          className={style[this.props.className]}
           value={this.state.value}
           onChange={this.handleOnChange}
           onBlur={this.handleOnBlur}

@@ -1,3 +1,6 @@
+.details {
+
+}
 .input {
   width: 100%;
   height: 100%;
@@ -16,10 +19,12 @@
 }
 .input-label {
   position: relative;
-  width: 70px;
-  height: 70px;
-  display: block;
-  margin: 0 5px 5px 0;
+  display: inline-block;
+  height:100px;
+  width: calc(100% * (1/3) - 10px - 1px);
+  margin:10px 0 0 2%;
+  border: 1px solid;
+  flex-grow: 1;
 }
 
 .input-label span{

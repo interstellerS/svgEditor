@@ -8,25 +8,25 @@ export default class ColorPallete extends Component {
     this.handlePalletePicked = this.handlePalletePicked.bind(this);
   }
 
-  handlePalletePicked() {
-    this.props.palletePicked(this.props.palleteKey);
+  handlePalletePicked(color) {
+    this.props.palletePicked(this.props.name, this.props.attribute, color);
   }
 
   renderPallete() {
     const { value } = this.props;
     return this.props.pallete.map((color, i) => (
       <div
-        className={color === value ? "pallete-active" : ""}
+        className={(color === value ? "pallete-active" : "") + " palette-item"}
         key={i}
-        style={{ width: 20, height: 20, backgroundColor: color }}
-        onClick={this.handlePalletePicked}
+        style={{ height: 20, backgroundColor: color }}
+        onClick={() => this.handlePalletePicked(color)}
       />
     ));
   }
 
   render() {
     return (
-      <div>
+      <div className="palette">
         {this.renderPallete()}
       </div>
     );
