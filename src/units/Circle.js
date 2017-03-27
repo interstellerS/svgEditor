@@ -38,15 +38,7 @@ export default class Circle extends SvgShape {
     this.set("cy", value);
   }
 
-  toJSX() {
-    return (
-      <circle
-        r={this.r}
-        cx={this.cx}
-        cy={this.cy}
-        fill={this.fill}
-        key={this.r + this.cx + this.cy}
-      />
-    );
+  get type() {
+    return "Circle";
   }
 }

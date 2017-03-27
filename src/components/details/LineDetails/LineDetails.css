@@ -1,0 +1,33 @@
+.input {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  padding-left: 15px;
+}
+
+.input:focus {
+  border: 1px solid #33C3F0 !important;
+}
+
+.table-input {
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+.inputs {
+
+  display: flex;
+  flex-wrap:wrap;
+  margin:-10px 0 0 -10px;
+}
+.colors {
+  padding-top: 30px ;
+  position: relative;
+}
+.colors span {
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  text-align: left;
+}

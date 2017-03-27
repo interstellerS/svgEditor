@@ -1,6 +1,6 @@
 import { List } from "immutable";
 import * as shortid from "shortid";
-import { Svg, Circle, Rectangle } from "units";
+import { Svg, Circle, Rectangle, Line } from "units";
 import * as constants from "../constants/ActionTypes";
 import * as colors from "data/colors";
 
@@ -43,7 +43,22 @@ const circle2 = new Circle({
   fill: colors.LILAS,
   children: List([])
 });
-const svg = initSvg.addChild(circle).addChild(circle2).addChild(rectangle);
+
+const line = new Line({
+  name: "line" + "_" + shortid.generate(),
+  x1: 200,
+  y1: 10,
+  x2: 10,
+  y2: 100,
+  strokeWidth: 10,
+  fill: colors.PARME,
+  children: List([])
+});
+const svg = initSvg
+  .addChild(circle)
+  .addChild(circle2)
+  .addChild(rectangle)
+  .addChild(line);
 
 const initialState = {
   svg,

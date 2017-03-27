@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { Toolbar } from "components";
-import { Rectangle, Circle, SvgShape } from "units";
-import { RectangleDetails, CircleDetails } from "components/details";
+import { Rectangle, Circle, SvgShape, Line } from "units";
+import {
+  RectangleDetails,
+  CircleDetails,
+  LineDetails
+} from "components/details";
 import { changeSvgDetail, selectItem } from "redux/actions/svgActions";
 
 class DetailContainer extends Component {
@@ -21,7 +25,10 @@ class DetailContainer extends Component {
 
     const isCircle = selectedItem instanceof Circle;
     const isRectangle = selectedItem instanceof Rectangle;
+    const isLine = selectedItem instanceof Line;
 
+    if (isLine)
+      return <LineDetails data={selectedItem} onBlur={this.handleOnBlur} />;
     if (isCircle)
       return <CircleDetails data={selectedItem} onBlur={this.handleOnBlur} />;
     if (isRectangle)

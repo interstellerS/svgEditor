@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from "react";
-import { Svg, Circle } from "units";
+import { Svg, Circle, Rectangle, Line } from "units";
 
 import "./SvgRenderer.css";
 
@@ -22,23 +22,42 @@ class SvgRenderer extends Component {
 
   renderLeafSvg(svg) {
     const isCircle = svg instanceof Circle;
-    const jsx = isCircle
-      ? <circle
+    const isRectangle = svg instanceof Rectangle;
+    const isLine = svg instanceof Line;
+
+    if (isCircle)
+      return (
+        <circle
           r={svg.r}
           cx={svg.cx}
           cy={svg.cy}
           fill={svg.fill}
           onClick={this.handleClick}
         />
-      : <rect
+      );
+    if (isRectangle)
+      return (
+        <rect
           x={svg.x}
           y={svg.y}
           width={svg.width}
           height={svg.height}
           fill={svg.fill}
           onClick={this.handleClick}
-        />;
-    return jsx;
+        />
+      );
+    if (isLine)
+      return (
+        <line
+          x1={svg.x1}
+          y1={svg.y1}
+          x2={svg.x2}
+          y2={svg.y2}
+          strokeWidth={svg.strokeWidth}
+          stroke={svg.fill}
+          onClick={this.handleClick}
+        />
+      );
   }
   renderRootSvg(svg) {
     return (

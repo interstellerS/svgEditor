@@ -23,7 +23,7 @@ class DomRenderer extends Component {
   renderLeafDom(data) {
     return (
       <li className="tree-item" onClick={this.handleClick}>
-        <span> {data instanceof Circle ? "Circle" : "Rectangle"} </span>
+        <span> {data.type} </span>
       </li>
     );
   }
