@@ -1,66 +1,56 @@
-import React, { Component, PropTypes } from "react";
+import React, { PropTypes } from "react";
 import { SvgShape } from "units";
 import { NumericInput, ColorPallete } from "components/inputs";
 import * as colors from "data/colors";
 import style from "./RectangleDetails.css";
 
-export default class Rectangle extends Component {
-  constructor(props) {
-    super(props);
-    this.handleInputBlur = this.handleInputBlur.bind(this);
-  }
-
-  handleInputBlur(name, attribute, value) {
-    this.props.onBlur(name, attribute, value);
-  }
-
-  render() {
-    const rectangle = this.props.data;
-    return (
-      <div className="details">
-        <h4 className="CircleDetails">Rectangle Details</h4>
-        <div className="inputs">
-          <NumericInput
-            name={rectangle.name}
-            attribute="x"
-            value={rectangle.x}
-            onBlur={this.handleInputBlur}
-          />
-          <NumericInput
-            name={rectangle.name}
-            attribute="y"
-            value={rectangle.y}
-            onBlur={this.handleInputBlur}
-          />
-          <NumericInput
-            name={rectangle.name}
-            attribute="width"
-            value={rectangle.width}
-            onBlur={this.handleInputBlur}
-          />
-          <NumericInput
-            name={rectangle.name}
-            attribute="height"
-            value={rectangle.height}
-            onBlur={this.handleInputBlur}
-          />
-        </div>
-        <div className="colors">
-          <span>fill</span>
-          <ColorPallete
-            name={rectangle.name}
-            attribute="fill"
-            value={rectangle.fill}
-            pallete={Object.values(colors)}
-            palletePicked={this.handleInputBlur}
-          />
-        </div>
+const RectangleDetails = ({ data, onBlur }) => {
+  return (
+    <div className="details">
+      <h4 className="CircleDetails">Rectangle Details</h4>
+      <div className="inputs">
+        <NumericInput
+          name={data.name}
+          attribute="x"
+          value={data.x}
+          onBlur={onBlur}
+        />
+        <NumericInput
+          name={data.name}
+          attribute="y"
+          value={data.y}
+          onBlur={onBlur}
+        />
+        <NumericInput
+          name={data.name}
+          attribute="width"
+          value={data.width}
+          onBlur={onBlur}
+        />
+        <NumericInput
+          name={data.name}
+          attribute="height"
+          value={data.height}
+          onBlur={onBlur}
+        />
       </div>
-    );
-  }
-}
+      <div className="colors">
+        <span>fill</span>
+        <ColorPallete
+          name={data.name}
+          attribute="fill"
+          value={data.fill}
+          pallete={Object.values(colors)}
+          palletePicked={onBlur}
+        />
+      </div>
+    </div>
+  );
+};
 
-Rectangle.propTypes = {
+RectangleDetails.propTypes = {
   data: PropTypes.instanceOf(SvgShape),
   onBlur: PropTypes.func.isRequired
 };
+
+export default RectangleDetails;

@@ -44,3 +44,6 @@
   height: 24px;
   position: relative;
 }
+.input-label input:focus {
+    outline-width: 0;
+}
