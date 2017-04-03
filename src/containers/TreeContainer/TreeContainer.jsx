@@ -18,7 +18,7 @@ class TreeContainer extends Component {
   render() {
     const { svg } = this.props;
     return (
-      <ol ref="treeContainer" className="tree">
+      <ol className="tree">
         <Tree {...this.props} handleClick={this.handleClick} />
       </ol>
     );

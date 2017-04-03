@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import { Svg } from "units";
-import { UnitRenderer } from "components";
+import { UnitRenderer } from "components/renderers";
 
 import "./Viewer.css";
 

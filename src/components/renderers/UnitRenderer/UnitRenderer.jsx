@@ -1,26 +1,16 @@
 import React, { Component, PropTypes } from "react";
 import { Svg, Circle } from "units";
-import { SvgRenderer, DomRenderer } from "components";
-
+import { DomRenderer, SvgRenderer } from "components/renderers";
 class UnitRenderer extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { data, index } = this.props;
-    const isDom = !!this.props.isDom;
+    const { data, isDom, handleClick } = this.props;
     return isDom
-      ? <DomRenderer
-          data={data}
-          index={index}
-          handleClick={this.props.handleClick}
-        />
-      : <SvgRenderer
-          data={data}
-          index={index}
-          handleClick={this.props.handleClick}
-        />;
+      ? <DomRenderer data={data} handleClick={handleClick} />
+      : <SvgRenderer data={data} handleClick={handleClick} />;
   }
 }
 
