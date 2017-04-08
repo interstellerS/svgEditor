@@ -41,4 +41,9 @@ export default class Circle extends SvgShape {
   get type() {
     return "Circle";
   }
+
+  get domProps() {
+    let { r, fill, cx, cy } = this.toJS();
+    return { r, fill, cx, cy };
+  }
 }

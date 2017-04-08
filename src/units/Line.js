@@ -65,4 +65,9 @@ export default class Line extends SvgShape {
   get type() {
     return "Line";
   }
+
+  get domProps() {
+    let { x1, x2, y1, y2, stroke, strokeWidth, fill } = this.toJS();
+    return { x1, x2, y1, y2, stroke, strokeWidth, fill };
+  }
 }
