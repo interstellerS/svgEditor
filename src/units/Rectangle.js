@@ -52,6 +52,6 @@ export default class Rectangle extends SvgShape {
 
   get domProps() {
     let { x, y, width, height, fill } = this.toJS();
-    return { r, fill, cx, cy };
+    return { x, y, width, height, fill };
   }
 }

@@ -54,12 +54,12 @@ export default class Line extends SvgShape {
     this.set("strokeWidth", value);
   }
 
-  get fill() {
-    return this.get("fill");
+  get stroke() {
+    return this.get("stroke");
   }
 
-  set fill(value) {
-    this.set("fill", value);
+  set stroke(value) {
+    this.set("stroke", value);
   }
 
   get type() {
@@ -67,7 +67,7 @@ export default class Line extends SvgShape {
   }
 
   get domProps() {
-    let { x1, x2, y1, y2, stroke, strokeWidth, fill } = this.toJS();
-    return { x1, x2, y1, y2, stroke, strokeWidth, fill };
+    let { x1, x2, y1, y2, stroke, strokeWidth } = this.toJS();
+    return { x1, x2, y1, y2, stroke, strokeWidth };
   }
 }

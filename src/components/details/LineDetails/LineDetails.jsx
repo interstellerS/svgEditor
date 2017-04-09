@@ -44,8 +44,8 @@ const LineDetails = ({ data, onBlur }) => {
         <span>fill</span>
         <ColorPallete
           name={data.name}
-          attribute="fill"
-          value={data.fill}
+          attribute="stroke"
+          value={data.stroke}
           pallete={Object.values(colors)}
           palletePicked={onBlur}
         />

@@ -51,7 +51,7 @@ const line = new Line({
   x2: 10,
   y2: 100,
   strokeWidth: 10,
-  fill: colors.PARME,
+  stroke: colors.PARME,
   children: List([])
 });
 const svg = initSvg
