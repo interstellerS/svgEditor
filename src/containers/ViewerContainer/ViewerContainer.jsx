@@ -4,7 +4,15 @@ import { Viewer } from "components";
 import { Svg } from "units";
 import { selectItem } from "redux/actions/svgActions";
 
+function mapStateToProps(state) {
+  return state.svg;
+}
+
+@connect(mapStateToProps)
 class ViewerContainer extends Component {
+  static propTypes = {
+    svg: PropTypes.instanceOf(Svg)
+  };
   constructor(props) {
     super(props);
     this.state = { height: 0, width: 0 };
@@ -29,12 +37,5 @@ class ViewerContainer extends Component {
     );
   }
 }
-ViewerContainer.propTypes = {
-  svg: PropTypes.instanceOf(Svg)
-};
 
-function mapStateToProps(state) {
-  return state.svg;
-}
-
-export default connect(mapStateToProps)(ViewerContainer);
+export default ViewerContainer;
