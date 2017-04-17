@@ -1,68 +1,29 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes, Component } from "react";
+import { ColorSelector, InputEditor, RangeEditor } from "components";
+import Tool from "./Tool/Tool";
 
-import './Toolbar.css'
-import { ColorSelector, InputEditor , RangeEditor  }  from 'components'
-import * as colors from 'data/colors';
+import "./Toolbar.css";
 
 class Toolbar extends Component {
-    constructor(props) {
-        super(props)
-    }
+  static propTypes = {
+    tools: PropTypes.array.isRequired
+  };
 
-      render() {
-          return (
-            <div className='toolContainer' >
-                <div className='row'>
-                    <ColorSelector
-                        label="color :"
-                        color={this.props.color}
-                        pallete={colors}
-                        onColorChange={this.props.onColorChange}
-                    />
-                </div>
-                <div className='row'>
-                    <InputEditor
-                        label="Text :"
-                        text={this.props.text}
-                        onChange={this.props.onTextChange}
-                        placeholder="Text"
-                    />
-                </div>
-                <div className='row'>
-                    <RangeEditor
-                        label="Radius"
-                        value={this.props.radius}
-                        onChange={this.props.onRadiusChange}
-                        placeholder="Radius"
-                    />
-                </div>
-                <div className='row'>
-                    <RangeEditor
-                        label="X"
-                        value={this.props.x}
-                        onChange={this.props.onXChange}
-                        placeholder="X"
-                    />
-                </div>
-                <div className='row'>
-                    <RangeEditor
-                        label="Y"
-                        value={this.props.y}
-                        onChange={this.props.onYChange}
-                        placeholder="Y"
-                    />
-                </div>
-            </div>
-          )
-      }
+  constructor(props) {
+    super(props);
+  }
+
+  renderTools() {
+    return this.props.tools.map((tool, i) => <Tool tool={tool} key={i} />);
+  }
+
+  render() {
+    return (
+      <div className="tools_panel">
+        {this.renderTools()}
+      </div>
+    );
+  }
 }
 
-Toolbar.propTypes = {
-  color: PropTypes.string.isRequired,
-  radius: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired
-}
-
-export default Toolbar
+export default Toolbar;

@@ -9,7 +9,16 @@ import {
 } from "components/details";
 import { changeSvgDetail, selectItem } from "redux/actions/svgActions";
 
+function mapStateToProps(state) {
+  return { selectedItem: state.svg.selectedItem };
+}
+
+@connect(mapStateToProps)
 class DetailContainer extends Component {
+  static propTypes = {
+    selectedItem: PropTypes.instanceOf(SvgShape)
+  };
+
   constructor(props) {
     super(props);
     this.handleOnBlur = this.handleOnBlur.bind(this);
@@ -39,11 +48,4 @@ class DetailContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { selectedItem: state.svg.selectedItem };
-}
-DetailContainer.propTypes = {
-  selectedItem: PropTypes.instanceOf(SvgShape)
-};
-
-export default connect(mapStateToProps)(DetailContainer);
+export default DetailContainer;

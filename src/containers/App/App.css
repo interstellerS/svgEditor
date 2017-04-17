@@ -7,9 +7,10 @@ ol {
     margin: 0 ;
 }
 .tree-column {
-    flex: 1 ;
+    flex: 0 0 3em; ;
     border-right:  1px solid #E0E0E0;
     margin-top: 10px ;
+    text-align: center ;
 }
 .detail-column {
     flex: 1 ;

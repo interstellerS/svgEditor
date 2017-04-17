@@ -62,7 +62,8 @@ const svg = initSvg
 
 const initialState = {
   svg,
-  selectedItem: circle2
+  selectedItem: circle2,
+  tools: ["select", "pencil", "line", "rectangle", "circle"]
 };
 
 export default function shapes(state = initialState, action = {}) {
