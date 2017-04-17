@@ -2,6 +2,10 @@
   position: absolute;
   height: 100% ;
   width : 100% ;
+  border-top-color: #ddd;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  border-bottom-color: #ddd;
 }
 .svgRendered{
   height: 100% ;

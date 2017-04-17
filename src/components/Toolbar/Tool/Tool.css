@@ -1,0 +1,24 @@
+.tool_button{
+  height: 32px;
+  width: 48px;
+  padding: 6px 0px 0px;
+  margin: 6px 2px 6px 2px;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-box-shadow: inset 1px 1px 2px white, 1px 1px 1px rgba(0,0,0,0.3);
+  moz-box-shadow: inset 1px 1px 2px white, 1px 1px 1px rgba(0,0,0,0.3);
+  box-shadow: inset 1px 1px 2px white, 1px 1px 1px rgba(0,0,0,0.3);
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  cursor: pointer;
+}
+.tool-selected{
+  -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4), 1px 1px 0 white !important;
+  -moz-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4), 1px 1px 0 white !important;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4), 1px 1px 0 white !important;
+  background-color: #f4e284 !important;
+}
+.tool_button:hover{
+  background-color: #ffc  ;
+}

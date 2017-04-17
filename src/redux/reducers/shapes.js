@@ -63,13 +63,20 @@ const svg = initSvg
 const initialState = {
   svg,
   selectedItem: circle2,
-  tools: ["select", "pencil", "line", "rectangle", "circle"]
+  toolsLeft: ["select", "pencil", "line", "rectangle", "circle"],
+  toolsTop: ["undo", "redo"],
+  selectedToolLeft: "select",
+  selectedToolTop: "undo"
 };
 
 export default function shapes(state = initialState, action = {}) {
   switch (action.type) {
     case constants.SELECT_ITEM:
       return update(state, { selectedItem: action.item });
+    case constants.SELECT_TOOL_LEFT:
+      return update(state, { selectedToolLeft: action.tool });
+    case constants.SELECT_TOOL_TOP:
+      return update(state, { selectedToolTop: action.tool });
     case constants.ATTR_CHANGE:
       return updateAttribute(
         state,

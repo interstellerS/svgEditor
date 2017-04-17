@@ -5,7 +5,7 @@ import React, { PropTypes } from "react";
 export default function IconLine() {
   return (
     <svg
-      fill="#000000"
+      fill="rgb(102, 102, 102)"
       height="24"
       viewBox="0 0 24 24"
       width="24"

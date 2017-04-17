@@ -7,23 +7,19 @@ ol {
     margin: 0 ;
 }
 .tree-column {
-    flex: 0 0 3em; ;
-    border-right:  1px solid #E0E0E0;
-    margin-top: 10px ;
+    flex: 0 0 3em;
+    margin: 5px 0px 0px 5px ;
     text-align: center ;
 }
 .detail-column {
     flex: 1 ;
-    border-left:  1px solid #E0E0E0;
     padding: 10px ;
 }
 
 .viewer-column {
     flex: 3 ;
-    margin: 10px ;
-    border : 2px solid #383A3F ;
+    margin: 0px 10px ;
     position: relative;
-
 }
 .treeView {
     flex-grow: 1;
@@ -37,4 +33,7 @@ ol {
 .tree-item {
     list-style: none;
     cursor: default;
+}
+.menu {
+    margin-bottom: 20px ;
 }

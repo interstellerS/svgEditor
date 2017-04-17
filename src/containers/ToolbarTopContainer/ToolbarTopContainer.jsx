@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { Toolbar } from "components";
-import { selectToolLeft } from "redux/actions/svgActions";
+import { selectToolTop } from "redux/actions/svgActions";
 
 function mapStateToProps(state) {
   return {
-    tools: state.svg.toolsLeft,
-    selectedTool: state.svg.selectedToolLeft
+    toolsTop: state.svg.toolsTop
   };
 }
 
@@ -19,15 +18,15 @@ class ToolbarContainer extends Component {
 
   toolPicked(tool) {
     const { dispatch } = this.props;
-    dispatch(selectToolLeft(tool));
+    dispatch(selectToolTop(tool));
   }
   render() {
     return (
       <Toolbar
-        tools={this.props.tools}
+        tools={this.props.toolsTop}
         selectedTool={this.props.selectedTool}
         toolPicked={this.toolPicked}
-        horizontal={false}
+        horizontal={true}
       />
     );
   }

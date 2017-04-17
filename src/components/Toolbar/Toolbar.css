@@ -4,3 +4,14 @@
 .toolContainer > .row {
   margin-top: 10px
 }
+.menu-icon {
+  font-size: 30px ;
+}
+.tools-panel-horizontal{
+  display: flex;
+  flex-direction: row;
+}
+.tools-panel-vertical{
+  display: flex;
+  flex-direction: column;
+}

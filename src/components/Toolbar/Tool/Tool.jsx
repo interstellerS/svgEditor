@@ -4,11 +4,13 @@ import "./Tool.css";
 
 class Tool extends React.Component {
   static propTypes = {
-    tool: PropTypes.string.isRequired
+    tool: PropTypes.string.isRequired,
+    toolPicked: PropTypes.func.isRequired,
+    selected: PropTypes.bool.isRequired
   };
 
-  handlePalletePicked(color) {
-    this.props.palletePicked(this.props.name, this.props.attribute, color);
+  handleToolPicked(color) {
+    this.props.toolPicked(this.props.tool);
   }
 
   renderIcon(tool) {
@@ -39,8 +41,10 @@ class Tool extends React.Component {
   render() {
     return (
       <div
-        className="tool_button"
-        onClick={() => this.handlePalletePicked(this.props.tool)}
+        className={
+          (this.props.selected ? "tool-selected" : "") + " tool_button"
+        }
+        onClick={() => this.handleToolPicked(this.props.tool)}
       >
         {this.renderIcon(this.props.tool)}
       </div>
