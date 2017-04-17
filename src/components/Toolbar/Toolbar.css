@@ -5,7 +5,7 @@
   margin-top: 10px
 }
 .menu-icon {
-  font-size: 30px ;
+  font-size: 40px ;
 }
 .tools-panel-horizontal{
   display: flex;
@@ -14,4 +14,9 @@
 .tools-panel-vertical{
   display: flex;
   flex-direction: column;
+}
+.toolbarContainer{
+  flex : 0 2 ;
+  display: flex;
+  align-items: center;
 }

@@ -14,12 +14,6 @@
   border: 0 !important;
   border-radius: 0 !important;
 }
-.inputs {
-
-  display: flex;
-  flex-wrap:wrap;
-  margin:-10px 0 0 -10px;
-}
 .colors {
   padding-top: 30px ;
   position: relative;

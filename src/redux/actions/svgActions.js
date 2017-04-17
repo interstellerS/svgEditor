@@ -14,7 +14,7 @@ export function changeSvgDetail(name, attribute, value) {
 }
 
 export function selectToolLeft(tool) {
-  return { type: SELECT_TOOL, tool };
+  return { type: SELECT_TOOL_LEFT, tool };
 }
 
 export function selectToolTop(tool) {

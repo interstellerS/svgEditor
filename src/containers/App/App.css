@@ -12,8 +12,9 @@ ol {
     text-align: center ;
 }
 .detail-column {
-    flex: 1 ;
     padding: 10px ;
+    display: flex ;
+    flex-direction: row;
 }
 
 .viewer-column {
@@ -36,4 +37,15 @@ ol {
 }
 .menu {
     margin-bottom: 20px ;
+    margin-top: 10px ;
+}
+.details {
+    margin-left: 20px;
+    flex: 2;
+    padding-left: 10px;
+    border-left: 1px #e1e4e8 solid;
+}
+.inputs {
+  display: flex;
+  align-items: center;
 }

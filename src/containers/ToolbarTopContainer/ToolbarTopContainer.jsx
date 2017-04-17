@@ -5,7 +5,8 @@ import { selectToolTop } from "redux/actions/svgActions";
 
 function mapStateToProps(state) {
   return {
-    toolsTop: state.svg.toolsTop
+    toolsTop: state.svg.toolsTop,
+    selectedTool: state.svg.selectedToolTop
   };
 }
 

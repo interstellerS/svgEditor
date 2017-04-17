@@ -19,6 +19,7 @@ class Tool extends React.Component {
       case "select":
         toolIcon = <icons.IconSelect />;
         break;
+        tiik;
       case "pencil":
         toolIcon = <icons.IconPencil />;
         break;
@@ -30,6 +31,12 @@ class Tool extends React.Component {
         break;
       case "circle":
         toolIcon = <icons.IconCircle />;
+        break;
+      case "undo":
+        toolIcon = <icons.IconUndo />;
+        break;
+      case "redo":
+        toolIcon = <icons.IconRedo />;
         break;
       default:
         toolIcon = <icons.IconSelect />;

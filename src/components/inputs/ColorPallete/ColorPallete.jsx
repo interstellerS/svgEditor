@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from "react";
+import reactCSS from "reactcss";
+import { SketchPicker } from "react-color";
 
 import style from "./ColorPallete.css";
 
@@ -12,22 +14,68 @@ export default class ColorPallete extends Component {
     this.props.palletePicked(this.props.name, this.props.attribute, color);
   }
 
-  renderPallete() {
-    const { value } = this.props;
-    return this.props.pallete.map((color, i) => (
-      <div
-        className={(color === value ? "pallete-active" : "") + " palette-item"}
-        key={i}
-        style={{ height: 20, backgroundColor: color }}
-        onClick={() => this.handlePalletePicked(color)}
-      />
-    ));
-  }
+  state = {
+    displayColorPicker: false
+  };
+
+  handleClick = () => {
+    this.setState({ displayColorPicker: !this.state.displayColorPicker });
+  };
+
+  handleClose = () => {
+    this.setState({ displayColorPicker: false });
+  };
+
+  handleChange = color => {
+    this.props.palletePicked(this.props.name, this.props.attribute, color.hex);
+  };
 
   render() {
+    const styles = reactCSS({
+      default: {
+        color: {
+          width: "36px",
+          height: "14px",
+          borderRadius: "2px",
+          background: `${this.props.value}`
+        },
+        swatch: {
+          padding: "5px",
+          background: "#fff",
+          borderRadius: "1px",
+          boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
+          display: "inline-block",
+          cursor: "pointer"
+        },
+        popover: {
+          position: "absolute",
+          zIndex: "2"
+        },
+        cover: {
+          position: "fixed",
+          top: "0px",
+          right: "0px",
+          bottom: "0px",
+          left: "0px"
+        }
+      }
+    });
+
     return (
-      <div className="palette">
-        {this.renderPallete()}
+      <div className="react-numeric-input">
+        <div style={styles.swatch} onClick={this.handleClick}>
+          <div style={styles.color} />
+        </div>
+        {this.state.displayColorPicker
+          ? <div style={styles.popover}>
+              <div style={styles.cover} onClick={this.handleClose} />
+              <SketchPicker
+                color={this.props.value}
+                onChange={this.handleChange}
+              />
+            </div>
+          : null}
+
       </div>
     );
   }

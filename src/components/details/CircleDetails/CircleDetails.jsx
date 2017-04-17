@@ -6,8 +6,7 @@ import style from "./CircleDetails.css";
 
 const CircleDetails = ({ data, onBlur }) => {
   return (
-    <div>
-      <h4 className="CircleDetails"> Circle Details </h4>
+    <div className="details">
       <div className="inputs">
         <NumericInput
           name={data.name}
@@ -27,9 +26,6 @@ const CircleDetails = ({ data, onBlur }) => {
           value={data.cy}
           onBlur={onBlur}
         />
-      </div>
-      <div className="colors">
-        <span>fill</span>
         <ColorPallete
           name={data.name}
           attribute="fill"

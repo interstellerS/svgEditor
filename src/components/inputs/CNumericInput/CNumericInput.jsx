@@ -15,15 +15,12 @@ export class CNumericInput extends Component {
 
   render() {
     return (
-      <label className="input-label">
-        <span>{this.props.attribute}</span>
-        <NumericInput
-          value={this.props.value}
-          onChange={value => this.handleOnChange(value)}
-          className="form-control"
-          style={false}
-        />
-      </label>
+      <NumericInput
+        value={this.props.value}
+        onChange={value => this.handleOnChange(value)}
+        className="numeric-input"
+        style={false}
+      />
     );
   }
 }

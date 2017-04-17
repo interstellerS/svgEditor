@@ -7,7 +7,6 @@ import style from "./LineDetails.css";
 const LineDetails = ({ data, onBlur }) => {
   return (
     <div className="details">
-      <h4 className="LineDetails">Line Details</h4>
       <div className="inputs">
         <NumericInput
           name={data.name}
@@ -39,9 +38,6 @@ const LineDetails = ({ data, onBlur }) => {
           value={data.strokeWidth}
           onBlur={onBlur}
         />
-      </div>
-      <div className="colors">
-        <span>fill</span>
         <ColorPallete
           name={data.name}
           attribute="stroke"

@@ -24,11 +24,11 @@ export default class App extends Component {
           <ToolbarContainer />
         </div>
         <div className="viewer-column">
-          <ToolbarTopContainer />
+          <div className="detail-column">
+            <ToolbarTopContainer />
+            <DetailContainer />
+          </div>
           <ViewerContainer />
-        </div>
-        <div className="detail-column">
-          <DetailContainer />
         </div>
         <CustomDragLayer />
       </div>
