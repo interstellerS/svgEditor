@@ -1,28 +1,23 @@
-import React, { Component, PropTypes } from 'react';
-import shouldPureComponentUpdate from './shouldPureComponentUpdate';
+import React, { Component, PropTypes } from "react";
+import shouldPureComponentUpdate from "./shouldPureComponentUpdate";
 
 const styles = {
-  border: '1px dashed gray',
-  padding: '0.5rem 1rem',
-  cursor: 'move',
+  border: "1px dashed gray",
+  padding: "0.5rem 1rem",
+  cursor: "move"
 };
 
 export default class Box extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    yellow: PropTypes.bool,
+    yellow: PropTypes.bool
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
-    const { title, yellow } = this.props;
-    const backgroundColor = yellow ? 'yellow' : 'white';
+    const { yellow } = this.props;
+    const backgroundColor = yellow ? "yellow" : "white";
 
-    return (
-      <div style={{ ...styles, backgroundColor }}>
-        {title}
-      </div>
-    );
+    return <div style={{ ...styles, backgroundColor }} />;
   }
 }

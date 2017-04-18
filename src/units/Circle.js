@@ -37,6 +37,23 @@ export default class Circle extends SvgShape {
   set cy(value) {
     this.set("cy", value);
   }
+  // those x and y attribute , are juste decorators methods just to normalize with what are rectangle svg
+  // details attribute are , willl soon see what other svg elements be ... to be continued :/
+  get x() {
+    return this.get("cx");
+  }
+
+  set x(value) {
+    this.set("cx", value);
+  }
+
+  get y() {
+    return this.get("cy");
+  }
+
+  set y(value) {
+    this.set("cy", value);
+  }
 
   get type() {
     return "Circle";

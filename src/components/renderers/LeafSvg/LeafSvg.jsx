@@ -5,7 +5,10 @@ import { ItemTypes } from "redux/constants/dndConstants";
 
 const svgItemSource = {
   beginDrag(props) {
-    return props.data.allProps;
+    return {
+      type: ItemTypes.SVG_ITEM,
+      data: props.data
+    };
   }
 };
 
@@ -23,7 +26,6 @@ class LeafSvg extends Component {
     super(props);
   }
   static propTypes = {
-    connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
     data: PropTypes.instanceOf(SvgShape),
@@ -40,7 +42,6 @@ class LeafSvg extends Component {
       data,
       handleClick,
       connectDragSource,
-      connectDragPreview,
       isDragging
     } = this.props;
 

@@ -14,11 +14,28 @@ const mapDispatchToProps = dispatch => ({
 const squareTarget = {
   drop(props, monitor, component) {
     const item = monitor.getItem();
-    const delta = monitor.getDifferenceFromInitialOffset();
-    props.move(item.name, "cx", item.cx + delta.x);
-    props.move(item.name, "cy", item.cy + delta.y);
+    switch (item.type) {
+      case ItemTypes.SVG_ITEM:
+        dropSvgItem(props, monitor, component);
+        break;
+      case ItemTypes.TOOL_ITEM:
+        dropToolItem(props, monitor, component);
+        break;
+      default:
+    }
   }
 };
+
+function dropSvgItem(props, monitor, component) {
+  const item = monitor.getItem();
+  const delta = monitor.getDifferenceFromInitialOffset();
+  props.move(item.data.name, "x", item.data.x + delta.x);
+  props.move(item.data.name, "y", item.data.y + delta.y);
+}
+function dropToolItem(props, monitor, component) {
+  const item = monitor.getItem();
+  // TODO add drop tool item support
+}
 
 function collect(connect, monitor) {
   return {
@@ -27,7 +44,7 @@ function collect(connect, monitor) {
   };
 }
 @connect(null, mapDispatchToProps)
-@DropTarget(ItemTypes.SVG_ITEM, squareTarget, collect)
+@DropTarget([ItemTypes.SVG_ITEM, ItemTypes.TOOL_ITEM], squareTarget, collect)
 class RootSvg extends Component {
   static propTypes = {
     data: PropTypes.instanceOf(Svg),

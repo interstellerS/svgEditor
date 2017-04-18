@@ -56,6 +56,8 @@ export default class CustomDragLayer extends Component {
     switch (type) {
       case ItemTypes.SVG_ITEM:
         return <BoxDragPreview title={item.title} />;
+      case ItemTypes.TOOL_ITEM:
+        return <BoxDragPreview title={item.title} />;
       default:
         return null;
     }
