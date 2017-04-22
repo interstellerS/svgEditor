@@ -4,10 +4,13 @@ import { connect } from "react-redux";
 import { SvgRenderer } from "components/renderers";
 import { Svg } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
-import { changeSvgDetail } from "redux/actions/svgActions";
+import { changeSvgDetail, createSvgElement } from "redux/actions/svgActions";
 const mapDispatchToProps = dispatch => ({
   move(name, attribute, value) {
     dispatch(changeSvgDetail(name, attribute, value));
+  },
+  create(tool, x, y) {
+    dispatch(createSvgElement(tool, x, y));
   }
 });
 
@@ -34,6 +37,10 @@ function dropSvgItem(props, monitor, component) {
 }
 function dropToolItem(props, monitor, component) {
   const item = monitor.getItem();
+  const { x, y } = monitor.getClientOffset();
+  const svg = document.getElementsByClassName("svgRendered")[0];
+  const { top, left } = svg.getBoundingClientRect();
+  props.create(item.tool, x - left, y - top);
   // TODO add drop tool item support
 }
 

@@ -2,7 +2,8 @@ import {
   SELECT_ITEM,
   ATTR_CHANGE,
   SELECT_TOOL_LEFT,
-  SELECT_TOOL_TOP
+  SELECT_TOOL_TOP,
+  CREATE_ITEM
 } from "../constants/ActionTypes";
 
 export function selectItem(item) {
@@ -19,4 +20,7 @@ export function selectToolLeft(tool) {
 
 export function selectToolTop(tool) {
   return { type: SELECT_TOOL_TOP, tool };
+}
+export function createSvgElement(tool, x, y) {
+  return { type: CREATE_ITEM, tool, x, y };
 }
