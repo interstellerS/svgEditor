@@ -29,8 +29,8 @@ const squareTarget = {
 function dropSvgItem(props, monitor, component) {
   const item = monitor.getItem();
   const delta = monitor.getDifferenceFromInitialOffset();
-  props.move(item.data.name, "x", item.data.x + delta.x);
-  props.move(item.data.name, "y", item.data.y + delta.y);
+  props.move(item.data.name, item.data.xAttributre, item.data.x + delta.x);
+  props.move(item.data.name, item.data.yAttributre, item.data.y + delta.y);
 }
 function dropToolItem(props, monitor, component) {
   const item = monitor.getItem();

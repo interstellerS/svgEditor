@@ -67,4 +67,11 @@ export default class Circle extends SvgShape {
   get allProps() {
     return Object.assign({ name: this.name }, this.domProps);
   }
+
+  get xAttributre() {
+    return "cx";
+  }
+  get yAttributre() {
+    return "cy";
+  }
 }

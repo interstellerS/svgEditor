@@ -5,15 +5,22 @@ import * as constants from "../constants/ActionTypes";
 import * as colors from "data/colors";
 
 const update = (state, mutations) => Object.assign({}, state, mutations);
-const updateAttribute = (state, name, attribute, value) => {
-  const newSvg = state.svg.update(svg => {
-    let newChildren = svg.children.update(
-      svg.children.findIndex(item => item.get("name") === name),
-      item => item.set(attribute, value)
-    );
+
+const updateAttribute = function updateSvgAttribute(
+  state,
+  name,
+  attribute,
+  value
+) {
+  const svg = state.svg;
+  let itemIndex = svg.children.findIndex(item => item["name"] === name);
+  const newChildren = svg.children.update(itemIndex, function(item) {
+    return item.set(attribute, value);
+  });
+  const newSvg = svg.update(svg => {
     return svg.set("children", newChildren);
   });
-  let selectedItem = newSvg.children.find(item => item.get("name") === name);
+  let selectedItem = newSvg.children.get(itemIndex);
   return update(state, { svg: newSvg, selectedItem: selectedItem });
 };
 

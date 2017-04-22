@@ -58,4 +58,11 @@ export default class Rectangle extends SvgShape {
   get allProps() {
     return Object.assign({ name: this.name }, this.domProps);
   }
+
+  get xAttributre() {
+    return "x";
+  }
+  get yAttributre() {
+    return "y";
+  }
 }
