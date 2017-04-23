@@ -1,16 +1,33 @@
 import React, { Component, PropTypes } from "react";
 import { DropTarget } from "react-dnd";
 import { connect } from "react-redux";
+import $ from "jquery";
 import { SvgRenderer } from "components/renderers";
 import { Svg } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
-import { changeSvgDetail, createSvgElement } from "redux/actions/svgActions";
+import {
+  changeSvgDetail,
+  createSvgElement,
+  selectItem
+} from "redux/actions/svgActions";
+
+const stylesGroup = {
+  pointerEvents: "all"
+};
+const stylesParent = {
+  height: "100%",
+  width: "100%"
+};
+
 const mapDispatchToProps = dispatch => ({
   move(name, attribute, value) {
     dispatch(changeSvgDetail(name, attribute, value));
   },
   create(tool, x, y) {
     dispatch(createSvgElement(tool, x, y));
+  },
+  selectItem(item) {
+    dispatch(selectItem(item));
   }
 });
 
@@ -38,7 +55,7 @@ function dropSvgItem(props, monitor, component) {
 function dropToolItem(props, monitor, component) {
   const item = monitor.getItem();
   const { x, y } = monitor.getClientOffset();
-  const svg = document.getElementsByClassName("svgRendered")[0];
+  const svg = $("#svgParent");
   const { top, left } = svg.getBoundingClientRect();
   props.create(item.tool, x - left, y - top);
   // TODO add drop tool item support
@@ -59,14 +76,27 @@ class RootSvg extends Component {
     data: PropTypes.instanceOf(Svg),
     handleClick: PropTypes.func.isRequired
   };
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
+  handleClick(event) {
+    console.log("target clicket : " + event.target);
+    if (event.target instanceof SVGSVGElement) {
+      this.props.selectItem(null);
+    }
+  }
   render() {
     const { data, handleClick, connectDropTarget, isDragging } = this.props;
     const svgDocument = (
-      <svg className="svgRendered">
-        {data.children.map((child, index) => (
-          <SvgRenderer key={index} data={child} handleClick={handleClick} />
-        ))}
+      <svg onClick={this.handleClick} id="svgcanvas" style={stylesParent}>
+        <g style={stylesGroup}>
+          {data.children.map((child, index) => (
+            <SvgRenderer key={index} data={child} handleClick={handleClick} />
+          ))}
+        </g>
+        <g className="selectGroup" />
       </svg>
     );
     return connectDropTarget(svgDocument);
