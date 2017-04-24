@@ -20,7 +20,6 @@ ol {
 .viewer-column {
     flex: 3 ;
     margin: 0px 10px ;
-    position: relative;
 }
 .treeView {
     flex-grow: 1;

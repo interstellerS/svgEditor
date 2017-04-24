@@ -26,14 +26,12 @@ class ViewerContainer extends Component {
 
   render() {
     return (
-      <div className="svgContainer">
-        <Viewer
-          {...this.props}
-          height={this.state.height}
-          width={this.state.width}
-          handleClick={this.handleClick}
-        />
-      </div>
+      <Viewer
+        {...this.props}
+        height={this.state.height}
+        width={this.state.width}
+        handleClick={this.handleClick}
+      />
     );
   }
 }

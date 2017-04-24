@@ -1,11 +1,14 @@
 .svgContainer{
   position: absolute;
-  height: 100% ;
-  width : 100% ;
+  top: 70px;
+  left: 70px;
+  right: 20px;
+  bottom: 20px;
   border-top-color: #ddd;
   border-radius: 3px;
   border: 1px solid #eee;
   border-bottom-color: #ddd;
+  background-color: #7C7877 ;
 }
 .svgRendered{
   height: 100% ;

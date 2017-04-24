@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react";
 import { DropTarget } from "react-dnd";
 import { connect } from "react-redux";
 import $ from "jquery";
+import Dimensions from "react-dimensions";
 import { SvgRenderer } from "components/renderers";
 import { Svg } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
@@ -15,8 +16,9 @@ const stylesGroup = {
   pointerEvents: "all"
 };
 const stylesParent = {
-  height: "100%",
-  width: "100%"
+  position: "absolute",
+  top: 0,
+  left: 0
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -67,6 +69,7 @@ function collect(connect, monitor) {
     isOver: monitor.isOver()
   };
 }
+
 @connect(null, mapDispatchToProps)
 @DropTarget([ItemTypes.SVG_ITEM, ItemTypes.TOOL_ITEM], squareTarget, collect)
 class RootSvg extends Component {
@@ -79,6 +82,7 @@ class RootSvg extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.state = { value: { x: 200, y: 200, svgHeight: 200, svgWidth: 200 } };
   }
 
   handleClick(event) {
@@ -87,20 +91,58 @@ class RootSvg extends Component {
       this.props.selectItem(null);
     }
   }
+  setValue(nextValue) {
+    this.setState({ value: nextValue });
+  }
+  getValue() {
+    return !!this.state ? this.state.value : null;
+  }
+  getSvgDimensions(parentWidth, parentHeight) {
+    let svgWidth = parentWidth * 0.6;
+    let x = parentWidth * 0.2;
+    let svgHeight = parentHeight * 0.6;
+    let y = parentHeight * 0.2;
+    let cords = {
+      x,
+      y,
+      svgHeight,
+      svgWidth
+    };
+    return cords;
+  }
   render() {
     const { data, handleClick, connectDropTarget, isDragging } = this.props;
+    let value = this.getSvgDimensions(
+      this.props.containerWidth,
+      this.props.containerHeight
+    );
     const svgDocument = (
-      <svg onClick={this.handleClick} id="svgcanvas" style={stylesParent}>
-        <g style={stylesGroup}>
-          {data.children.map((child, index) => (
-            <SvgRenderer key={index} data={child} handleClick={handleClick} />
-          ))}
-        </g>
-        <g className="selectGroup" />
+      <svg
+        id="svgRoot"
+        style={stylesParent}
+        ref={svgRoot => this.svgRoot = svgRoot}
+        width={this.props.containerWidth}
+        height={this.props.containerHeight}
+      >
+        <svg
+          id="svgContent"
+          width={value.svgWidth}
+          height={value.svgHeight}
+          x={value.x}
+          y={value.y}
+          onClick={this.handleClick}
+        >
+          <g style={stylesGroup}>
+            {data.children.map((child, index) => (
+              <SvgRenderer key={index} data={child} handleClick={handleClick} />
+            ))}
+          </g>
+          <g className="selectGroup" />
+        </svg>
       </svg>
     );
     return connectDropTarget(svgDocument);
   }
 }
 
-export default RootSvg;
+export default Dimensions()(RootSvg);

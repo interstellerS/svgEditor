@@ -167,7 +167,7 @@ class Ruler extends Component {
   }
 
   componentDidMount() {
-    updateRulers();
+    //updateRulers();
   }
 
   render() {

@@ -13,7 +13,7 @@ class Viewer extends Component {
   render() {
     const { width, height, svg } = this.props;
     return (
-      <div>
+      <div className="svgContainer">
         <Ruler />
         <UnitRenderer
           data={svg}
