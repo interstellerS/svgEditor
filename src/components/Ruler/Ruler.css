@@ -1,45 +1,35 @@
 #rulers > div {
     position: absolute;
-    background: #DDD;
     z-index: 1;
     overflow: hidden;
+    color: white ;
 }
-
-svg-editor.css:83
 #ruler_corner {
-    top: 41px;
-    left: 41px;
+    top: 0px;
+    left: 0px;
     width: 15px;
     height: 15px;
 }
-#rulers > div {
-    position: absolute;
-    background: #DDD;
-    z-index: 1;
-    overflow: hidden;
-}
-
-svg-editor.css:90
 #ruler_x {
     height: 15px;
-    top: 41px;
-    left: 56px;
+    top: 0px;
+    left: 15px;
     right: 30px;
     border-bottom: 1px solid;
     border-left: 1px solid #777;
 }
-#rulers > div {
-    position: absolute;
-    background: #DDD;
-    z-index: 1;
-    overflow: hidden;
-}
-svg-editor.css:99
 #ruler_y {
     width: 15px;
-    top: 55px;
-    left: 41px;
+    top: 15px;
+    left: 0px;
     bottom: 56px;
     border-right: 1px solid;
     border-top: 1px solid #777;
+}
+#ruler_x canvas:first-child {
+    margin-left: -16px;
+}
+svg-editor.css:112
+#ruler_x canvas {
+    float: left;
 }

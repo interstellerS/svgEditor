@@ -16,7 +16,7 @@ function updateRulers(scanvas, zoom) {
 
   var d, i;
   var limit = 30000;
-  var contentElem = $("#svgcanvas");
+  var contentElem = $("#svgContent")[0];
 
   var unit = 1; // 1 = 1px
 
@@ -43,7 +43,7 @@ function updateRulers(scanvas, zoom) {
     var ctx = hcanv.getContext("2d");
     var ctx_arr, num, ctx_arr_num;
 
-    ctx.fillStyle = "rgb(200,0,0)";
+    ctx.fillStyle = "rgb(239, 239, 239)";
     ctx.fillRect(0, 0, hcanv.width, hcanv.height);
 
     // Remove any existing canvasses
@@ -75,6 +75,13 @@ function updateRulers(scanvas, zoom) {
     // Calculate the main number interval
     var raw_m = 50 / u_multi;
     var multi = 1;
+    var r_intervals = [];
+    var i;
+    for (i = 0.1; i < 1e5; i *= 10) {
+      r_intervals.push(i);
+      r_intervals.push(2 * i);
+      r_intervals.push(5 * i);
+    }
     for (i = 0; i < r_intervals.length; i++) {
       num = r_intervals[i];
       multi = num;
@@ -116,7 +123,7 @@ function updateRulers(scanvas, zoom) {
       if (label !== 0 && label !== 1000 && label % 1000 === 0) {
         label = label / 1000 + "K";
       }
-
+      ctx.fillStyle = "#fff";
       if (isX) {
         ctx.fillText(label, ruler_d + 2, 8);
       } else {
@@ -156,7 +163,7 @@ function updateRulers(scanvas, zoom) {
       }
       ruler_d += big_int;
     }
-    ctx.strokeStyle = "#000";
+    ctx.strokeStyle = "#FFF";
     ctx.stroke();
   }
 }
@@ -167,7 +174,8 @@ class Ruler extends Component {
   }
 
   componentDidMount() {
-    //updateRulers();
+    // hack to call ruler construction after svg , did not undestand why svg not rendered when this is called
+    setTimeout(updateRulers, 1000);
   }
 
   render() {

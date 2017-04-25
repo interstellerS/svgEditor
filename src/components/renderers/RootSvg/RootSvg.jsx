@@ -12,8 +12,11 @@ import {
   selectItem
 } from "redux/actions/svgActions";
 
-const stylesGroup = {
+const enablePointerStyle = {
   pointerEvents: "all"
+};
+const disableointerStyle = {
+  pointerEvents: "none"
 };
 const stylesParent = {
   position: "absolute",
@@ -98,17 +101,20 @@ class RootSvg extends Component {
     return !!this.state ? this.state.value : null;
   }
   getSvgDimensions(parentWidth, parentHeight) {
-    let svgWidth = parentWidth * 0.6;
+    let width = parentWidth * 0.6;
     let x = parentWidth * 0.2;
-    let svgHeight = parentHeight * 0.6;
+    let height = parentHeight * 0.6;
     let y = parentHeight * 0.2;
     let cords = {
       x,
       y,
-      svgHeight,
-      svgWidth
+      width,
+      height
     };
     return cords;
+  }
+  componentDidMount() {
+    console.log("mounted : ");
   }
   render() {
     const { data, handleClick, connectDropTarget, isDragging } = this.props;
@@ -124,15 +130,18 @@ class RootSvg extends Component {
         width={this.props.containerWidth}
         height={this.props.containerHeight}
       >
-        <svg
-          id="svgContent"
-          width={value.svgWidth}
-          height={value.svgHeight}
-          x={value.x}
-          y={value.y}
-          onClick={this.handleClick}
-        >
-          <g style={stylesGroup}>
+        <svg id="svgBackground" {...value} style={disableointerStyle}>
+          <rect
+            width="100%"
+            height="100%"
+            x="0"
+            y="0"
+            stroke="#000"
+            fill="#FFF"
+          />
+        </svg>
+        <svg id="svgContent" {...value} onClick={this.handleClick}>
+          <g style={enablePointerStyle}>
             {data.children.map((child, index) => (
               <SvgRenderer key={index} data={child} handleClick={handleClick} />
             ))}
