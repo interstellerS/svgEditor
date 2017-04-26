@@ -74,4 +74,17 @@ export default class Circle extends SvgShape {
   get yAttributre() {
     return "cy";
   }
+
+  get edges() {
+    return [
+      { x: this.cx - this.r, y: this.cy - this.r },
+      { x: this.cx + this.r, y: this.cy - this.r },
+      { x: this.cx + this.r, y: this.cy + this.r },
+      { x: this.cx - this.r, y: this.cy + this.r }
+    ];
+  }
+
+  get edgesPath() {
+    return `M${this.edges[0].x},${this.edges[0].y} L${this.edges[1].x},${this.edges[1].y} ${this.edges[2].x},${this.edges[2].y} ${this.edges[3].x},${this.edges[3].y}z`;
+  }
 }

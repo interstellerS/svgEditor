@@ -65,4 +65,17 @@ export default class Rectangle extends SvgShape {
   get yAttributre() {
     return "y";
   }
+
+  get edges() {
+    return [
+      { x: this.x, y: this.y },
+      { x: this.x + this.width, y: this.y },
+      { x: this.x + this.width, y: this.y + this.height },
+      { x: this.x, y: this.y + this.height }
+    ];
+  }
+
+  get edgesPath() {
+    return `M${this.edges[0].x},${this.edges[0].y} L${this.edges[1].x},${this.edges[1].y} ${this.edges[2].x},${this.edges[2].y} ${this.edges[3].x},${this.edges[3].y}z`;
+  }
 }

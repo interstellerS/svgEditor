@@ -3,7 +3,7 @@ import { DropTarget } from "react-dnd";
 import { connect } from "react-redux";
 import $ from "jquery";
 import Dimensions from "react-dimensions";
-import { SvgRenderer } from "components/renderers";
+import { SvgRenderer, SelectorSvg } from "components/renderers";
 import { Svg } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
 import {
@@ -35,7 +35,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(selectItem(item));
   }
 });
-
+const mapStateToProps = state => {
+  return { selectedItem: state.svg.selectedItem };
+};
 const squareTarget = {
   drop(props, monitor, component) {
     const item = monitor.getItem();
@@ -60,7 +62,7 @@ function dropSvgItem(props, monitor, component) {
 function dropToolItem(props, monitor, component) {
   const item = monitor.getItem();
   const { x, y } = monitor.getClientOffset();
-  const svg = $("#svgParent");
+  const svg = $("#svgContent")[0];
   const { top, left } = svg.getBoundingClientRect();
   props.create(item.tool, x - left, y - top);
   // TODO add drop tool item support
@@ -73,7 +75,7 @@ function collect(connect, monitor) {
   };
 }
 
-@connect(null, mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 @DropTarget([ItemTypes.SVG_ITEM, ItemTypes.TOOL_ITEM], squareTarget, collect)
 class RootSvg extends Component {
   static propTypes = {
@@ -100,6 +102,20 @@ class RootSvg extends Component {
   getValue() {
     return !!this.state ? this.state.value : null;
   }
+  renderBackround(value) {
+    return (
+      <svg id="svgBackground" {...value} style={disableointerStyle}>
+        <rect
+          width="100%"
+          height="100%"
+          x="0"
+          y="0"
+          stroke="#000"
+          fill="#FFF"
+        />
+      </svg>
+    );
+  }
   getSvgDimensions(parentWidth, parentHeight) {
     let width = parentWidth * 0.6;
     let x = parentWidth * 0.2;
@@ -112,9 +128,6 @@ class RootSvg extends Component {
       height
     };
     return cords;
-  }
-  componentDidMount() {
-    console.log("mounted : ");
   }
   render() {
     const { data, handleClick, connectDropTarget, isDragging } = this.props;
@@ -130,23 +143,14 @@ class RootSvg extends Component {
         width={this.props.containerWidth}
         height={this.props.containerHeight}
       >
-        <svg id="svgBackground" {...value} style={disableointerStyle}>
-          <rect
-            width="100%"
-            height="100%"
-            x="0"
-            y="0"
-            stroke="#000"
-            fill="#FFF"
-          />
-        </svg>
+        {this.renderBackround(value)}
         <svg id="svgContent" {...value} onClick={this.handleClick}>
           <g style={enablePointerStyle}>
             {data.children.map((child, index) => (
               <SvgRenderer key={index} data={child} handleClick={handleClick} />
             ))}
           </g>
-          <g className="selectGroup" />
+          <SelectorSvg selectedItem={this.props.selectedItem} />
         </svg>
       </svg>
     );
