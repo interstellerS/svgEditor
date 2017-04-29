@@ -42,7 +42,7 @@ const updateAttribute = function updateSvgAttribute(
 const initSvg = builder.createSvg();
 const circle = builder.createCircle(50, 50, 10, colors.COQUELICOT);
 const rectangle = builder.createRectangle(50, 10, 30, 30, colors.ACACIA);
-const circle2 = builder.createCircle(10, 10, 10, colors.LILAS);
+const circle2 = builder.createCircle(300, 200, 100, colors.LILAS);
 const line = builder.createLine(200, 10, 10, 100, colors.LILAS);
 
 const svg = initSvg

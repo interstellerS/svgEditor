@@ -16,7 +16,7 @@ const enablePointerStyle = {
   pointerEvents: "all"
 };
 const disableointerStyle = {
-  pointerEvents: "none"
+  pointerEvents: "all"
 };
 const stylesParent = {
   position: "absolute",
@@ -65,7 +65,6 @@ function dropToolItem(props, monitor, component) {
   const svg = $("#svgContent")[0];
   const { top, left } = svg.getBoundingClientRect();
   props.create(item.tool, x - left, y - top);
-  // TODO add drop tool item support
 }
 
 function collect(connect, monitor) {
@@ -80,19 +79,16 @@ function collect(connect, monitor) {
 class RootSvg extends Component {
   static propTypes = {
     data: PropTypes.instanceOf(Svg),
-    handleClick: PropTypes.func.isRequired,
-    data: PropTypes.instanceOf(Svg),
     handleClick: PropTypes.func.isRequired
   };
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleBackgroundClick = this.handleBackgroundClick.bind(this);
     this.state = { value: { x: 200, y: 200, svgHeight: 200, svgWidth: 200 } };
   }
 
-  handleClick(event) {
-    console.log("target clicket : " + event.target);
-    if (event.target instanceof SVGSVGElement) {
+  handleBackgroundClick(event) {
+    if (event.target.id == "rectBackground") {
       this.props.selectItem(null);
     }
   }
@@ -106,6 +102,8 @@ class RootSvg extends Component {
     return (
       <svg id="svgBackground" {...value} style={disableointerStyle}>
         <rect
+          id="rectBackground"
+          onClick={this.handleBackgroundClick}
           width="100%"
           height="100%"
           x="0"
@@ -144,7 +142,7 @@ class RootSvg extends Component {
         height={this.props.containerHeight}
       >
         {this.renderBackround(value)}
-        <svg id="svgContent" {...value} onClick={this.handleClick}>
+        <svg id="svgContent" {...value}>
           <g style={enablePointerStyle}>
             {data.children.map((child, index) => (
               <SvgRenderer key={index} data={child} handleClick={handleClick} />

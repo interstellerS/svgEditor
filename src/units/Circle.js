@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import SvgShape from "./SvgShape";
+import { ORIENTATION } from "redux/constants/dndConstants";
 
 export default class Circle extends SvgShape {
   constructor(options) {
@@ -81,6 +82,68 @@ export default class Circle extends SvgShape {
       { x: this.cx + this.r, y: this.cy - this.r },
       { x: this.cx + this.r, y: this.cy + this.r },
       { x: this.cx - this.r, y: this.cy + this.r }
+    ];
+  }
+
+  get circles() {
+    return [
+      {
+        orientation: ORIENTATION.NORD_WEST,
+        fill: "#22C",
+        r: 5,
+        cx: this.cx - this.r,
+        cy: this.cy - this.r
+      },
+      {
+        orientation: ORIENTATION.NORD,
+        fill: "#22C",
+        r: 5,
+        cx: this.cx,
+        cy: this.cy - this.r
+      },
+      {
+        orientation: ORIENTATION.NORD_EST,
+        fill: "#22C",
+        r: 5,
+        cx: this.cx + this.r,
+        cy: this.cy - this.r
+      },
+      {
+        orientation: ORIENTATION.EST,
+        fill: "#22C",
+        r: 5,
+        cx: this.cx + this.r,
+        cy: this.cy
+      },
+      {
+        orientation: ORIENTATION.SUD_EST,
+        fill: "#22C",
+        r: 5,
+        cx: this.cx + this.r,
+        cy: this.cy + this.r
+      },
+      {
+        orientation: ORIENTATION.SUD,
+        fill: "#22C",
+        r: 5,
+        cx: this.cx,
+        cy: this.cy + this.r
+      },
+      {
+        orientation: ORIENTATION.SUD_WEST,
+        fill: "#22C",
+        r: 5,
+        cx: this.cx,
+        cy: this.cy + this.r
+      },
+      {
+        orientation: ORIENTATION.WEST,
+        fill: "#22C",
+        r: 5,
+        cx: this.cx - this.r,
+        cy: this.cy + this.r
+      },
+      { orientation: "", fill: "#22C", r: 5, cx: this.cx - this.r, cy: this.cy }
     ];
   }
 

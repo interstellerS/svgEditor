@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import SvgShape from "./SvgShape";
+import { ORIENTATION } from "redux/constants/dndConstants";
 
 export default class Rectangle extends SvgShape {
   constructor(options) {
@@ -75,6 +76,66 @@ export default class Rectangle extends SvgShape {
     ];
   }
 
+  get circles() {
+    return [
+      {
+        orientation: ORIENTATION.NORD_WEST,
+        r: 5,
+        fill: "#22C",
+        cx: this.x,
+        cy: this.y
+      },
+      {
+        orientation: ORIENTATION.NORD,
+        r: 5,
+        fill: "#22C",
+        cx: this.x + this.width / 2,
+        cy: this.y
+      },
+      {
+        orientation: ORIENTATION.NORD_EST,
+        r: 5,
+        fill: "#22C",
+        cx: this.x + this.width,
+        cy: this.y
+      },
+      {
+        orientation: ORIENTATION.EST,
+        r: 5,
+        fill: "#22C",
+        cx: this.x + this.width,
+        cy: this.y + this.height / 2
+      },
+      {
+        orientation: ORIENTATION.SUD_EST,
+        r: 5,
+        fill: "#22C",
+        cx: this.x + this.width,
+        cy: this.y + this.height
+      },
+      {
+        orientation: ORIENTATION.SUD,
+        r: 5,
+        fill: "#22C",
+        cx: this.x + this.width / 2,
+        cy: this.y + this.height
+      },
+      {
+        orientation: ORIENTATION.SUD_WEST,
+        r: 5,
+        fill: "#22C",
+        cx: this.x,
+        cy: this.y + this.height
+      },
+      {
+        orientation: ORIENTATION.WEST,
+        r: 5,
+        fill: "#22C",
+        cx: this.x,
+        cy: this.y + this.height / 2
+      }
+    ];
+  }
   get edgesPath() {
     return `M${this.edges[0].x},${this.edges[0].y} L${this.edges[1].x},${this.edges[1].y} ${this.edges[2].x},${this.edges[2].y} ${this.edges[3].x},${this.edges[3].y}z`;
   }

@@ -10,8 +10,11 @@ import { DevTools } from "containers";
 
 import rootReducer from "redux/reducers";
 
-const enhancer = compose(DevTools.instrument());
-const store = createStore(rootReducer, enhancer);
+//const enhancer = compose(DevTools.instrument());
+const store = createStore(
+  rootReducer,
+  window.devToolsExtension && window.devToolsExtension()
+);
 
 render(
   <Provider store={store}>

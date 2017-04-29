@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { DragLayer } from "react-dnd";
 import { ItemTypes } from "redux/constants/dndConstants";
-import BoxDragPreview from "./BoxDragPreview";
+import SvgDragPreview from "./SvgDragPreview";
 
 const layerStyles = {
   position: "fixed",
@@ -22,7 +22,6 @@ function getItemStyles(props) {
   }
 
   let { x, y } = currentOffset;
-
   const transform = `translate(${x}px, ${y}px)`;
   return {
     transform,
@@ -55,9 +54,11 @@ export default class CustomDragLayer extends Component {
   renderItem(type, item) {
     switch (type) {
       case ItemTypes.SVG_ITEM:
-        return <BoxDragPreview title={item.title} />;
+        return <SvgDragPreview title={item.title} />;
       case ItemTypes.TOOL_ITEM:
-        return <BoxDragPreview title={item.title} />;
+        return <SvgDragPreview title={item.title} />;
+      case ItemTypes.EDGE_ITEM:
+        return <SvgDragPreview title={item.title} />;
       default:
         return null;
     }

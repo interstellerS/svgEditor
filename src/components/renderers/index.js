@@ -6,3 +6,4 @@ export RootSvg from "./RootSvg/RootSvg";
 export SvgRenderer from "./SvgRenderer/SvgRenderer";
 export UnitRenderer from "./UnitRenderer/UnitRenderer";
 export SelectorSvg from "./SelectorSvg/SelectorSvg";
+export SelectorEdge from "./SelectorEdge/SelectorEdge";
