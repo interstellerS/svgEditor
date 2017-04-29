@@ -4,7 +4,7 @@ import shouldPureComponentUpdate from "./shouldPureComponentUpdate";
 import setIntervalDecorator from "helpers/decorators";
 
 @setIntervalDecorator
-export default class SvgDragPreview extends Component {
+export default class EdgeDragPreview extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props) {
@@ -46,8 +46,9 @@ export default class SvgDragPreview extends Component {
         zIndex: 100,
         left: `${currentOffset.x}px`,
         top: `${currentOffset.y}px`,
-        width: `${rest.item.data.calculatedWidth}px`,
-        height: `${rest.item.data.calculatedHeight}px`,
+        width: "10px",
+        height: "10px",
+        borderRadius: "50%",
         transition: "border 0.1s linear, boxShadow 0.1s linear"
       },
       borderNormal: {
@@ -62,7 +63,8 @@ export default class SvgDragPreview extends Component {
       },
       inner: {
         backgroundColor: "#30A9DE",
-        opacity: 0.1,
+        borderRadius: "50%",
+        opacity: 0.9,
         width: "100%",
         height: "100%"
       }

@@ -2,16 +2,7 @@ import React, { Component, PropTypes } from "react";
 import { DragLayer } from "react-dnd";
 import { ItemTypes } from "redux/constants/dndConstants";
 import SvgDragPreview from "./SvgDragPreview";
-
-const layerStyles = {
-  position: "fixed",
-  pointerEvents: "none",
-  zIndex: 100,
-  left: 0,
-  top: 0,
-  width: "100%",
-  height: "100%"
-};
+import EdgeDragPreview from "./EdgeDragPreview";
 
 function getItemStyles(props) {
   const { initialOffset, currentOffset } = props;
@@ -51,32 +42,21 @@ export default class CustomDragLayer extends Component {
     isDragging: PropTypes.bool.isRequired
   };
 
-  renderItem(type, item) {
-    switch (type) {
-      case ItemTypes.SVG_ITEM:
-        return <SvgDragPreview title={item.title} />;
-      case ItemTypes.TOOL_ITEM:
-        return <SvgDragPreview title={item.title} />;
-      case ItemTypes.EDGE_ITEM:
-        return <SvgDragPreview title={item.title} />;
-      default:
-        return null;
-    }
-  }
-
   render() {
-    const { item, itemType, isDragging } = this.props;
+    const { isDragging, ...rest } = this.props;
 
     if (!isDragging) {
       return null;
     }
-
-    return (
-      <div style={layerStyles}>
-        <div style={getItemStyles(this.props)}>
-          {this.renderItem(itemType, item)}
-        </div>
-      </div>
-    );
+    switch (this.props.itemType) {
+      case ItemTypes.SVG_ITEM:
+        return <SvgDragPreview {...rest} />;
+      case ItemTypes.EDGE_ITEM:
+        return <EdgeDragPreview {...rest} />;
+      case ItemTypes.TOOL_ITEM:
+        return <SvgDragPreview {...rest} />;
+      default:
+        return null;
+    }
   }
 }
