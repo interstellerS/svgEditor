@@ -43,7 +43,7 @@ const initSvg = builder.createSvg();
 const circle = builder.createCircle(50, 50, 10, colors.COQUELICOT);
 const rectangle = builder.createRectangle(300, 100, 100, 50, colors.ACACIA);
 const circle2 = builder.createCircle(30, 20, 10, colors.LILAS);
-const line = builder.createLine(200, 10, 10, 100, colors.LILAS);
+const line = builder.createLine(200, 10, 10, 100, 10, colors.LILAS);
 
 const svg = initSvg
   .addChild(circle)

@@ -41,7 +41,7 @@ export function createLine(
   y1,
   x2,
   y2,
-  strokeWidth = 10,
+  strokeWidth = 20,
   stroke = colors.COQUELICOT
 ) {
   return new Line({
