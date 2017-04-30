@@ -4,7 +4,7 @@ import shouldPureComponentUpdate from "./shouldPureComponentUpdate";
 import setIntervalDecorator from "helpers/decorators";
 
 @setIntervalDecorator
-export default class SvgDragPreview extends Component {
+export default class ToolDragPreview extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props) {
@@ -45,33 +45,31 @@ export default class SvgDragPreview extends Component {
         zIndex: 100,
         left: `${currentOffset.x}px`,
         top: `${currentOffset.y}px`,
-        width: `${rest.item.data.calculatedWidth}px`,
-        height: `${rest.item.data.calculatedHeight}px`,
-        borderColor: "#2b90d9",
+        width: "48px",
+        height: "32px",
         transition: "border 0.1s linear, boxShadow 0.1s linear"
       },
       borderNormal: {
         borderColor: "#2b90d9",
-        borderWidth: 5,
+        border: "1px solid transparent",
         boxShadow: "none"
       },
       borderGlowing: {
         borderColor: "#2b90d9",
-        borderWidth: 5,
+        border: "2px solid ",
         boxShadow: "0 0 5px #2b90d9"
       },
       inner: {
         backgroundColor: "#30A9DE",
         opacity: 0.1,
-
         width: "100%",
         height: "100%"
       }
     };
     const stylesActive = tickTock ? styles.borderGlowing : styles.borderNormal;
     return (
-      <div style={Object.assign({}, stylesActive, styles.box)}>
-        <div style={styles.inner} />{" "}
+      <div style={Object.assign({}, styles.inner, stylesActive, styles.box)}>
+        <div style={styles.inner} />
       </div>
     );
   }

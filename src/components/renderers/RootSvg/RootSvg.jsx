@@ -6,6 +6,7 @@ import Dimensions from "react-dimensions";
 import { SvgRenderer, SelectorSvg } from "components/renderers";
 import { Svg } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
+import { ORIENTATION } from "redux/constants/dndConstants";
 import {
   changeSvgDetail,
   createSvgElement,
@@ -25,7 +26,7 @@ const stylesParent = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  move(name, attribute, value) {
+  change(name, attribute, value) {
     dispatch(changeSvgDetail(name, attribute, value));
   },
   create(tool, x, y) {
@@ -48,6 +49,9 @@ const squareTarget = {
       case ItemTypes.TOOL_ITEM:
         dropToolItem(props, monitor, component);
         break;
+      case ItemTypes.EDGE_ITEM:
+        dropEdgeItem(props, monitor, component);
+        break;
       default:
     }
   }
@@ -56,8 +60,8 @@ const squareTarget = {
 function dropSvgItem(props, monitor, component) {
   const item = monitor.getItem();
   const delta = monitor.getDifferenceFromInitialOffset();
-  props.move(item.data.name, item.data.xAttributre, item.data.x + delta.x);
-  props.move(item.data.name, item.data.yAttributre, item.data.y + delta.y);
+  props.change(item.data.name, item.data.xAttributre, item.data.x + delta.x);
+  props.change(item.data.name, item.data.yAttributre, item.data.y + delta.y);
 }
 function dropToolItem(props, monitor, component) {
   const item = monitor.getItem();
@@ -65,6 +69,29 @@ function dropToolItem(props, monitor, component) {
   const svg = $("#svgContent")[0];
   const { top, left } = svg.getBoundingClientRect();
   props.create(item.tool, x - left, y - top);
+}
+function dropEdgeItem(props, monitor, component) {
+  const item = monitor.getItem();
+  const delta = monitor.getDifferenceFromInitialOffset();
+  if (item.data.name.indexOf("circle") > -1)
+    handleCircleEdge(props, item, delta);
+  if (item.data.name.indexOf("rectangle") > -1)
+    handleRectangleEdge(props, item, delta);
+
+  function handleCircleEdge(props, item, delta) {
+    const diff = [ORIENTATION.NORD, ORIENTATION.SUD].indexOf(
+      item.data.orientation
+    ) > -1
+      ? delta.y
+      : delta.x;
+    props.change(item.data.name, "r", item.data.radius + diff);
+  }
+  function handleRectangleEdge(props, item, delta) {
+    if ([ORIENTATION.NORD, ORIENTATION.SUD].indexOf(item.data.orientation) > -1)
+      props.change(item.data.name, "height", item.data.height + delta.y);
+    if ([ORIENTATION.EST, ORIENTATION.WEST].indexOf(item.data.orientation) > -1)
+      props.change(item.data.name, "width", item.data.width + delta.x);
+  }
 }
 
 function collect(connect, monitor) {
@@ -75,7 +102,11 @@ function collect(connect, monitor) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-@DropTarget([ItemTypes.SVG_ITEM, ItemTypes.TOOL_ITEM], squareTarget, collect)
+@DropTarget(
+  [ItemTypes.SVG_ITEM, ItemTypes.TOOL_ITEM, ItemTypes.EDGE_ITEM],
+  squareTarget,
+  collect
+)
 class RootSvg extends Component {
   static propTypes = {
     data: PropTypes.instanceOf(Svg),

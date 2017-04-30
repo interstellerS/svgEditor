@@ -41,8 +41,8 @@ const updateAttribute = function updateSvgAttribute(
 
 const initSvg = builder.createSvg();
 const circle = builder.createCircle(50, 50, 10, colors.COQUELICOT);
-const rectangle = builder.createRectangle(50, 10, 30, 30, colors.ACACIA);
-const circle2 = builder.createCircle(300, 200, 100, colors.LILAS);
+const rectangle = builder.createRectangle(300, 100, 100, 50, colors.ACACIA);
+const circle2 = builder.createCircle(30, 20, 10, colors.LILAS);
 const line = builder.createLine(200, 10, 10, 100, colors.LILAS);
 
 const svg = initSvg
@@ -53,7 +53,7 @@ const svg = initSvg
 
 const initialState = {
   svg,
-  selectedItem: circle2,
+  selectedItem: rectangle,
   toolsLeft: ["select", "pencil", "line", "rectangle", "circle"],
   toolsTop: ["undo", "redo"],
   selectedToolLeft: "select",

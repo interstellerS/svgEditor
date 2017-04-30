@@ -49,7 +49,7 @@ class SelectorSvg extends Component {
           d={this.props.selectedItem.edgesPath}
         />
         <g style={circles}>
-          {this.props.selectedItem.circles.map((child, index) => (
+          {this.props.selectedItem.circlesMins.map((child, index) => (
             <SelectorEdge data={child} key={index} />
           ))}
         </g>

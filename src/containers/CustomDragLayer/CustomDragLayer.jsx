@@ -3,22 +3,7 @@ import { DragLayer } from "react-dnd";
 import { ItemTypes } from "redux/constants/dndConstants";
 import SvgDragPreview from "./SvgDragPreview";
 import EdgeDragPreview from "./EdgeDragPreview";
-
-function getItemStyles(props) {
-  const { initialOffset, currentOffset } = props;
-  if (!initialOffset || !currentOffset) {
-    return {
-      display: "none"
-    };
-  }
-
-  let { x, y } = currentOffset;
-  const transform = `translate(${x}px, ${y}px)`;
-  return {
-    transform,
-    WebkitTransform: transform
-  };
-}
+import ToolDragPreview from "./ToolDragPreview";
 
 @DragLayer(monitor => ({
   item: monitor.getItem(),
@@ -44,7 +29,6 @@ export default class CustomDragLayer extends Component {
 
   render() {
     const { isDragging, ...rest } = this.props;
-
     if (!isDragging) {
       return null;
     }
@@ -54,7 +38,7 @@ export default class CustomDragLayer extends Component {
       case ItemTypes.EDGE_ITEM:
         return <EdgeDragPreview {...rest} />;
       case ItemTypes.TOOL_ITEM:
-        return <SvgDragPreview {...rest} />;
+        return <ToolDragPreview {...rest} />;
       default:
         return null;
     }

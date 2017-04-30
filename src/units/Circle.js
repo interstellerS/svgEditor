@@ -146,6 +146,46 @@ export default class Circle extends SvgShape {
       { orientation: "", fill: "#22C", r: 5, cx: this.cx - this.r, cy: this.cy }
     ];
   }
+  get circlesMins() {
+    return [
+      {
+        orientation: ORIENTATION.NORD,
+        fill: "#22C",
+        r: 5,
+        name: this.name,
+        radius: this.r,
+        cx: this.cx,
+        cy: this.cy - this.r
+      },
+      {
+        orientation: ORIENTATION.EST,
+        fill: "#22C",
+        r: 5,
+        name: this.name,
+        radius: this.r,
+        cx: this.cx + this.r,
+        cy: this.cy
+      },
+      {
+        orientation: ORIENTATION.SUD,
+        fill: "#22C",
+        r: 5,
+        name: this.name,
+        radius: this.r,
+        cx: this.cx,
+        cy: this.cy + this.r
+      },
+      {
+        orientation: ORIENTATION.WEST,
+        fill: "#22C",
+        r: 5,
+        name: this.name,
+        radius: this.r,
+        cx: this.cx - this.r,
+        cy: this.cy
+      }
+    ];
+  }
 
   get edgesPath() {
     return `M${this.edges[0].x},${this.edges[0].y} L${this.edges[1].x},${this.edges[1].y} ${this.edges[2].x},${this.edges[2].y} ${this.edges[3].x},${this.edges[3].y}z`;

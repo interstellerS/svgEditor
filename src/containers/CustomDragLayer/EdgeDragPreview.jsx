@@ -2,7 +2,23 @@ import React, { Component, PropTypes } from "react";
 import { SvgShape } from "units";
 import shouldPureComponentUpdate from "./shouldPureComponentUpdate";
 import setIntervalDecorator from "helpers/decorators";
+import { ORIENTATION } from "redux/constants/dndConstants";
 
+function getItemCoordiante(currentOffset, initialOffset, item) {
+  let point;
+  switch (item.data.orientation) {
+    case ORIENTATION.NORD:
+    case ORIENTATION.SUD:
+      point = { x: initialOffset.x, y: currentOffset.y };
+      break;
+    case ORIENTATION.EST:
+    case ORIENTATION.WEST:
+      point = { x: currentOffset.x, y: initialOffset.y };
+      break;
+    default:
+  }
+  return point;
+}
 @setIntervalDecorator
 export default class EdgeDragPreview extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -37,15 +53,16 @@ export default class EdgeDragPreview extends Component {
 
   render() {
     const { tickTock } = this.state;
-    const { currentOffset, ...rest } = this.props;
-    if (!currentOffset) return null;
+    const { currentOffset, initialOffset, item, ...rest } = this.props;
+    if (!currentOffset || !initialOffset) return null;
+    const point = getItemCoordiante(currentOffset, initialOffset, item);
     const styles = {
       box: {
         position: "fixed",
         pointerEvents: "none",
         zIndex: 100,
-        left: `${currentOffset.x}px`,
-        top: `${currentOffset.y}px`,
+        left: `${point.x}px`,
+        top: `${point.y}px`,
         width: "10px",
         height: "10px",
         borderRadius: "50%",
