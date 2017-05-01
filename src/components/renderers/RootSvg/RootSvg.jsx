@@ -7,11 +7,7 @@ import { SvgRenderer, SelectorSvg } from "components/renderers";
 import { Svg } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
 import { ORIENTATION } from "redux/constants/dndConstants";
-import {
-  changeSvgDetail,
-  createSvgElement,
-  selectItem
-} from "redux/actions/svgActions";
+import { selectItem, dropItem } from "redux/actions/svgActions";
 
 const enablePointerStyle = {
   pointerEvents: "all"
@@ -26,11 +22,8 @@ const stylesParent = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  change(name, attribute, value) {
-    dispatch(changeSvgDetail(name, attribute, value));
-  },
-  create(tool, x, y) {
-    dispatch(createSvgElement(tool, x, y));
+  drop(monitor, component) {
+    dispatch(dropItem(monitor, component));
   },
   selectItem(item) {
     dispatch(selectItem(item));
@@ -41,58 +34,9 @@ const mapStateToProps = state => {
 };
 const squareTarget = {
   drop(props, monitor, component) {
-    const item = monitor.getItem();
-    switch (item.type) {
-      case ItemTypes.SVG_ITEM:
-        dropSvgItem(props, monitor, component);
-        break;
-      case ItemTypes.TOOL_ITEM:
-        dropToolItem(props, monitor, component);
-        break;
-      case ItemTypes.EDGE_ITEM:
-        dropEdgeItem(props, monitor, component);
-        break;
-      default:
-    }
+    props.drop(monitor, component);
   }
 };
-
-function dropSvgItem(props, monitor, component) {
-  const item = monitor.getItem();
-  const delta = monitor.getDifferenceFromInitialOffset();
-  props.change(item.data.name, item.data.xAttributre, item.data.x + delta.x);
-  props.change(item.data.name, item.data.yAttributre, item.data.y + delta.y);
-}
-function dropToolItem(props, monitor, component) {
-  const item = monitor.getItem();
-  const { x, y } = monitor.getClientOffset();
-  const svg = $("#svgContent")[0];
-  const { top, left } = svg.getBoundingClientRect();
-  props.create(item.tool, x - left, y - top);
-}
-function dropEdgeItem(props, monitor, component) {
-  const item = monitor.getItem();
-  const delta = monitor.getDifferenceFromInitialOffset();
-  if (item.data.name.indexOf("circle") > -1)
-    handleCircleEdge(props, item, delta);
-  if (item.data.name.indexOf("rectangle") > -1)
-    handleRectangleEdge(props, item, delta);
-
-  function handleCircleEdge(props, item, delta) {
-    const diff = [ORIENTATION.NORD, ORIENTATION.SUD].indexOf(
-      item.data.orientation
-    ) > -1
-      ? delta.y
-      : delta.x;
-    props.change(item.data.name, "r", item.data.radius + diff);
-  }
-  function handleRectangleEdge(props, item, delta) {
-    if ([ORIENTATION.NORD, ORIENTATION.SUD].indexOf(item.data.orientation) > -1)
-      props.change(item.data.name, "height", item.data.height + delta.y);
-    if ([ORIENTATION.EST, ORIENTATION.WEST].indexOf(item.data.orientation) > -1)
-      props.change(item.data.name, "width", item.data.width + delta.x);
-  }
-}
 
 function collect(connect, monitor) {
   return {

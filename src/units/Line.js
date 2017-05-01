@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import SvgShape from "./SvgShape";
+import { ORIENTATION } from "redux/constants/dndConstants";
 
 export default class Line extends SvgShape {
   constructor(options) {
@@ -144,43 +145,35 @@ export default class Line extends SvgShape {
     return [
       {
         orientation: ORIENTATION.NORD,
-        r: 5,
-        width: this.width,
-        height: this.height,
-        name: this.name,
         fill: "#22C",
-        cx: this.x + this.width / 2,
-        cy: this.y
+        r: 5,
+        name: this.name,
+        cx: (this.x1 + this.x2) / 2,
+        cy: this.y1
       },
       {
         orientation: ORIENTATION.EST,
-        r: 5,
-        width: this.width,
-        height: this.height,
-        name: this.name,
         fill: "#22C",
-        cx: this.x + this.width,
-        cy: this.y + this.height / 2
+        r: 5,
+        name: this.name,
+        cx: this.x2,
+        cy: (this.y1 + this.y2) / 2
       },
       {
         orientation: ORIENTATION.SUD,
-        r: 5,
-        width: this.width,
-        height: this.height,
-        name: this.name,
         fill: "#22C",
-        cx: this.x + this.width / 2,
-        cy: this.y + this.height
+        r: 5,
+        name: this.name,
+        cx: (this.x1 + this.x2) / 2,
+        cy: this.y2
       },
       {
         orientation: ORIENTATION.WEST,
-        r: 5,
-        width: this.width,
-        height: this.height,
-        name: this.name,
         fill: "#22C",
-        cx: this.x,
-        cy: this.y + this.height / 2
+        r: 5,
+        name: this.name,
+        cx: this.x1,
+        cy: (this.y1 + this.y2) / 2
       }
     ];
   }
@@ -189,10 +182,10 @@ export default class Line extends SvgShape {
   }
 
   get calculatedWidth() {
-    return this.width;
+    return Math.abs(this.x1 - this.x2);
   }
 
   get calculatedHeight() {
-    return this.height;
+    return Math.abs(this.y1 - this.y2);
   }
 }

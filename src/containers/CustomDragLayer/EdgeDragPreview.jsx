@@ -47,7 +47,6 @@ export default class EdgeDragPreview extends Component {
   }
 
   tick() {
-    console.log("tick .. ");
     this.setState({ tickTock: !this.state.tickTock });
   }
 

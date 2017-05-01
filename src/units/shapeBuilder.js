@@ -3,6 +3,21 @@ import { Circle, Rectangle, Line, Svg } from "units";
 import * as shortid from "shortid";
 import * as colors from "data/colors";
 
+export function createSvgSample() {
+  const initSvg = createSvg();
+  const circle = createCircle(50, 50, 10, colors.COQUELICOT);
+  const rectangle = createRectangle(300, 100, 100, 50, colors.ACACIA);
+  const circle2 = createCircle(30, 20, 10, colors.LILAS);
+  const line = createLine(200, 10, 10, 100, 10, colors.LILAS);
+
+  const svg = initSvg
+    .addChild(circle)
+    .addChild(circle2)
+    .addChild(rectangle)
+    .addChild(line);
+
+  return svg;
+}
 export function createSvg() {
   return new Svg({ name: "svg", expanded: true, children: List([]) });
 }

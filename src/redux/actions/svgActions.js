@@ -3,6 +3,7 @@ import {
   ATTR_CHANGE,
   SELECT_TOOL_LEFT,
   SELECT_TOOL_TOP,
+  DROP_ITEM,
   CREATE_ITEM
 } from "../constants/ActionTypes";
 
@@ -23,4 +24,7 @@ export function selectToolTop(tool) {
 }
 export function createSvgElement(tool, x, y) {
   return { type: CREATE_ITEM, tool, x, y };
+}
+export function dropItem(monitor, component) {
+  return { type: DROP_ITEM, monitor, component };
 }

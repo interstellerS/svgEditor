@@ -1,32 +1,32 @@
+import $ from "jquery";
 import * as constants from "../constants/ActionTypes";
 import * as builder from "units/shapeBuilder";
 import * as colors from "data/colors";
+import { ItemTypes } from "redux/constants/dndConstants";
+import { ORIENTATION } from "redux/constants/dndConstants";
 
 const update = (state, mutations) => Object.assign({}, state, mutations);
 
-const create = function createElement(state, element) {
+function createElement(state, tool, x, y) {
   let newSvg;
-  switch (element.tool) {
+  let newState;
+  switch (tool) {
     case "circle":
-      let createdCircle = builder.createCircle(element.x, element.y);
+      let createdCircle = builder.createCircle(x, y);
       newSvg = state.svg.addChild(createdCircle);
-      return update(state, { svg: newSvg });
+      newState = update(state, { svg: newSvg });
       break;
     case "rectangle":
-      let rectangle = builder.createRectangle(element.x, element.y);
+      let rectangle = builder.createRectangle(x, y);
       newSvg = state.svg.addChild(rectangle);
-      return update(state, { svg: newSvg });
+      newState = update(state, { svg: newSvg });
       break;
     default:
   }
-};
+  return newState;
+}
 
-const updateAttribute = function updateSvgAttribute(
-  state,
-  name,
-  attribute,
-  value
-) {
+function updateAttribute(state, name, attribute, value) {
   const svg = state.svg;
   let itemIndex = svg.children.findIndex(item => item["name"] === name);
   const newChildren = svg.children.update(itemIndex, function(item) {
@@ -37,23 +37,98 @@ const updateAttribute = function updateSvgAttribute(
   });
   let selectedItem = newSvg.children.get(itemIndex);
   return update(state, { svg: newSvg, selectedItem: selectedItem });
-};
+}
 
-const initSvg = builder.createSvg();
-const circle = builder.createCircle(50, 50, 10, colors.COQUELICOT);
-const rectangle = builder.createRectangle(300, 100, 100, 50, colors.ACACIA);
-const circle2 = builder.createCircle(30, 20, 10, colors.LILAS);
-const line = builder.createLine(200, 10, 10, 100, 10, colors.LILAS);
+function drop(state, monitor, component) {
+  const item = monitor.getItem();
+  let newState;
+  switch (item.type) {
+    case ItemTypes.SVG_ITEM:
+      newState = dropSvgItem(state, monitor, component);
+      break;
+    case ItemTypes.TOOL_ITEM:
+      newState = dropToolItem(state, monitor, component);
+      break;
+    case ItemTypes.EDGE_ITEM:
+      newState = dropEdgeItem(state, monitor, component);
+      break;
+    default:
+  }
+  return newState;
+}
 
-const svg = initSvg
-  .addChild(circle)
-  .addChild(circle2)
-  .addChild(rectangle)
-  .addChild(line);
+function dropSvgItem(state, monitor, component) {
+  const item = monitor.getItem();
+  const delta = monitor.getDifferenceFromInitialOffset();
+  let state1 = updateAttribute(
+    state,
+    item.data.name,
+    item.data.xAttributre,
+    item.data.x + delta.x
+  );
+  let state2 = updateAttribute(
+    state1,
+    item.data.name,
+    item.data.yAttributre,
+    item.data.y + delta.y
+  );
+  return state2;
+}
+function dropToolItem(state, monitor, component) {
+  const item = monitor.getItem();
+  const { x, y } = monitor.getClientOffset();
+  const svg = $("#svgContent")[0];
+  const { top, left } = svg.getBoundingClientRect();
+  return createElement(state, item.tool, x - left, y - top);
+}
+function dropEdgeItem(state, monitor, component) {
+  const item = monitor.getItem();
+  let newState;
+  const delta = monitor.getDifferenceFromInitialOffset();
+  if (item.data.name.indexOf("circle") > -1)
+    newState = handleCircleEdge(state, item, delta);
+  if (item.data.name.indexOf("rectangle") > -1)
+    newState = handleRectangleEdge(state, item, delta);
 
+  return newState;
+}
+
+function handleCircleEdge(state, item, delta) {
+  const diff = [ORIENTATION.NORD, ORIENTATION.SUD].indexOf(
+    item.data.orientation
+  ) > -1
+    ? delta.y
+    : delta.x;
+  let newState = updateAttribute(
+    state,
+    item.data.name,
+    "r",
+    item.data.radius + diff
+  );
+  return newState;
+}
+function handleRectangleEdge(state, item, delta) {
+  let newState;
+  if ([ORIENTATION.NORD, ORIENTATION.SUD].indexOf(item.data.orientation) > -1)
+    newState = updateAttribute(
+      state,
+      item.data.name,
+      "height",
+      item.data.height + delta.y
+    );
+  if ([ORIENTATION.EST, ORIENTATION.WEST].indexOf(item.data.orientation) > -1)
+    newState = updateAttribute(
+      state,
+      item.data.name,
+      "width",
+      item.data.width + delta.x
+    );
+
+  return newState;
+}
 const initialState = {
-  svg,
-  selectedItem: rectangle,
+  svg: builder.createSvgSample(),
+  selectedItem: null,
   toolsLeft: ["select", "pencil", "line", "rectangle", "circle"],
   toolsTop: ["undo", "redo"],
   selectedToolLeft: "select",
@@ -68,19 +143,8 @@ export default function shapes(state = initialState, action = {}) {
       return update(state, { selectedToolLeft: action.tool });
     case constants.SELECT_TOOL_TOP:
       return update(state, { selectedToolTop: action.tool });
-    case constants.CREATE_ITEM:
-      return create(state, {
-        tool: action.tool,
-        x: action.x,
-        y: action.y
-      });
-    case constants.ATTR_CHANGE:
-      return updateAttribute(
-        state,
-        action.name,
-        action.attribute,
-        action.value
-      );
+    case constants.DROP_ITEM:
+      return drop(state, action.monitor, action.component);
     default:
       return state;
   }
