@@ -140,41 +140,33 @@ export default class Rectangle extends SvgShape {
     return [
       {
         orientation: ORIENTATION.NORD,
-        r: 5,
         width: this.width,
         height: this.height,
         name: this.name,
-        fill: "#22C",
         cx: this.x + this.width / 2,
         cy: this.y
       },
       {
         orientation: ORIENTATION.EST,
-        r: 5,
         width: this.width,
         height: this.height,
         name: this.name,
-        fill: "#22C",
         cx: this.x + this.width,
         cy: this.y + this.height / 2
       },
       {
         orientation: ORIENTATION.SUD,
-        r: 5,
         width: this.width,
         height: this.height,
         name: this.name,
-        fill: "#22C",
         cx: this.x + this.width / 2,
         cy: this.y + this.height
       },
       {
         orientation: ORIENTATION.WEST,
-        r: 5,
         width: this.width,
         height: this.height,
         name: this.name,
-        fill: "#22C",
         cx: this.x,
         cy: this.y + this.height / 2
       }
@@ -190,5 +182,23 @@ export default class Rectangle extends SvgShape {
 
   get calculatedHeight() {
     return this.height;
+  }
+  resize(orientation, delta) {
+    let other, that;
+    if (orientation == ORIENTATION.NORD) {
+      that = this.set("y", this.y + delta.y);
+      other = that.set("height", that.height - delta.y);
+    }
+    if (orientation == ORIENTATION.WEST) {
+      that = this.set("x", this.x + delta.x);
+      other = that.set("width", that.width - delta.x);
+    }
+    if (orientation == ORIENTATION.SUD) {
+      other = this.set("height", this.height + delta.y);
+    }
+    if (orientation == ORIENTATION.EST) {
+      other = this.set("width", this.width + delta.x);
+    }
+    return other;
   }
 }

@@ -21,6 +21,11 @@ function createElement(state, tool, x, y) {
       newSvg = state.svg.addChild(rectangle);
       newState = update(state, { svg: newSvg });
       break;
+    case "line":
+      newSvg = state.svg.addChild(line);
+      let line = builder.createLine(x, y, x + 100, y + 100);
+      newState = update(state, { svg: newSvg });
+      break;
     default:
   }
   return newState;
@@ -31,6 +36,18 @@ function updateAttribute(state, name, attribute, value) {
   let itemIndex = svg.children.findIndex(item => item["name"] === name);
   const newChildren = svg.children.update(itemIndex, function(item) {
     return item.set(attribute, value);
+  });
+  const newSvg = svg.update(svg => {
+    return svg.set("children", newChildren);
+  });
+  let selectedItem = newSvg.children.get(itemIndex);
+  return update(state, { svg: newSvg, selectedItem: selectedItem });
+}
+function resizeSvgItem(state, name, orientation, delta) {
+  const svg = state.svg;
+  let itemIndex = svg.children.findIndex(item => item["name"] === name);
+  const newChildren = svg.children.update(itemIndex, function(item) {
+    return item.resize(orientation, delta);
   });
   const newSvg = svg.update(svg => {
     return svg.set("children", newChildren);
@@ -82,50 +99,17 @@ function dropToolItem(state, monitor, component) {
   return createElement(state, item.tool, x - left, y - top);
 }
 function dropEdgeItem(state, monitor, component) {
-  const item = monitor.getItem();
-  let newState;
   const delta = monitor.getDifferenceFromInitialOffset();
-  if (item.data.name.indexOf("circle") > -1)
-    newState = handleCircleEdge(state, item, delta);
-  if (item.data.name.indexOf("rectangle") > -1)
-    newState = handleRectangleEdge(state, item, delta);
-
-  return newState;
-}
-
-function handleCircleEdge(state, item, delta) {
-  const diff = [ORIENTATION.NORD, ORIENTATION.SUD].indexOf(
-    item.data.orientation
-  ) > -1
-    ? delta.y
-    : delta.x;
-  let newState = updateAttribute(
+  const item = monitor.getItem();
+  let newState = resizeSvgItem(
     state,
     item.data.name,
-    "r",
-    item.data.radius + diff
+    item.data.orientation,
+    delta
   );
   return newState;
 }
-function handleRectangleEdge(state, item, delta) {
-  let newState;
-  if ([ORIENTATION.NORD, ORIENTATION.SUD].indexOf(item.data.orientation) > -1)
-    newState = updateAttribute(
-      state,
-      item.data.name,
-      "height",
-      item.data.height + delta.y
-    );
-  if ([ORIENTATION.EST, ORIENTATION.WEST].indexOf(item.data.orientation) > -1)
-    newState = updateAttribute(
-      state,
-      item.data.name,
-      "width",
-      item.data.width + delta.x
-    );
 
-  return newState;
-}
 const initialState = {
   svg: builder.createSvgSample(),
   selectedItem: null,

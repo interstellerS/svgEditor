@@ -145,32 +145,24 @@ export default class Line extends SvgShape {
     return [
       {
         orientation: ORIENTATION.NORD,
-        fill: "#22C",
-        r: 5,
         name: this.name,
         cx: (this.x1 + this.x2) / 2,
         cy: this.y1
       },
       {
         orientation: ORIENTATION.EST,
-        fill: "#22C",
-        r: 5,
         name: this.name,
         cx: this.x2,
         cy: (this.y1 + this.y2) / 2
       },
       {
         orientation: ORIENTATION.SUD,
-        fill: "#22C",
-        r: 5,
         name: this.name,
         cx: (this.x1 + this.x2) / 2,
         cy: this.y2
       },
       {
         orientation: ORIENTATION.WEST,
-        fill: "#22C",
-        r: 5,
         name: this.name,
         cx: this.x1,
         cy: (this.y1 + this.y2) / 2
@@ -187,5 +179,27 @@ export default class Line extends SvgShape {
 
   get calculatedHeight() {
     return Math.abs(this.y1 - this.y2);
+  }
+
+  resize(orientation, delta) {
+    let other, that;
+    if (orientation == ORIENTATION.NORD) {
+      if (this.y1 > this.y2) other = this.set("y2", this.y2 - delta.y);
+    }
+    if (orientation == ORIENTATION.SUD) {
+      if (this.y1 > this.y2) other = this.set("y1", this.y1 + delta.y);
+      if (this.y2 > this.y1) other = this.set("y2", this.y2 + delta.y);
+    }
+
+    if (orientation == ORIENTATION.WEST) {
+      that = this.set("x", this.x + delta.x);
+      other = that.set("width", that.width - delta.x);
+    }
+
+    if (orientation == ORIENTATION.EST) {
+      if (this.x1 > this.x2) other = this.set("x1", this.x1 + delta.y);
+      if (this.x2 > this.x1) other = this.set("x2", this.x2 + delta.y);
+    }
+    return other;
   }
 }

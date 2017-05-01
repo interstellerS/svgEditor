@@ -11,5 +11,5 @@ export const ORIENTATION = {
   SUD_EST: "SUD_EST",
   SUD: "SUD",
   SUD_WEST: "SUD_WEST",
-  EST: "EST"
+  WEST: "WEST"
 };

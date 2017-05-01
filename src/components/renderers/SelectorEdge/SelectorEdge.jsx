@@ -46,7 +46,7 @@ class SelectorEdge extends Component {
       isDragging
     } = this.props;
 
-    const jxsElement = <circle {...data} />;
+    const jxsElement = <circle {...data} r={5} fill="#22C" />;
 
     return connectDragSource(jxsElement);
   }

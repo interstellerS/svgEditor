@@ -150,8 +150,6 @@ export default class Circle extends SvgShape {
     return [
       {
         orientation: ORIENTATION.NORD,
-        fill: "#22C",
-        r: 5,
         name: this.name,
         radius: this.r,
         cx: this.cx,
@@ -159,8 +157,6 @@ export default class Circle extends SvgShape {
       },
       {
         orientation: ORIENTATION.EST,
-        fill: "#22C",
-        r: 5,
         name: this.name,
         radius: this.r,
         cx: this.cx + this.r,
@@ -168,8 +164,6 @@ export default class Circle extends SvgShape {
       },
       {
         orientation: ORIENTATION.SUD,
-        fill: "#22C",
-        r: 5,
         name: this.name,
         radius: this.r,
         cx: this.cx,
@@ -177,8 +171,6 @@ export default class Circle extends SvgShape {
       },
       {
         orientation: ORIENTATION.WEST,
-        fill: "#22C",
-        r: 5,
         name: this.name,
         radius: this.r,
         cx: this.cx - this.r,
@@ -196,5 +188,22 @@ export default class Circle extends SvgShape {
 
   get calculatedHeight() {
     return this.r * 2;
+  }
+
+  resize(orientation, delta) {
+    let other, that;
+    if (orientation == ORIENTATION.NORD) {
+      other = this.set("r", this.r - delta.y);
+    }
+    if (orientation == ORIENTATION.WEST) {
+      other = this.set("r", this.r - delta.x);
+    }
+    if (orientation == ORIENTATION.SUD) {
+      other = this.set("r", this.r + delta.y);
+    }
+    if (orientation == ORIENTATION.EST) {
+      other = this.set("r", this.r + delta.x);
+    }
+    return other;
   }
 }
