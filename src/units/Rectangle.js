@@ -183,6 +183,7 @@ export default class Rectangle extends SvgShape {
   get calculatedHeight() {
     return this.height;
   }
+
   resize(orientation, delta) {
     let other, that;
     if (orientation == ORIENTATION.NORD) {
@@ -199,6 +200,12 @@ export default class Rectangle extends SvgShape {
     if (orientation == ORIENTATION.EST) {
       other = this.set("width", this.width + delta.x);
     }
+    return other;
+  }
+
+  translate(delta) {
+    let that = this.set("x", this.x + delta.x);
+    let other = that.set("y", that.y + delta.y);
     return other;
   }
 }

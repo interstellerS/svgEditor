@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { DragSource } from "react-dnd";
 import { ItemTypes } from "redux/constants/dndConstants";
+import { ORIENTATION } from "redux/constants/dndConstants";
 
 const svgItemSource = {
   beginDrag(props) {
@@ -38,6 +39,18 @@ class SelectorEdge extends Component {
     const img = <circle cx={10} cx={20} r={30} />;
     this.props.connectDragPreview(img);
   }
+  getStyleFromOrientation(orientation) {
+    const cursors = {
+      NORD: "n-resize",
+      EST: "e-resize",
+      SUD: "s-resize",
+      WEST: "w-resize"
+    };
+    const cursorProp = cursors[orientation];
+    return {
+      cursor: `${cursorProp}`
+    };
+  }
 
   render() {
     const {
@@ -45,8 +58,8 @@ class SelectorEdge extends Component {
       connectDragSource,
       isDragging
     } = this.props;
-
-    const jxsElement = <circle {...data} r={5} fill="#22C" />;
+    const style = this.getStyleFromOrientation(data.orientation);
+    const jxsElement = <circle {...data} r={5} fill="#22C" style={style} />;
 
     return connectDragSource(jxsElement);
   }

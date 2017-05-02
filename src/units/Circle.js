@@ -206,4 +206,10 @@ export default class Circle extends SvgShape {
     }
     return other;
   }
+
+  translate(delta) {
+    let that = this.set("cx", this.cx + delta.x);
+    let other = that.set("cy", that.cy + delta.y);
+    return other;
+  }
 }

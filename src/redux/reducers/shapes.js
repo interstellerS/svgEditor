@@ -22,8 +22,8 @@ function createElement(state, tool, x, y) {
       newState = update(state, { svg: newSvg });
       break;
     case "line":
-      newSvg = state.svg.addChild(line);
       let line = builder.createLine(x, y, x + 100, y + 100);
+      newSvg = state.svg.addChild(line);
       newState = update(state, { svg: newSvg });
       break;
     default:
@@ -56,6 +56,22 @@ function resizeSvgItem(state, name, orientation, delta) {
   return update(state, { svg: newSvg, selectedItem: selectedItem });
 }
 
+function dropSvgItem(state, monitor, component) {
+  const name = monitor.getItem().data.name;
+  const delta = monitor.getDifferenceFromInitialOffset();
+  const svg = state.svg;
+  let itemIndex = svg.children.findIndex(item => item["name"] === name);
+  const newChildren = svg.children.update(itemIndex, function(item) {
+    return item.translate(delta);
+  });
+  const newSvg = svg.update(svg => {
+    return svg.set("children", newChildren);
+  });
+  let selectedItem = newSvg.children.get(itemIndex);
+  return update(state, { svg: newSvg, selectedItem: selectedItem });
+  return state2;
+}
+
 function drop(state, monitor, component) {
   const item = monitor.getItem();
   let newState;
@@ -74,23 +90,6 @@ function drop(state, monitor, component) {
   return newState;
 }
 
-function dropSvgItem(state, monitor, component) {
-  const item = monitor.getItem();
-  const delta = monitor.getDifferenceFromInitialOffset();
-  let state1 = updateAttribute(
-    state,
-    item.data.name,
-    item.data.xAttributre,
-    item.data.x + delta.x
-  );
-  let state2 = updateAttribute(
-    state1,
-    item.data.name,
-    item.data.yAttributre,
-    item.data.y + delta.y
-  );
-  return state2;
-}
 function dropToolItem(state, monitor, component) {
   const item = monitor.getItem();
   const { x, y } = monitor.getClientOffset();

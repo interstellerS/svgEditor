@@ -184,22 +184,31 @@ export default class Line extends SvgShape {
   resize(orientation, delta) {
     let other, that;
     if (orientation == ORIENTATION.NORD) {
-      if (this.y1 > this.y2) other = this.set("y2", this.y2 - delta.y);
+      if (this.y1 > this.y2) other = this.set("y2", this.y2 + delta.y);
+      if (this.y2 > this.y1) other = this.set("y1", this.y1 + delta.y);
     }
     if (orientation == ORIENTATION.SUD) {
       if (this.y1 > this.y2) other = this.set("y1", this.y1 + delta.y);
       if (this.y2 > this.y1) other = this.set("y2", this.y2 + delta.y);
     }
 
-    if (orientation == ORIENTATION.WEST) {
-      that = this.set("x", this.x + delta.x);
-      other = that.set("width", that.width - delta.x);
+    if (orientation == ORIENTATION.EST) {
+      if (this.x1 > this.x2) other = this.set("x2", this.x2 + delta.x);
+      if (this.x2 > this.x1) other = this.set("x1", this.x1 + delta.x);
     }
 
-    if (orientation == ORIENTATION.EST) {
-      if (this.x1 > this.x2) other = this.set("x1", this.x1 + delta.y);
-      if (this.x2 > this.x1) other = this.set("x2", this.x2 + delta.y);
+    if (orientation == ORIENTATION.WEST) {
+      if (this.x1 > this.x2) other = this.set("x1", this.x1 + delta.x);
+      if (this.x2 > this.x1) other = this.set("x2", this.x2 + delta.x);
     }
     return other;
+  }
+
+  translate(delta) {
+    let step1 = this.set("x1", this.x1 + delta.x);
+    let step2 = step1.set("x2", step1.x2 + delta.x);
+    let step3 = step2.set("y1", step2.y1 + delta.y);
+    let step4 = step3.set("y2", step3.y2 + delta.y);
+    return step4;
   }
 }
