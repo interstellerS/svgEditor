@@ -3,6 +3,10 @@ import { DragSource } from "react-dnd";
 import { SvgShape, Circle, Rectangle, Line } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
 
+const style = {
+  cursor: "move"
+};
+
 const svgItemSource = {
   beginDrag(props) {
     return {
@@ -52,15 +56,27 @@ class LeafSvg extends Component {
     let jxsElement;
     if (isCircle)
       jxsElement = (
-        <circle {...data.domProps} onClick={() => handleClick(data)} />
+        <circle
+          {...data.domProps}
+          style={style}
+          onClick={() => handleClick(data)}
+        />
       );
     if (isRectangle)
       jxsElement = (
-        <rect {...data.domProps} onClick={() => handleClick(data)} />
+        <rect
+          {...data.domProps}
+          style={style}
+          onClick={() => handleClick(data)}
+        />
       );
     if (isLine)
       jxsElement = (
-        <line {...data.domProps} onClick={() => handleClick(data)} />
+        <line
+          {...data.domProps}
+          style={style}
+          onClick={() => handleClick(data)}
+        />
       );
     return connectDragSource(jxsElement);
   }

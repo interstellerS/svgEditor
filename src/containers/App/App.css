@@ -21,6 +21,12 @@ ol {
     flex: 3 ;
     margin: 0px 10px ;
 }
+.color-selector {
+  position: absolute;
+  left: 70px;
+  right: 20px;
+  bottom: 10px ;
+}
 .treeView {
     flex-grow: 1;
     flex-shrink: 0;
@@ -47,4 +53,8 @@ ol {
 .inputs {
   display: flex;
   align-items: center;
+}
+#svgcanvas svg * {
+    cursor: move;
+    pointer-events: all;
 }

@@ -26,7 +26,8 @@ class Tool extends React.Component {
     isDragging: PropTypes.bool.isRequired,
     tool: PropTypes.string.isRequired,
     toolPicked: PropTypes.func.isRequired,
-    selected: PropTypes.bool.isRequired
+    selected: PropTypes.bool.isRequired,
+    selectedColor: PropTypes.string
   };
 
   handleToolPicked(color) {
@@ -37,29 +38,29 @@ class Tool extends React.Component {
     let toolIcon;
     switch (tool) {
       case "select":
-        toolIcon = <icons.IconSelect />;
+        toolIcon = <icons.IconSelect color={this.props.selectedColor} />;
         break;
         tiik;
       case "pencil":
-        toolIcon = <icons.IconPencil />;
+        toolIcon = <icons.IconPencil color={this.props.selectedColor} />;
         break;
       case "line":
-        toolIcon = <icons.IconLine />;
+        toolIcon = <icons.IconLine color={this.props.selectedColor} />;
         break;
       case "rectangle":
-        toolIcon = <icons.IconRectangle />;
+        toolIcon = <icons.IconRectangle color={this.props.selectedColor} />;
         break;
       case "circle":
-        toolIcon = <icons.IconCircle />;
+        toolIcon = <icons.IconCircle color={this.props.selectedColor} />;
         break;
       case "undo":
-        toolIcon = <icons.IconUndo />;
+        toolIcon = <icons.IconUndo color={this.props.selectedColor} />;
         break;
       case "redo":
-        toolIcon = <icons.IconRedo />;
+        toolIcon = <icons.IconRedo color={this.props.selectedColor} />;
         break;
       default:
-        toolIcon = <icons.IconSelect />;
+        toolIcon = <icons.IconSelect color={this.props.selectedColor} />;
     }
 
     return toolIcon;

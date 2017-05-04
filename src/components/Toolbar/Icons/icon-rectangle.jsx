@@ -2,10 +2,10 @@ import React, { PropTypes } from "react";
 
 //https://materialdesignicons.com/icon/cursor-move
 
-export default function IconRectangle() {
+export default function IconRectangle(props) {
   return (
     <svg
-      fill="rgb(102, 102, 102)"
+      fill={props.color}
       height="24"
       viewBox="0 0 24 24"
       width="24"

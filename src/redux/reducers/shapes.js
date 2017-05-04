@@ -115,11 +115,14 @@ const initialState = {
   toolsLeft: ["select", "pencil", "line", "rectangle", "circle"],
   toolsTop: ["undo", "redo"],
   selectedToolLeft: "select",
+  selectedColor: "#0693E3",
   selectedToolTop: "undo"
 };
 
 export default function shapes(state = initialState, action = {}) {
   switch (action.type) {
+    case constants.SELECT_COLOR:
+      return update(state, { selectedColor: action.color });
     case constants.SELECT_ITEM:
       return update(state, { selectedItem: action.item });
     case constants.SELECT_TOOL_LEFT:
@@ -128,6 +131,13 @@ export default function shapes(state = initialState, action = {}) {
       return update(state, { selectedToolTop: action.tool });
     case constants.DROP_ITEM:
       return drop(state, action.monitor, action.component);
+    case constants.ATTR_CHANGE:
+      return updateAttribute(
+        state,
+        action.name,
+        action.attribute,
+        action.value
+      );
     default:
       return state;
   }

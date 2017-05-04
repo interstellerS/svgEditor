@@ -2,10 +2,10 @@ import React, { PropTypes } from "react";
 
 //credits https://materialdesignicons.com/icon/cursor-default-outline
 
-export default function IconPencil() {
+export default function IconPencil(props) {
   return (
     <svg
-      fill="rgb(102, 102, 102)"
+      fill={props.color}
       height="24"
       viewBox="0 0 24 24"
       width="24"

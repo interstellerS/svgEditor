@@ -6,6 +6,7 @@ import {
   DetailContainer,
   ToolbarContainer,
   ViewerContainer,
+  ToolbarBottomContainer,
   ToolbarTopContainer
 } from "containers";
 import CustomDragLayer from "../CustomDragLayer/CustomDragLayer";
@@ -28,6 +29,9 @@ export default class App extends Component {
             <DetailContainer />
           </div>
           <ViewerContainer />
+          <div className="color-selector">
+            <ToolbarBottomContainer />
+          </div>
         </div>
         <CustomDragLayer />
       </div>

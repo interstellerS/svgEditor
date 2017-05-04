@@ -3,6 +3,7 @@ import {
   ATTR_CHANGE,
   SELECT_TOOL_LEFT,
   SELECT_TOOL_TOP,
+  SELECT_COLOR,
   DROP_ITEM,
   CREATE_ITEM
 } from "../constants/ActionTypes";
@@ -27,4 +28,7 @@ export function createSvgElement(tool, x, y) {
 }
 export function dropItem(monitor, component) {
   return { type: DROP_ITEM, monitor, component };
+}
+export function selectColor(color) {
+  return { type: SELECT_COLOR, color };
 }

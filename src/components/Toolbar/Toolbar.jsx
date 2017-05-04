@@ -8,6 +8,7 @@ class Toolbar extends Component {
   static propTypes = {
     tools: PropTypes.array.isRequired,
     selectedTool: PropTypes.string.isRequired,
+    selectedColor: PropTypes.string,
     toolPicked: PropTypes.func.isRequired,
     horizontal: PropTypes.bool.isRequired
   };
@@ -22,6 +23,7 @@ class Toolbar extends Component {
         tool={tool}
         key={i}
         toolPicked={this.props.toolPicked}
+        selectedColor={this.props.selectedColor}
         selected={this.props.selectedTool == tool}
       />
     ));
