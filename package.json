@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server --config ./webpack.config.js --inline --hot",
     "build": "NODE_ENV=production webpack --config webpack.prod.config.js --progress  --profile  --colors ",
-    "deploy" : "npm run build&& gh-pages -d public"
+    "deploy": "npm run build&& gh-pages -d public"
   },
   "keywords": [
     "react",
@@ -19,6 +19,8 @@
   "dependencies": {
     "babel-polyfill": "^6.13.0",
     "babel-runtime": "^6.11.6",
+    "d3": "^4.8.0",
+    "d3-shape": "^1.0.6",
     "extendable-immutable": "1.2.0",
     "immutable": "^3.8.1",
     "jquery": "^3.2.1",

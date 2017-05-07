@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import { DragSource } from "react-dnd";
-import { SvgShape, Circle, Rectangle, Line } from "units";
+import { SvgShape, Circle, Rectangle, Line, Path } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
 
 const style = {
@@ -52,6 +52,7 @@ class LeafSvg extends Component {
     const isCircle = data instanceof Circle;
     const isRectangle = data instanceof Rectangle;
     const isLine = data instanceof Line;
+    const isPath = data instanceof Path;
 
     let jxsElement;
     if (isCircle)
@@ -73,6 +74,14 @@ class LeafSvg extends Component {
     if (isLine)
       jxsElement = (
         <line
+          {...data.domProps}
+          style={style}
+          onClick={() => handleClick(data)}
+        />
+      );
+    if (isPath)
+      jxsElement = (
+        <path
           {...data.domProps}
           style={style}
           onClick={() => handleClick(data)}

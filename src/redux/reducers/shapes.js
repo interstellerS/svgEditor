@@ -4,6 +4,9 @@ import * as builder from "units/shapeBuilder";
 import * as colors from "data/colors";
 import { ItemTypes } from "redux/constants/dndConstants";
 import { ORIENTATION } from "redux/constants/dndConstants";
+import { PathManager } from "helpers";
+
+const pathManager = new PathManager();
 
 const update = (state, mutations) => Object.assign({}, state, mutations);
 
@@ -28,6 +31,13 @@ function createElement(state, tool, x, y) {
       break;
     default:
   }
+  return newState;
+}
+
+function createPath(state, points) {
+  let createdPath = builder.createPath(points,);
+  let newSvg = state.svg.addChild(createdPath);
+  let newState = update(state, { svg: newSvg });
   return newState;
 }
 
@@ -126,11 +136,16 @@ export default function shapes(state = initialState, action = {}) {
     case constants.SELECT_ITEM:
       return update(state, { selectedItem: action.item });
     case constants.SELECT_TOOL_LEFT:
+      if (action.tool == "pencil") {
+        pathManager.setup();
+      }
       return update(state, { selectedToolLeft: action.tool });
     case constants.SELECT_TOOL_TOP:
       return update(state, { selectedToolTop: action.tool });
     case constants.DROP_ITEM:
       return drop(state, action.monitor, action.component);
+    case constants.CREATE_PATH:
+      return createPath(state, action.points);
     case constants.ATTR_CHANGE:
       return updateAttribute(
         state,

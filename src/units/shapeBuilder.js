@@ -1,5 +1,5 @@
 import { List } from "immutable";
-import { Circle, Rectangle, Line, Svg } from "units";
+import { Circle, Rectangle, Line, Svg, Path } from "units";
 import * as shortid from "shortid";
 import * as colors from "data/colors";
 
@@ -16,7 +16,7 @@ export function createSvgSample() {
     .addChild(rectangle)
     .addChild(line);
 
-  return svg;
+  return initSvg;
 }
 export function createSvg() {
   return new Svg({ name: "svg", expanded: true, children: List([]) });
@@ -56,7 +56,7 @@ export function createLine(
   y1,
   x2,
   y2,
-  strokeWidth = 20,
+  strokeWidth = 5,
   stroke = colors.COQUELICOT
 ) {
   return new Line({
@@ -67,6 +67,20 @@ export function createLine(
     y2: y2,
     strokeWidth: strokeWidth,
     stroke: stroke,
+    children: List([])
+  });
+}
+export function createPath(
+  points,
+  strokeWidth = 5,
+  stroke = colors.COQUELICOT
+) {
+  return new Path({
+    name: "path" + "_" + shortid.generate(),
+    points: points,
+    strokeWidth: strokeWidth,
+    stroke: stroke,
+    fill: "none",
     children: List([])
   });
 }

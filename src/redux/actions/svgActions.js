@@ -5,6 +5,7 @@ import {
   SELECT_TOOL_TOP,
   SELECT_COLOR,
   DROP_ITEM,
+  CREATE_PATH,
   CREATE_ITEM
 } from "../constants/ActionTypes";
 
@@ -25,6 +26,9 @@ export function selectToolTop(tool) {
 }
 export function createSvgElement(tool, x, y) {
   return { type: CREATE_ITEM, tool, x, y };
+}
+export function createSvgPath(points) {
+  return { type: CREATE_PATH, points };
 }
 export function dropItem(monitor, component) {
   return { type: DROP_ITEM, monitor, component };

@@ -7,7 +7,7 @@ import { SvgRenderer, SelectorSvg } from "components/renderers";
 import { Svg } from "units";
 import { ItemTypes } from "redux/constants/dndConstants";
 import { ORIENTATION } from "redux/constants/dndConstants";
-import { selectItem, dropItem } from "redux/actions/svgActions";
+import { createSvgPath } from "redux/actions/svgActions";
 
 const enablePointerStyle = {
   pointerEvents: "all"
