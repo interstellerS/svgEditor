@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from "react";
 import NumericInput from "react-numeric-input";
+import InputRange from "react-input-range";
+import $ from "jquery";
 
 import style from "./CNumericInput.css";
+import "react-input-range/lib/css/index.css";
 
 export class CNumericInput extends Component {
   constructor(props) {
@@ -13,13 +16,19 @@ export class CNumericInput extends Component {
     this.props.onBlur(this.props.name, this.props.attribute, value);
   }
 
+  // TODO refac : Jquery is an antipattern in react apps  -> refac this code
+  componentDidMount() {
+    const svgWidth = $("#rectBackground")[0].getBoundingClientRect().width;
+    this.setState({ svgWidth: Math.round(svgWidth) });
+  }
+
   render() {
     return (
-      <NumericInput
-        value={this.props.value}
+      <InputRange
+        value={Math.round(this.props.value)}
         onChange={value => this.handleOnChange(value)}
-        className="numeric-input"
-        style={false}
+        maxValue={this.state.svgWidth}
+        minValue={0}
       />
     );
   }

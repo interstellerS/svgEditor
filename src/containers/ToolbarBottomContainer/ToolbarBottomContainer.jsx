@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { Toolbar } from "components";
 import { selectColor } from "redux/actions/svgActions";
-import { TwitterPicker } from "react-color";
+import { CompactPicker } from "react-color";
+import "./ToolbarBottomContainer.css";
 
 function mapStateToProps(state) {
   return {
@@ -23,7 +24,7 @@ class ToolbarBottomContainer extends Component {
   }
   render() {
     return (
-      <TwitterPicker
+      <CompactPicker
         color={this.props.selectedColor}
         onChangeComplete={this.colorPicked}
         triangle="hide-triangle"

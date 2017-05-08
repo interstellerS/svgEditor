@@ -39,21 +39,38 @@ function createShape(state, startPoint) {
   let createdShape;
   switch (state.selectedToolLeft) {
     case "pencil":
-      createdShape = builder.createPath(startPoint);
+      createdShape = builder.createPath(
+        startPoint,
+        undefined,
+        state.selectedColor
+      );
       break;
     case "line":
       createdShape = builder.createLine(
         startPoint.x,
         startPoint.y,
         startPoint.y,
-        startPoint.y
+        startPoint.y,
+        undefined,
+        state.selectedColor
       );
       break;
     case "rectangle":
-      createdShape = builder.createRectangle(startPoint.x, startPoint.y);
+      createdShape = builder.createRectangle(
+        startPoint.x,
+        startPoint.y,
+        undefined,
+        undefined,
+        state.selectedColor
+      );
       break;
     case "circle":
-      createdShape = builder.createCircle(startPoint.x, startPoint.y);
+      createdShape = builder.createCircle(
+        startPoint.x,
+        startPoint.y,
+        undefined,
+        state.selectedColor
+      );
       break;
     default:
   }

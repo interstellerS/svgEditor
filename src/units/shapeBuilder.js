@@ -46,7 +46,7 @@ export function createRectangle(
     y: y,
     width: width,
     height: height,
-    fill: colors.ACACIA,
+    fill: color,
     children: List([])
   });
 }

@@ -77,7 +77,7 @@ export default class PathManager {
     if (event.which === 1 && this.mouseButtonDown) {
       this.mouseButtonDown = false;
       this.updatePath(event);
-      this.teardown();
+      //this.teardown();
       if (typeof this.onEnd === "function") {
         this.onEnd(event);
       }
