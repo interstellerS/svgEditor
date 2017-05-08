@@ -71,13 +71,13 @@ export function createLine(
   });
 }
 export function createPath(
-  points,
+  startPoint,
   strokeWidth = 5,
   stroke = colors.COQUELICOT
 ) {
   return new Path({
     name: "path" + "_" + shortid.generate(),
-    points: points,
+    points: List([startPoint]),
     strokeWidth: strokeWidth,
     stroke: stroke,
     fill: "none",

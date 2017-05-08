@@ -1,8 +1,7 @@
 "use strict";
 import $ from "jquery";
-import * as shapes from "d3-shape";
 import Point from "./Point";
-import { createSvgPath } from "redux/actions/svgActions";
+import { createSvgPath, updateSvgPath } from "redux/actions/svgActions";
 import store from "redux/store";
 
 export default class PathManager {
@@ -34,18 +33,13 @@ export default class PathManager {
   }
   teardown() {
     console.log(this.points);
-
-    store.dispatch(createSvgPath(this.points));
     this.points = [];
 
     this.svgContainer[0].removeEventListener("mousedown", this.handleMouseDown);
     this.svgContainer[0].removeEventListener("mousemove", this.handleMouseMove);
     document.removeEventListener("mouseup", this.handleMouseUp);
 
-    this.svgContainer[0].removeEventListener(
-      "touchstart",
-      this.handleTouchStart
-    );
+    //this.svgContainer[0].removeEventListener("touchstart",this.handleTouchStart );
     this.svgContainer[0].removeEventListener("touchmove", this.handleTouchMove);
     this.svgContainer[0].removeEventListener("touchend", this.handleTouchEnd);
   }
@@ -65,7 +59,7 @@ export default class PathManager {
   handleMouseDown(event) {
     if (event.which === 1) {
       this._mouseButtonDown = true;
-      this.updatePath(event);
+      this.beginPath(event);
 
       if (typeof this.onBegin === "function") {
         this.onBegin(event);
@@ -98,10 +92,14 @@ export default class PathManager {
   handleTouchEnd(event) {
     // TODO implement
   }
+  beginPath(event) {
+    const startPoint = this.createPoint(event.clientX, event.clientY);
+    store.dispatch(createSvgPath(startPoint));
+  }
+
   updatePath(event) {
     const point = this.createPoint(event.clientX, event.clientY);
-    console.log(point);
-    this.addPoint(point);
+    store.dispatch(updateSvgPath(point));
   }
 
   createPoint(x, y) {

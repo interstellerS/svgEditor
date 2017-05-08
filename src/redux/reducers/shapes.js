@@ -34,13 +34,26 @@ function createElement(state, tool, x, y) {
   return newState;
 }
 
-function createPath(state, points) {
-  let createdPath = builder.createPath(points,);
+function createPath(state, startPoint) {
+  let createdPath = builder.createPath(startPoint);
   let newSvg = state.svg.addChild(createdPath);
-  let newState = update(state, { svg: newSvg });
+  let newState = update(state, { svg: newSvg, currentPath: createdPath.name });
   return newState;
 }
 
+function updatePath(state, point) {
+  const svg = state.svg;
+  let itemIndex = svg.children.findIndex(
+    item => item["name"] === state.currentPath
+  );
+  const newChildren = svg.children.update(itemIndex, function(item) {
+    return item.addPoint(point);
+  });
+  const newSvg = svg.update(svg => {
+    return svg.set("children", newChildren);
+  });
+  return update(state, { svg: newSvg });
+}
 function updateAttribute(state, name, attribute, value) {
   const svg = state.svg;
   let itemIndex = svg.children.findIndex(item => item["name"] === name);
@@ -122,6 +135,7 @@ function dropEdgeItem(state, monitor, component) {
 const initialState = {
   svg: builder.createSvgSample(),
   selectedItem: null,
+  currentPath: null,
   toolsLeft: ["select", "pencil", "line", "rectangle", "circle"],
   toolsTop: ["undo", "redo"],
   selectedToolLeft: "select",
@@ -145,7 +159,9 @@ export default function shapes(state = initialState, action = {}) {
     case constants.DROP_ITEM:
       return drop(state, action.monitor, action.component);
     case constants.CREATE_PATH:
-      return createPath(state, action.points);
+      return createPath(state, action.startPoint);
+    case constants.UPDATE_PATH:
+      return updatePath(state, action.point);
     case constants.ATTR_CHANGE:
       return updateAttribute(
         state,

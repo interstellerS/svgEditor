@@ -55,7 +55,7 @@ export default class Path extends SvgShape {
 
   get domProps() {
     const line = shapes.line().x(p => p.x).y(p => p.y).curve(d3.curveCardinal);
-    const d = line(this.points);
+    const d = line(this.points.toArray());
 
     return {
       d: d,
@@ -203,5 +203,16 @@ export default class Path extends SvgShape {
     let step3 = step2.set("y1", step2.y1 + delta.y);
     let step4 = step3.set("y2", step3.y2 + delta.y);
     return step4;
+  }
+
+  setPoints(value) {
+    return this.set("points", value);
+  }
+
+  addPoint(point) {
+    const newPoints = this.points.push(point);
+    console.log(newPoints);
+    const other = this.setPoints(newPoints);
+    return other;
   }
 }
