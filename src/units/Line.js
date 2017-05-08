@@ -211,4 +211,10 @@ export default class Line extends SvgShape {
     let step4 = step3.set("y2", step3.y2 + delta.y);
     return step4;
   }
+
+  updateShape(point) {
+    let step1 = this.set("x2", point.x);
+    let step2 = step1.set("y2", point.y);
+    return step2;
+  }
 }

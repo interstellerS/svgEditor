@@ -208,4 +208,10 @@ export default class Rectangle extends SvgShape {
     let other = that.set("y", that.y + delta.y);
     return other;
   }
+
+  updateShape(point) {
+    let step1 = this.set("width", Math.abs(this.x - point.x));
+    let step2 = step1.set("height", Math.abs(this.y - point.y));
+    return step2;
+  }
 }

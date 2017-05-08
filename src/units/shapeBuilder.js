@@ -22,7 +22,7 @@ export function createSvg() {
   return new Svg({ name: "svg", expanded: true, children: List([]) });
 }
 
-export function createCircle(x, y, r = 10, color = colors.COQUELICOT) {
+export function createCircle(x, y, r = 5, color = colors.COQUELICOT) {
   return new Circle({
     name: "circle" + "_" + shortid.generate(),
     cx: x,

@@ -34,20 +34,45 @@ function createElement(state, tool, x, y) {
   return newState;
 }
 
-function createPath(state, startPoint) {
-  let createdPath = builder.createPath(startPoint);
-  let newSvg = state.svg.addChild(createdPath);
-  let newState = update(state, { svg: newSvg, currentPath: createdPath.name });
+//  toolsLeft: ["select", "pencil", "line", "rectangle", "circle"],
+function createShape(state, startPoint) {
+  let createdShape;
+  switch (state.selectedToolLeft) {
+    case "pencil":
+      createdShape = builder.createPath(startPoint);
+      break;
+    case "line":
+      createdShape = builder.createLine(
+        startPoint.x,
+        startPoint.y,
+        startPoint.y,
+        startPoint.y
+      );
+      break;
+    case "rectangle":
+      createdShape = builder.createRectangle(startPoint.x, startPoint.y);
+      break;
+    case "circle":
+      createdShape = builder.createCircle(startPoint.x, startPoint.y);
+      break;
+    default:
+  }
+
+  let newSvg = state.svg.addChild(createdShape);
+  let newState = update(state, {
+    svg: newSvg,
+    currentShapeName: createdShape.name
+  });
   return newState;
 }
 
-function updatePath(state, point) {
+function updateShape(state, point) {
   const svg = state.svg;
   let itemIndex = svg.children.findIndex(
-    item => item["name"] === state.currentPath
+    item => item["name"] === state.currentShapeName
   );
   const newChildren = svg.children.update(itemIndex, function(item) {
-    return item.addPoint(point);
+    return item.updateShape(point);
   });
   const newSvg = svg.update(svg => {
     return svg.set("children", newChildren);
@@ -135,7 +160,7 @@ function dropEdgeItem(state, monitor, component) {
 const initialState = {
   svg: builder.createSvgSample(),
   selectedItem: null,
-  currentPath: null,
+  currentShapeName: null,
   toolsLeft: ["select", "pencil", "line", "rectangle", "circle"],
   toolsTop: ["undo", "redo"],
   selectedToolLeft: "select",
@@ -150,7 +175,7 @@ export default function shapes(state = initialState, action = {}) {
     case constants.SELECT_ITEM:
       return update(state, { selectedItem: action.item });
     case constants.SELECT_TOOL_LEFT:
-      if (action.tool == "pencil") {
+      if (action.tool !== "select") {
         pathManager.setup();
       }
       return update(state, { selectedToolLeft: action.tool });
@@ -158,10 +183,10 @@ export default function shapes(state = initialState, action = {}) {
       return update(state, { selectedToolTop: action.tool });
     case constants.DROP_ITEM:
       return drop(state, action.monitor, action.component);
-    case constants.CREATE_PATH:
-      return createPath(state, action.startPoint);
-    case constants.UPDATE_PATH:
-      return updatePath(state, action.point);
+    case constants.CREATE_SHAPE:
+      return createShape(state, action.startPoint);
+    case constants.UPDATE_SHAPE:
+      return updateShape(state, action.point);
     case constants.ATTR_CHANGE:
       return updateAttribute(
         state,

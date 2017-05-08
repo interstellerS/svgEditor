@@ -5,8 +5,8 @@ import {
   SELECT_TOOL_TOP,
   SELECT_COLOR,
   DROP_ITEM,
-  CREATE_PATH,
-  UPDATE_PATH,
+  CREATE_SHAPE,
+  UPDATE_SHAPE,
   CREATE_ITEM
 } from "../constants/ActionTypes";
 
@@ -34,9 +34,9 @@ export function dropItem(monitor, component) {
 export function selectColor(color) {
   return { type: SELECT_COLOR, color };
 }
-export function createSvgPath(startPoint) {
-  return { type: CREATE_PATH, startPoint };
+export function createSvgShape(startPoint) {
+  return { type: CREATE_SHAPE, startPoint };
 }
-export function updateSvgPath(point) {
-  return { type: UPDATE_PATH, point };
+export function updateSvgShape(point) {
+  return { type: UPDATE_SHAPE, point };
 }

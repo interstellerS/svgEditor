@@ -1,7 +1,7 @@
 "use strict";
 import $ from "jquery";
 import Point from "./Point";
-import { createSvgPath, updateSvgPath } from "redux/actions/svgActions";
+import { createSvgShape, updateSvgShape } from "redux/actions/svgActions";
 import store from "redux/store";
 
 export default class PathManager {
@@ -94,12 +94,12 @@ export default class PathManager {
   }
   beginPath(event) {
     const startPoint = this.createPoint(event.clientX, event.clientY);
-    store.dispatch(createSvgPath(startPoint));
+    store.dispatch(createSvgShape(startPoint));
   }
 
   updatePath(event) {
     const point = this.createPoint(event.clientX, event.clientY);
-    store.dispatch(updateSvgPath(point));
+    store.dispatch(updateSvgShape(point));
   }
 
   createPoint(x, y) {

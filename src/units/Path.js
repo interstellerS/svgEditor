@@ -64,31 +64,43 @@ export default class Path extends SvgShape {
       fill: this.fill
     };
   }
+  get cords() {
+    const points = this.points.toArray();
+    const minX = Math.min.apply(Math, points.map(o => o.x));
+    const minY = Math.min.apply(Math, points.map(o => o.y));
+    const maxX = Math.max.apply(Math, points.map(o => o.x));
+    const maxY = Math.max.apply(Math, points.map(o => o.y));
+
+    return {
+      minX,
+      minY,
+      maxX,
+      maxY
+    };
+  }
 
   get edges() {
+    const cords = this.cords;
     return [
-      { x: this.x1, y: this.y2 },
-      { x: this.x2, y: this.y2 },
-      { x: this.x2, y: this.y1 },
-      { x: this.x1, y: this.y1 }
+      { x: cords.minX, y: cords.minY },
+      { x: cords.maxX, y: cords.minY },
+      { x: cords.maxX, y: cords.maxY },
+      { x: cords.minX, y: cords.maxY }
     ];
   }
 
   get circles() {
+    const cords = this.cords;
     return [
       {
         orientation: ORIENTATION.NORD_WEST,
-        r: 5,
-        fill: "#22C",
-        cx: this.x,
-        cy: this.y
+        cx: (cords.minX + cords.maxX) / 2,
+        cy: minY
       },
       {
         orientation: ORIENTATION.NORD,
-        r: 5,
-        fill: "#22C",
-        cx: this.x + this.width / 2,
-        cy: this.y
+        cx: cords.maxX,
+        cy: (cords.minY + cords.maxY) / 2
       },
       {
         orientation: ORIENTATION.NORD_EST,
@@ -135,30 +147,31 @@ export default class Path extends SvgShape {
     ];
   }
   get circlesMins() {
+    const cords = this.cords;
     return [
       {
         orientation: ORIENTATION.NORD,
         name: this.name,
-        cx: (this.x1 + this.x2) / 2,
-        cy: this.y1
+        cx: (cords.minX + cords.maxX) / 2,
+        cy: cords.minY
       },
       {
         orientation: ORIENTATION.EST,
         name: this.name,
-        cx: this.x2,
-        cy: (this.y1 + this.y2) / 2
+        cx: cords.maxX,
+        cy: (cords.minY + cords.maxY) / 2
       },
       {
         orientation: ORIENTATION.SUD,
         name: this.name,
-        cx: (this.x1 + this.x2) / 2,
-        cy: this.y2
+        cx: (cords.minX + cords.maxX) / 2,
+        cy: cords.maxY
       },
       {
         orientation: ORIENTATION.WEST,
         name: this.name,
-        cx: this.x1,
-        cy: (this.y1 + this.y2) / 2
+        cx: cords.minX,
+        cy: (cords.minY + cords.maxY) / 2
       }
     ];
   }
@@ -197,21 +210,34 @@ export default class Path extends SvgShape {
     return other;
   }
 
-  translate(delta) {
-    let step1 = this.set("x1", this.x1 + delta.x);
-    let step2 = step1.set("x2", step1.x2 + delta.x);
-    let step3 = step2.set("y1", step2.y1 + delta.y);
-    let step4 = step3.set("y2", step3.y2 + delta.y);
-    return step4;
-  }
-
   setPoints(value) {
     return this.set("points", value);
   }
 
-  addPoint(point) {
+  updateShape(point) {
     const newPoints = this.points.push(point);
-    console.log(newPoints);
+    const other = this.setPoints(newPoints);
+    return other;
+  }
+
+  get calculatedWidth() {
+    const cords = this.cords;
+    return Math.abs(cords.minX - cords.maxX);
+  }
+
+  get calculatedHeight() {
+    const cords = this.cords;
+    return Math.abs(cords.minY - cords.maxY);
+  }
+
+  translate(delta) {
+    const newPoints = this.points.map(function mapPoint(point) {
+      return {
+        x: point.x + delta.x,
+        y: point.y + delta.y
+      };
+    });
+
     const other = this.setPoints(newPoints);
     return other;
   }

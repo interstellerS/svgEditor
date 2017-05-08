@@ -212,4 +212,12 @@ export default class Circle extends SvgShape {
     let other = that.set("cy", that.cy + delta.y);
     return other;
   }
+
+  updateShape(point) {
+    const distance = Math.sqrt(
+      Math.pow(this.cx - point.x, 2) + Math.pow(this.cy - point.y, 2)
+    );
+    let step1 = this.set("r", distance);
+    return step1;
+  }
 }

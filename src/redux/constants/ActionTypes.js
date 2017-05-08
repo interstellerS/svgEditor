@@ -6,5 +6,5 @@ export const SELECT_TOOL_TOP = "SELECT_TOOL_TOP";
 export const CREATE_ITEM = "CREATE_ITEM";
 export const DROP_ITEM = "DROP_ITEM";
 export const SELECT_COLOR = "SELECT_COLOR";
-export const CREATE_PATH = "CREATE_PATH";
-export const UPDATE_PATH = "UPDATE_PATH";
+export const CREATE_SHAPE = "CREATE_SHAPE";
+export const UPDATE_SHAPE = "UPDATE_SHAPE";
