@@ -45,14 +45,12 @@ ol {
     margin-top: 10px ;
 }
 .details {
-    margin-left: 20px;
-    flex: 2;
-    padding-left: 10px;
-    border-left: 1px #e1e4e8 solid;
+  flex: 2;
 }
 .inputs {
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 #svgcanvas svg * {
     cursor: move;

@@ -45,7 +45,7 @@ export default class PathManager {
   }
 
   initListners() {
-    this._mouseButtonDown = false;
+    this.mouseButtonDown = false;
 
     this.svgContainer[0].addEventListener("mousedown", this.handleMouseDown);
     this.svgContainer[0].addEventListener("mousemove", this.handleMouseMove);
@@ -57,8 +57,13 @@ export default class PathManager {
   }
 
   handleMouseDown(event) {
+    if (event.currentTarget.id != "svgBackground") {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
     if (event.which === 1) {
-      this._mouseButtonDown = true;
+      this.mouseButtonDown = true;
       this.beginPath(event);
 
       if (typeof this.onBegin === "function") {
@@ -67,8 +72,7 @@ export default class PathManager {
     }
   }
   handleMouseMove(event) {
-    if (event.which === 1) {
-      this.mouseButtonDown = true;
+    if (event.which === 1 && this.mouseButtonDown) {
       this.updatePath(event);
     }
   }
@@ -108,7 +112,7 @@ export default class PathManager {
   }
 
   addPoint(point) {
-    if (this._mouseButtonDown) {
+    if (this.mouseButtonDown) {
       this.points.push(point);
     }
   }

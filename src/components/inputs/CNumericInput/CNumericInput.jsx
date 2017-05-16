@@ -9,6 +9,7 @@ import "react-input-range/lib/css/index.css";
 export class CNumericInput extends Component {
   constructor(props) {
     super(props);
+    this.state = { svgWidth: 100 };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
@@ -24,12 +25,15 @@ export class CNumericInput extends Component {
 
   render() {
     return (
-      <InputRange
-        value={Math.round(this.props.value)}
-        onChange={value => this.handleOnChange(value)}
-        maxValue={this.state.svgWidth}
-        minValue={0}
-      />
+      <div className="numericInput">
+        <span className="attribute"> {this.props.attribute} </span>
+        <InputRange
+          value={Math.round(this.props.value)}
+          onChange={value => this.handleOnChange(value)}
+          maxValue={this.state.svgWidth}
+          minValue={0}
+        />
+      </div>
     );
   }
 }

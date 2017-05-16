@@ -65,5 +65,24 @@
   flex : 0 1 40px;
 }
 .input-range{
-  margin-right: 20px ;
+  margin : 15px 0px ;
+}
+.numericInput{
+  width: 100% ;
+  position: relative;
+}
+.input-range__label--min{
+  display: none ;
+}
+..input-range__label--min{
+  display: none ;
+}
+.numericInput .attribute {
+  font: 11px/130% sans-serif;
+      color: #ccc;
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      text-align: left;
 }

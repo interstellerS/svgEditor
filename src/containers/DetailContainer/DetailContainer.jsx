@@ -2,12 +2,25 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { Toolbar } from "components";
 import { Rectangle, Circle, SvgShape, Line } from "units";
+import * as icons from "components/Toolbar/Icons";
+import { Tool } from "components";
+import { slide as Menu } from "react-burger-menu";
+import "./DetailContainer.css";
+
 import {
   RectangleDetails,
   CircleDetails,
   LineDetails
 } from "components/details";
 import { changeSvgDetail, selectItem } from "redux/actions/svgActions";
+
+var styles = {
+  bmMenu: {
+    background: "#373a47",
+    padding: "2.5em 1.5em 0",
+    fontSize: "1.15em"
+  }
+};
 
 function mapStateToProps(state) {
   return { selectedItem: state.svg.selectedItem };
@@ -22,29 +35,62 @@ class DetailContainer extends Component {
   constructor(props) {
     super(props);
     this.handleOnBlur = this.handleOnBlur.bind(this);
+    this.state = { isOpen: false };
   }
-
   handleOnBlur(name, attribute, value) {
     const { dispatch } = this.props;
     dispatch(changeSvgDetail(name, attribute, value));
   }
-
-  render() {
+  toggle() {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+  renderPopover() {
     const { selectedItem } = this.props;
+    const {
+      isOpen
+    } = this.state;
 
     const isCircle = selectedItem instanceof Circle;
     const isRectangle = selectedItem instanceof Rectangle;
     const isLine = selectedItem instanceof Line;
-
+    let details;
     if (isLine)
-      return <LineDetails data={selectedItem} onBlur={this.handleOnBlur} />;
+      details = <LineDetails data={selectedItem} onBlur={this.handleOnBlur} />;
     if (isCircle)
-      return <CircleDetails data={selectedItem} onBlur={this.handleOnBlur} />;
+      details = (
+        <CircleDetails data={selectedItem} onBlur={this.handleOnBlur} />
+      );
+
     if (isRectangle)
-      return (
+      details = (
         <RectangleDetails data={selectedItem} onBlur={this.handleOnBlur} />
       );
-    return null;
+
+    return (
+      <Menu
+        isOpen={isOpen}
+        customBurgerIcon={false}
+        right
+        width={280}
+        styles={styles}
+        noOverlay
+      >
+        <div onClick={this.toggle}>
+          {details}
+        </div>
+      </Menu>
+    );
+  }
+
+  render() {
+    return (
+      <div id="details">
+        <div className="tool_button toolsBtn" onClick={() => this.toggle()}>
+          <icons.IconTool color="#566270" />
+        </div>
+        {this.renderPopover()}
+      </div>
+    );
   }
 }
 
