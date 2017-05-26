@@ -45450,6 +45450,22 @@
 	      this.set("fill", value);
 	    }
 	  }, {
+	    key: "stroke",
+	    get: function get() {
+	      return this.get("stroke");
+	    },
+	    set: function set(value) {
+	      this.set("stroke", value);
+	    }
+	  }, {
+	    key: "strokeWidth",
+	    get: function get() {
+	      return this.get("strokeWidth");
+	    },
+	    set: function set(value) {
+	      this.set("strokeWidth", value);
+	    }
+	  }, {
 	    key: "cx",
 	    get: function get() {
 	      return this.get("cx");
@@ -45496,9 +45512,11 @@
 	          r = _toJS.r,
 	          fill = _toJS.fill,
 	          cx = _toJS.cx,
-	          cy = _toJS.cy;
+	          cy = _toJS.cy,
+	          stroke = _toJS.stroke,
+	          strokeWidth = _toJS.strokeWidth;
 
-	      return { r: r, fill: fill, cx: cx, cy: cy };
+	      return { r: r, fill: fill, cx: cx, cy: cy, stroke: stroke, strokeWidth: strokeWidth };
 	    }
 	  }, {
 	    key: "allProps",
@@ -45754,6 +45772,22 @@
 	      this.set("fill", value);
 	    }
 	  }, {
+	    key: "stroke",
+	    get: function get() {
+	      return this.get("stroke");
+	    },
+	    set: function set(value) {
+	      this.set("stroke", value);
+	    }
+	  }, {
+	    key: "strokeWidth",
+	    get: function get() {
+	      return this.get("strokeWidth");
+	    },
+	    set: function set(value) {
+	      this.set("strokeWidth", value);
+	    }
+	  }, {
 	    key: "type",
 	    get: function get() {
 	      return "Rectangle";
@@ -45766,9 +45800,11 @@
 	          y = _toJS.y,
 	          width = _toJS.width,
 	          height = _toJS.height,
-	          fill = _toJS.fill;
+	          fill = _toJS.fill,
+	          stroke = _toJS.stroke,
+	          strokeWidth = _toJS.strokeWidth;
 
-	      return { x: x, y: y, width: width, height: height, fill: fill };
+	      return { x: x, y: y, width: width, height: height, fill: fill, stroke: stroke, strokeWidth: strokeWidth };
 	    }
 	  }, {
 	    key: "allProps",
@@ -65728,6 +65764,7 @@
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (DetailContainer.__proto__ || (0, _getPrototypeOf2.default)(DetailContainer)).call(this, props));
 
 	    _this.handleOnBlur = _this.handleOnBlur.bind(_this);
+	    _this.toggle = _this.toggle.bind(_this);
 	    _this.state = { isOpen: false };
 	    return _this;
 	  }
@@ -65772,7 +65809,7 @@
 	        },
 	        _react2.default.createElement(
 	          "div",
-	          { onClick: this.toggle },
+	          null,
 	          details
 	        )
 	      );
@@ -88298,7 +88335,7 @@
 
 
 	// module
-	exports.push([module.id, "/* Position and sizing of burger button */\n.bm-burger-button {\n  position: fixed;\n  width: 36px;\n  height: 30px;\n  left: 36px;\n  top: 36px;\n}\n\n/* Color/shape of burger icon bars */\n.bm-burger-bars {\n  background: #373a47;\n}\n\n/* Position and sizing of clickable cross button */\n.bm-cross-button {\n  height: 24px;\n  width: 24px;\n}\n\n/* Color/shape of close button cross */\n.bm-cross {\n  background: #bdc3c7;\n}\n\n/* General sidebar styles */\n.bm-menu {\n  background: white !important ;\n  padding: 2.5em 1.5em 0;\n  font-size: 1.15em;\n  overflow: hidden !important ;\n  box-shadow: rgba(0, 0, 0, 0.117647) 0px 2px 10px, rgba(0, 0, 0, 0.156863) 0px 2px 5px;\n  height: 90% !important ;\n}\n\n/* Morph shape necessary with bubble or elastic */\n.bm-morph-shape {\n  fill: #373a47;\n}\n\n/* Wrapper for item list */\n.bm-item-list {\n  color: #b8b7ad;\n  padding: 0.8em;\n}\n\n/* Styling of overlay */\n.bm-overlay {\n  background: none  ;\n}\n.toolsBtn{\n  position: absolute;\n  right: 10px ;\n}\n.bm-menu-wrap{\n  top: 70px ;\n  right: 10px !important ;\n  height: 90% !important ;\n}\n", ""]);
+	exports.push([module.id, "/* Position and sizing of burger button */\n.bm-burger-button {\n  position: fixed;\n  width: 36px;\n  height: 30px;\n  left: 36px;\n  top: 36px;\n}\n\n/* Color/shape of burger icon bars */\n.bm-burger-bars {\n  background: #373a47;\n}\n\n/* Position and sizing of clickable cross button */\n.bm-cross-button {\n  height: 24px;\n  width: 24px;\n}\n\n/* Color/shape of close button cross */\n.bm-cross {\n  background: #bdc3c7;\n}\n\n/* General sidebar styles */\n.bm-menu {\n  background: white !important ;\n  padding: 2.5em 0 0 !important  ;\n  font-size: 1.15em;\n  overflow: hidden !important ;\n  box-shadow: rgba(0, 0, 0, 0.117647) 0px 2px 10px, rgba(0, 0, 0, 0.156863) 0px 2px 5px;\n  height: 90% !important ;\n}\n\n/* Morph shape necessary with bubble or elastic */\n.bm-morph-shape {\n  fill: #373a47;\n}\n\n/* Wrapper for item list */\n.bm-item-list {\n  color: #b8b7ad;\n  padding: 0.8em;\n}\n\n/* Styling of overlay */\n.bm-overlay {\n  background: none  ;\n}\n.toolsBtn{\n  position: absolute;\n  right: 10px ;\n}\n.bm-menu-wrap{\n  top: 70px ;\n  right: 10px !important ;\n  height: 90% !important ;\n}\n", ""]);
 
 	// exports
 
@@ -88380,24 +88417,41 @@
 	        name: data.name,
 	        attribute: "r",
 	        value: data.r,
+	        horizontal: false,
 	        onBlur: onBlur
 	      }),
 	      _react2.default.createElement(_inputs.NumericInput, {
 	        name: data.name,
 	        attribute: "cx",
 	        value: data.cx,
+	        horizontal: true,
 	        onBlur: onBlur
 	      }),
 	      _react2.default.createElement(_inputs.NumericInput, {
 	        name: data.name,
 	        attribute: "cy",
 	        value: data.cy,
+	        horizontal: false,
+	        onBlur: onBlur
+	      }),
+	      _react2.default.createElement(_inputs.NumericInput, {
+	        name: data.name,
+	        attribute: "strokeWidth",
+	        value: data.strokeWidth,
+	        horizontal: false,
 	        onBlur: onBlur
 	      }),
 	      _react2.default.createElement(_inputs.ColorPallete, {
 	        name: data.name,
 	        attribute: "fill",
 	        value: data.fill,
+	        pallete: (0, _values2.default)(colors),
+	        palletePicked: onBlur
+	      }),
+	      _react2.default.createElement(_inputs.ColorPallete, {
+	        name: data.name,
+	        attribute: "stroke",
+	        value: data.stroke,
 	        pallete: (0, _values2.default)(colors),
 	        palletePicked: onBlur
 	      })
@@ -88519,6 +88573,8 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	var _class, _temp;
+
 	var _react = __webpack_require__(307);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -88543,7 +88599,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var CNumericInput = exports.CNumericInput = function (_Component) {
+	var CNumericInput = exports.CNumericInput = (_temp = _class = function (_Component) {
 	  (0, _inherits3.default)(CNumericInput, _Component);
 
 	  function CNumericInput(props) {
@@ -88551,7 +88607,7 @@
 
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (CNumericInput.__proto__ || (0, _getPrototypeOf2.default)(CNumericInput)).call(this, props));
 
-	    _this.state = { svgWidth: 100 };
+	    _this.state = { max: 100 };
 	    _this.handleOnChange = _this.handleOnChange.bind(_this);
 	    return _this;
 	  }
@@ -88561,14 +88617,16 @@
 	    value: function handleOnChange(value) {
 	      this.props.onBlur(this.props.name, this.props.attribute, value);
 	    }
-
-	    // TODO refac : Jquery is an antipattern in react apps  -> refac this code
-
 	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      var svgWidth = (0, _jquery2.default)("#rectBackground")[0].getBoundingClientRect().width;
-	      this.setState({ svgWidth: Math.round(svgWidth) });
+	    key: "componentWillMount",
+	    value: function componentWillMount() {
+	      var _$$0$getBoundingClien = (0, _jquery2.default)("#rectBackground")[0].getBoundingClientRect(),
+	          width = _$$0$getBoundingClien.width,
+	          height = _$$0$getBoundingClien.height;
+
+	      this.setState({
+	        max: this.props.horizontal ? Math.round(width) : Math.round(height)
+	      });
 	    }
 	  }, {
 	    key: "render",
@@ -88590,21 +88648,20 @@
 	          onChange: function onChange(value) {
 	            return _this2.handleOnChange(value);
 	          },
-	          maxValue: this.state.svgWidth,
+	          maxValue: this.state.max,
 	          minValue: 0
 	        })
 	      );
 	    }
 	  }]);
 	  return CNumericInput;
-	}(_react.Component);
-
-	CNumericInput.propTypes = {
+	}(_react.Component), _class.propTypes = {
 	  name: _react.PropTypes.string.isRequired,
 	  attribute: _react.PropTypes.string.isRequired,
 	  placeholder: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
+	  horizontal: _react.PropTypes.bool.isRequired,
 	  onBlur: _react.PropTypes.func.isRequired
-	};
+	}, _temp);
 
 /***/ },
 /* 858 */
@@ -91732,7 +91789,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.input {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  padding-left: 15px;\n}\n\n.input:focus {\n  border: 1px solid #33C3F0 !important;\n}\n\n.table-input {\n  border: 0 !important;\n  border-radius: 0 !important;\n}\n.input-label {\n  position: relative;\n  display: inline-block;\n  height:100px;\n  width: calc(100% * (1/3) - 10px - 1px);\n  margin:10px 0 0 2%;\n  border: 1px solid;\n  flex-grow: 1;\n}\n\n.input-label span{\n  display: block;\n  position: absolute;\n  top: 5px;\n  left: 5px;\n  text-align: left;\n}\n.input-label input{\n  border: 0;\n  background: transparent;\n  font: 24px/normal sans-serif;\n  text-align: center;\n  padding: 30px 0 16px;\n  width: 100%;\n  height: 24px;\n  position: relative;\n}\n.input-label input:focus {\n    outline-width: 0;\n}\n.numeric-input {\n  padding: 9px 5px 10px 5px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  outline: 0;\n  background: #fff;\n  font-size: .9em;\n  font-family: inherit;\n  border: none;\n  border: 1px solid #E6EDF4;\n  color: #7E899B;\n  -webkit-transition: all .2s;\n  transition: all .2s;\n}\n.react-numeric-input{\n  margin : 5px 5px 0;\n  flex : 0 1 40px;\n}\n.input-range{\n  margin : 15px 0px ;\n}\n.numericInput{\n  width: 100% ;\n  position: relative;\n}\n.input-range__label--min{\n  display: none ;\n}\n..input-range__label--min{\n  display: none ;\n}\n.numericInput .attribute {\n  font: 11px/130% sans-serif;\n      color: #ccc;\n      display: block;\n      position: absolute;\n      top: 0px;\n      left: 0px;\n      text-align: left;\n}\n", ""]);
+	exports.push([module.id, "\n.input {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  padding-left: 15px;\n}\n\n.input:focus {\n  border: 1px solid #33C3F0 !important;\n}\n\n.table-input {\n  border: 0 !important;\n  border-radius: 0 !important;\n}\n.input-label {\n  position: relative;\n  display: inline-block;\n  height:100px;\n  width: calc(100% * (1/3) - 10px - 1px);\n  margin:10px 0 0 2%;\n  border: 1px solid;\n  flex-grow: 1;\n}\n\n.input-label span{\n  display: block;\n  position: absolute;\n  top: 5px;\n  left: 5px;\n  text-align: left;\n}\n.input-label input{\n  border: 0;\n  background: transparent;\n  font: 24px/normal sans-serif;\n  text-align: center;\n  padding: 30px 0 16px;\n  width: 100%;\n  height: 24px;\n  position: relative;\n}\n.input-label input:focus {\n    outline-width: 0;\n}\n.numeric-input {\n  padding: 9px 5px 10px 5px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  outline: 0;\n  background: #fff;\n  font-size: .9em;\n  font-family: inherit;\n  border: none;\n  border: 1px solid #E6EDF4;\n  color: #7E899B;\n  -webkit-transition: all .2s;\n  transition: all .2s;\n}\n.react-numeric-input{\n  margin : 5px 5px 0;\n  flex : 0 1 40px;\n}\n.input-range{\n  margin : 20px 0px ;\n}\n.numericInput{\n  width: 100% ;\n  position: relative;\n  border-bottom: 1px solid rgb(238, 238, 238);\n}\n.input-range__label--min{\n  display: none ;\n}\n.input-range__label--min{\n  display: none ;\n}\n.input-range__label--max{\n  display: none ;\n}\n.numericInput .attribute {\n  font: 11px/130% sans-serif;\n      color: rgb(51, 51, 51) ;\n      display: block;\n      position: absolute;\n      top: 0px;\n      left: 0px;\n      text-align: left;\n}\n", ""]);
 
 	// exports
 
@@ -91892,7 +91949,14 @@
 
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "react-numeric-input" },
+	        { className: "color-palette" },
+	        _react2.default.createElement(
+	          "span",
+	          { className: "attribute" },
+	          " ",
+	          this.props.attribute,
+	          " "
+	        ),
 	        _react2.default.createElement(
 	          "div",
 	          { style: styles.swatch, onClick: this.handleClick },
@@ -104971,7 +105035,7 @@
 
 
 	// module
-	exports.push([module.id, ".palette {\n  display: flex;\n  flex-direction: row;\n}\n.palette-item {\n  flex : 1 ;\n}\n\n.pallete:hover {\n  border: 6px solid #EEEEEE;\n}\n\n.pallete-active {\n  border: 4px solid #E0E0E0;\n}\n", ""]);
+	exports.push([module.id, ".palette {\n  display: flex;\n  flex-direction: row;\n}\n.palette-item {\n  flex : 1 ;\n}\n\n.pallete:hover {\n  border: 6px solid #EEEEEE;\n}\n\n.pallete-active {\n  border: 4px solid #E0E0E0;\n}\n.color-palette  {\n  position: relative;\n  width: 100%;\n  text-align: center;\n  border-bottom: 1px solid rgb(238, 238, 238);\n  padding: 15px 0px;\n}\n.color-palette .attribute {\n  font: 11px/130% sans-serif;\n      color: rgb(51, 51, 51) ;\n      display: block;\n      position: absolute;\n      top: 0px;\n      left: 0px;\n      text-align: left;\n}\n", ""]);
 
 	// exports
 
@@ -105092,30 +105156,48 @@
 	        name: data.name,
 	        attribute: "x",
 	        value: data.x,
+	        horizontal: true,
 	        onBlur: onBlur
 	      }),
 	      _react2.default.createElement(_inputs.NumericInput, {
 	        name: data.name,
 	        attribute: "y",
 	        value: data.y,
+	        horizontal: false,
 	        onBlur: onBlur
 	      }),
 	      _react2.default.createElement(_inputs.NumericInput, {
 	        name: data.name,
 	        attribute: "width",
 	        value: data.width,
+	        horizontal: true,
 	        onBlur: onBlur
 	      }),
 	      _react2.default.createElement(_inputs.NumericInput, {
 	        name: data.name,
 	        attribute: "height",
 	        value: data.height,
+	        horizontal: false,
+	        onBlur: onBlur
+	      }),
+	      _react2.default.createElement(_inputs.NumericInput, {
+	        name: data.name,
+	        attribute: "strokeWidth",
+	        value: data.strokeWidth,
+	        horizontal: false,
 	        onBlur: onBlur
 	      }),
 	      _react2.default.createElement(_inputs.ColorPallete, {
 	        name: data.name,
 	        attribute: "fill",
 	        value: data.fill,
+	        pallete: (0, _values2.default)(colors),
+	        palletePicked: onBlur
+	      }),
+	      _react2.default.createElement(_inputs.ColorPallete, {
+	        name: data.name,
+	        attribute: "stroke",
+	        value: data.stroke,
 	        pallete: (0, _values2.default)(colors),
 	        palletePicked: onBlur
 	      })
@@ -121187,6 +121269,8 @@
 	function createCircle(x, y) {
 	  var r = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
 	  var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : colors.COQUELICOT;
+	  var strokeWidth = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 5;
+	  var stroke = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : colors.PARME;
 
 	  return new _units.Circle({
 	    name: "circle" + "_" + shortid.generate(),
@@ -121194,6 +121278,8 @@
 	    cy: y,
 	    r: r,
 	    fill: color,
+	    strokeWidth: strokeWidth,
+	    stroke: stroke,
 	    children: (0, _immutable.List)([])
 	  });
 	}
@@ -121202,6 +121288,8 @@
 	  var width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 30;
 	  var height = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 30;
 	  var color = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : colors.COQUELICOT;
+	  var strokeWidth = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 5;
+	  var stroke = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : colors.PARME;
 
 	  return new _units.Rectangle({
 	    name: "rectangle" + "_" + shortid.generate(),
@@ -121210,6 +121298,8 @@
 	    width: width,
 	    height: height,
 	    fill: color,
+	    strokeWidth: strokeWidth,
+	    stroke: stroke,
 	    children: (0, _immutable.List)([])
 	  });
 	}
@@ -121728,7 +121818,9 @@
 	  }, {
 	    key: "handleMouseDown",
 	    value: function handleMouseDown(event) {
-	      if (event.currentTarget.id != "svgBackground") {
+	      var selectedToolLeft = _store2.default.getState().svg.selectedToolLeft;
+
+	      if (event.currentTarget.id != "svgBackground" || selectedToolLeft == "select") {
 	        event.preventDefault();
 	        event.stopPropagation();
 	        return false;
