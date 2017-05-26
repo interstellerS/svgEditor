@@ -13,3 +13,11 @@ export const ORIENTATION = {
   SUD_WEST: "SUD_WEST",
   WEST: "WEST"
 };
+export const ALIGN = {
+  LEFT: "LEFT",
+  CENTER: "CENTER",
+  RIGHT: "RIGHT",
+  TOP: "TOP",
+  MIDDLE: "MIDDLE",
+  BOTTOM: "BOTTOM"
+};

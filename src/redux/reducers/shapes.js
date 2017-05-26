@@ -120,6 +120,19 @@ function resizeSvgItem(state, name, orientation, delta) {
   let selectedItem = newSvg.children.get(itemIndex);
   return update(state, { svg: newSvg, selectedItem: selectedItem });
 }
+function changeAlign(state, name, value) {
+  const svg = state.svg;
+  const { width, height } = $("#rectBackground")[0].getBoundingClientRect();
+  let itemIndex = svg.children.findIndex(item => item["name"] === name);
+  const newChildren = svg.children.update(itemIndex, function(item) {
+    return item.changeAlign(value, width, height);
+  });
+  const newSvg = svg.update(svg => {
+    return svg.set("children", newChildren);
+  });
+  let selectedItem = newSvg.children.get(itemIndex);
+  return update(state, { svg: newSvg, selectedItem: selectedItem });
+}
 
 function dropSvgItem(state, monitor, component) {
   const name = monitor.getItem().data.name;
@@ -204,6 +217,8 @@ export default function shapes(state = initialState, action = {}) {
       return createShape(state, action.startPoint);
     case constants.UPDATE_SHAPE:
       return updateShape(state, action.point);
+    case constants.CHANGE_ALIGN:
+      return changeAlign(state, action.name, action.value);
     case constants.ATTR_CHANGE:
       return updateAttribute(
         state,

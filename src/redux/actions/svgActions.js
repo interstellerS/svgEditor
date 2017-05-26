@@ -7,6 +7,7 @@ import {
   DROP_ITEM,
   CREATE_SHAPE,
   UPDATE_SHAPE,
+  CHANGE_ALIGN,
   CREATE_ITEM
 } from "../constants/ActionTypes";
 
@@ -16,6 +17,9 @@ export function selectItem(item) {
 
 export function changeSvgDetail(name, attribute, value) {
   return { type: ATTR_CHANGE, name, attribute, value };
+}
+export function changeSvgAlign(name, value) {
+  return { type: CHANGE_ALIGN, name, value };
 }
 
 export function selectToolLeft(tool) {

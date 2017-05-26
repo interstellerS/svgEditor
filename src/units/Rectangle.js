@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import SvgShape from "./SvgShape";
 import { ORIENTATION } from "redux/constants/dndConstants";
+import { ALIGN } from "redux/constants/dndConstants";
 
 export default class Rectangle extends SvgShape {
   constructor(options) {
@@ -225,6 +226,31 @@ export default class Rectangle extends SvgShape {
       other = this.set("width", this.width + delta.x);
     }
     return other;
+  }
+  changeAlign(value, width, height) {
+    let that;
+    switch (value) {
+      case ALIGN.LEFT:
+        that = this.set("x", 0);
+        break;
+      case ALIGN.CENTER:
+        that = this.set("x", width / 2 - this.width / 2);
+        break;
+      case ALIGN.RIGHT:
+        that = this.set("x", width - this.width);
+        break;
+      case ALIGN.TOP:
+        that = this.set("y", 0);
+        break;
+      case ALIGN.MIDDLE:
+        that = this.set("y", height / 2 - this.height / 2);
+        break;
+      case ALIGN.BOTTOM:
+        that = this.set("y", height - this.height);
+        break;
+      default:
+    }
+    return that;
   }
 
   translate(delta) {

@@ -1,10 +1,11 @@
 import React, { PropTypes } from "react";
 import { SvgShape } from "units";
 import { NumericInput, ColorPallete } from "components/inputs";
+import { AlignDetails } from "components/details";
 import * as colors from "data/colors";
 import style from "./RectangleDetails.css";
 
-const RectangleDetails = ({ data, onBlur }) => {
+const RectangleDetails = ({ data, onBlur, onAlignPicked }) => {
   return (
     <div className="details">
       <div className="inputs">
@@ -58,13 +59,15 @@ const RectangleDetails = ({ data, onBlur }) => {
           palletePicked={onBlur}
         />
       </div>
+      <AlignDetails alignPicked={onAlignPicked} />
     </div>
   );
 };
 
 RectangleDetails.propTypes = {
   data: PropTypes.instanceOf(SvgShape),
-  onBlur: PropTypes.func.isRequired
+  onBlur: PropTypes.func.isRequired,
+  onAlignPicked: PropTypes.func.isRequired
 };
 
 export default RectangleDetails;

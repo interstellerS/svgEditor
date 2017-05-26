@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import SvgShape from "./SvgShape";
 import { ORIENTATION } from "redux/constants/dndConstants";
+import { ALIGN } from "redux/constants/dndConstants";
 
 export default class Circle extends SvgShape {
   constructor(options) {
@@ -241,5 +242,31 @@ export default class Circle extends SvgShape {
     );
     let step1 = this.set("r", distance);
     return step1;
+  }
+
+  changeAlign(value, width, height) {
+    let that, other;
+    switch (value) {
+      case ALIGN.LEFT:
+        that = this.set("cx", this.r);
+        break;
+      case ALIGN.CENTER:
+        that = this.set("cx", width / 2);
+        break;
+      case ALIGN.RIGHT:
+        that = this.set("cx", width - this.r);
+        break;
+      case ALIGN.TOP:
+        that = this.set("cy", this.r);
+        break;
+      case ALIGN.MIDDLE:
+        that = this.set("cy", height / 2);
+        break;
+      case ALIGN.BOTTOM:
+        that = this.set("cy", height - this.r);
+        break;
+      default:
+    }
+    return that;
   }
 }

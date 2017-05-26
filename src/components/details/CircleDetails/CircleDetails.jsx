@@ -1,10 +1,11 @@
 import React, { PropTypes } from "react";
 import { SvgShape } from "units";
 import { NumericInput, ColorPallete } from "components/inputs";
+import { AlignDetails } from "components/details";
 import * as colors from "data/colors";
 import style from "./CircleDetails.css";
 
-const CircleDetails = ({ data, onBlur }) => {
+const CircleDetails = ({ data, onBlur, onAlignPicked }) => {
   return (
     <div className="details">
       <div className="inputs">
@@ -51,14 +52,15 @@ const CircleDetails = ({ data, onBlur }) => {
           palletePicked={onBlur}
         />
       </div>
-
+      <AlignDetails alignPicked={onAlignPicked} />
     </div>
   );
 };
 
 CircleDetails.propTypes = {
   data: PropTypes.instanceOf(SvgShape),
-  onBlur: PropTypes.func.isRequired
+  onBlur: PropTypes.func.isRequired,
+  onAlignPicked: PropTypes.func.isRequired
 };
 
 export default CircleDetails;

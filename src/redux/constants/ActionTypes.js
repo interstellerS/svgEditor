@@ -8,3 +8,4 @@ export const DROP_ITEM = "DROP_ITEM";
 export const SELECT_COLOR = "SELECT_COLOR";
 export const CREATE_SHAPE = "CREATE_SHAPE";
 export const UPDATE_SHAPE = "UPDATE_SHAPE";
+export const CHANGE_ALIGN = "CHANGE_ALIGN";

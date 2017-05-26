@@ -30,7 +30,6 @@
   font-size: 1.15em;
   overflow: hidden !important ;
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 2px 10px, rgba(0, 0, 0, 0.156863) 0px 2px 5px;
-  height: 90% !important ;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -53,7 +52,6 @@
   right: 10px ;
 }
 .bm-menu-wrap{
-  top: 70px ;
   right: 10px !important ;
   height: 90% !important ;
 }

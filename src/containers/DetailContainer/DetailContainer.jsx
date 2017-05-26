@@ -12,7 +12,11 @@ import {
   CircleDetails,
   LineDetails
 } from "components/details";
-import { changeSvgDetail, selectItem } from "redux/actions/svgActions";
+import {
+  changeSvgDetail,
+  selectItem,
+  changeSvgAlign
+} from "redux/actions/svgActions";
 
 var styles = {
   bmMenu: {
@@ -36,11 +40,17 @@ class DetailContainer extends Component {
     super(props);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.onAlignPicked = this.onAlignPicked.bind(this);
     this.state = { isOpen: false };
   }
   handleOnBlur(name, attribute, value) {
     const { dispatch } = this.props;
     dispatch(changeSvgDetail(name, attribute, value));
+  }
+  onAlignPicked(value) {
+    let { name } = this.props.selectedItem;
+    const { dispatch } = this.props;
+    dispatch(changeSvgAlign(name, value));
   }
   toggle() {
     this.setState({ isOpen: !this.state.isOpen });
@@ -56,15 +66,29 @@ class DetailContainer extends Component {
     const isLine = selectedItem instanceof Line;
     let details;
     if (isLine)
-      details = <LineDetails data={selectedItem} onBlur={this.handleOnBlur} />;
+      details = (
+        <LineDetails
+          data={selectedItem}
+          onBlur={this.handleOnBlur}
+          onAlignPicked={this.onAlignPicked}
+        />
+      );
     if (isCircle)
       details = (
-        <CircleDetails data={selectedItem} onBlur={this.handleOnBlur} />
+        <CircleDetails
+          data={selectedItem}
+          onBlur={this.handleOnBlur}
+          onAlignPicked={this.onAlignPicked}
+        />
       );
 
     if (isRectangle)
       details = (
-        <RectangleDetails data={selectedItem} onBlur={this.handleOnBlur} />
+        <RectangleDetails
+          data={selectedItem}
+          onBlur={this.handleOnBlur}
+          onAlignPicked={this.onAlignPicked}
+        />
       );
 
     return (
