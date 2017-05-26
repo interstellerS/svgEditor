@@ -12,24 +12,41 @@ const CircleDetails = ({ data, onBlur }) => {
           name={data.name}
           attribute="r"
           value={data.r}
+          horizontal={false}
           onBlur={onBlur}
         />
         <NumericInput
           name={data.name}
           attribute="cx"
           value={data.cx}
+          horizontal={true}
           onBlur={onBlur}
         />
         <NumericInput
           name={data.name}
           attribute="cy"
           value={data.cy}
+          horizontal={false}
+          onBlur={onBlur}
+        />
+        <NumericInput
+          name={data.name}
+          attribute="strokeWidth"
+          value={data.strokeWidth}
+          horizontal={false}
           onBlur={onBlur}
         />
         <ColorPallete
           name={data.name}
           attribute="fill"
           value={data.fill}
+          pallete={Object.values(colors)}
+          palletePicked={onBlur}
+        />
+        <ColorPallete
+          name={data.name}
+          attribute="stroke"
+          value={data.stroke}
           pallete={Object.values(colors)}
           palletePicked={onBlur}
         />

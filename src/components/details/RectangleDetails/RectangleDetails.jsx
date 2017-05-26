@@ -12,30 +12,48 @@ const RectangleDetails = ({ data, onBlur }) => {
           name={data.name}
           attribute="x"
           value={data.x}
+          horizontal={true}
           onBlur={onBlur}
         />
         <NumericInput
           name={data.name}
           attribute="y"
           value={data.y}
+          horizontal={false}
           onBlur={onBlur}
         />
         <NumericInput
           name={data.name}
           attribute="width"
           value={data.width}
+          horizontal={true}
           onBlur={onBlur}
         />
         <NumericInput
           name={data.name}
           attribute="height"
           value={data.height}
+          horizontal={false}
+          onBlur={onBlur}
+        />
+        <NumericInput
+          name={data.name}
+          attribute="strokeWidth"
+          value={data.strokeWidth}
+          horizontal={false}
           onBlur={onBlur}
         />
         <ColorPallete
           name={data.name}
           attribute="fill"
           value={data.fill}
+          pallete={Object.values(colors)}
+          palletePicked={onBlur}
+        />
+        <ColorPallete
+          name={data.name}
+          attribute="stroke"
+          value={data.stroke}
           pallete={Object.values(colors)}
           palletePicked={onBlur}
         />

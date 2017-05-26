@@ -57,7 +57,10 @@ export default class PathManager {
   }
 
   handleMouseDown(event) {
-    if (event.currentTarget.id != "svgBackground") {
+    let { selectedToolLeft } = store.getState().svg;
+    if (
+      event.currentTarget.id != "svgBackground" || selectedToolLeft == "select"
+    ) {
       event.preventDefault();
       event.stopPropagation();
       return false;

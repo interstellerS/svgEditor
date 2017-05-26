@@ -35,6 +35,7 @@ class DetailContainer extends Component {
   constructor(props) {
     super(props);
     this.handleOnBlur = this.handleOnBlur.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.state = { isOpen: false };
   }
   handleOnBlur(name, attribute, value) {
@@ -75,7 +76,7 @@ class DetailContainer extends Component {
         styles={styles}
         noOverlay
       >
-        <div onClick={this.toggle}>
+        <div>
           {details}
         </div>
       </Menu>

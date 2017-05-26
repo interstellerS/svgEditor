@@ -22,13 +22,22 @@ export function createSvg() {
   return new Svg({ name: "svg", expanded: true, children: List([]) });
 }
 
-export function createCircle(x, y, r = 5, color = colors.COQUELICOT) {
+export function createCircle(
+  x,
+  y,
+  r = 5,
+  color = colors.COQUELICOT,
+  strokeWidth = 5,
+  stroke = colors.PARME
+) {
   return new Circle({
     name: "circle" + "_" + shortid.generate(),
     cx: x,
     cy: y,
     r: r,
     fill: color,
+    strokeWidth: strokeWidth,
+    stroke: stroke,
     children: List([])
   });
 }
@@ -38,7 +47,9 @@ export function createRectangle(
   y,
   width = 30,
   height = 30,
-  color = colors.COQUELICOT
+  color = colors.COQUELICOT,
+  strokeWidth = 5,
+  stroke = colors.PARME
 ) {
   return new Rectangle({
     name: "rectangle" + "_" + shortid.generate(),
@@ -47,6 +58,8 @@ export function createRectangle(
     width: width,
     height: height,
     fill: color,
+    strokeWidth: strokeWidth,
+    stroke: stroke,
     children: List([])
   });
 }

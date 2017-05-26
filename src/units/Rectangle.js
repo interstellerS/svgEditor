@@ -47,13 +47,37 @@ export default class Rectangle extends SvgShape {
     this.set("fill", value);
   }
 
+  get stroke() {
+    return this.get("stroke");
+  }
+
+  set stroke(value) {
+    this.set("stroke", value);
+  }
+
+  get strokeWidth() {
+    return this.get("strokeWidth");
+  }
+
+  set strokeWidth(value) {
+    this.set("strokeWidth", value);
+  }
+
+  get stroke() {
+    return this.get("stroke");
+  }
+
+  set stroke(value) {
+    this.set("stroke", value);
+  }
+
   get type() {
     return "Rectangle";
   }
 
   get domProps() {
-    let { x, y, width, height, fill } = this.toJS();
-    return { x, y, width, height, fill };
+    let { x, y, width, height, fill, stroke, strokeWidth } = this.toJS();
+    return { x, y, width, height, fill, stroke, strokeWidth };
   }
 
   get allProps() {

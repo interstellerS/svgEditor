@@ -22,7 +22,29 @@ export default class Circle extends SvgShape {
   set fill(value) {
     this.set("fill", value);
   }
+  get stroke() {
+    return this.get("stroke");
+  }
 
+  set stroke(value) {
+    this.set("stroke", value);
+  }
+
+  get strokeWidth() {
+    return this.get("strokeWidth");
+  }
+
+  set strokeWidth(value) {
+    this.set("strokeWidth", value);
+  }
+
+  get stroke() {
+    return this.get("stroke");
+  }
+
+  set stroke(value) {
+    this.set("stroke", value);
+  }
   get cx() {
     return this.get("cx");
   }
@@ -61,8 +83,8 @@ export default class Circle extends SvgShape {
   }
 
   get domProps() {
-    let { r, fill, cx, cy } = this.toJS();
-    return { r, fill, cx, cy };
+    let { r, fill, cx, cy, stroke, strokeWidth } = this.toJS();
+    return { r, fill, cx, cy, stroke, strokeWidth };
   }
 
   get allProps() {

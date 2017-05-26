@@ -62,7 +62,8 @@ export default class ColorPallete extends Component {
     });
 
     return (
-      <div className="react-numeric-input">
+      <div className="color-palette">
+        <span className="attribute"> {this.props.attribute} </span>
         <div style={styles.swatch} onClick={this.handleClick}>
           <div style={styles.color} />
         </div>
