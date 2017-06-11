@@ -186,10 +186,11 @@ function dropEdgeItem(state, monitor, component) {
   );
   return newState;
 }
-
+let svg = builder.createSvgSample();
+let selectedItem = svg.children.get(3);
 const initialState = {
   svg: builder.createSvgSample(),
-  selectedItem: null,
+  selectedItem: selectedItem,
   currentShapeName: null,
   toolsLeft: ["select", "pencil", "line", "rectangle", "circle"],
   toolsTop: ["undo", "redo"],

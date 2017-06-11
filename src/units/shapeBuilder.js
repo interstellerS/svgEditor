@@ -3,12 +3,13 @@ import { Circle, Rectangle, Line, Svg, Path } from "units";
 import * as shortid from "shortid";
 import * as colors from "data/colors";
 
+const line = createLine(900, 100, 10, 300, 10, colors.LILAS);
+
 export function createSvgSample() {
   const initSvg = createSvg();
-  const circle = createCircle(50, 50, 10, colors.COQUELICOT);
-  const rectangle = createRectangle(300, 100, 100, 50, colors.ACACIA);
-  const circle2 = createCircle(30, 20, 10, colors.LILAS);
-  const line = createLine(200, 10, 10, 100, 10, colors.LILAS);
+  const circle = createCircle(400, 300, 150, colors.COQUELICOT);
+  const rectangle = createRectangle(350, 100, 200, 300, colors.ACACIA);
+  const circle2 = createCircle(800, 260, 100, colors.COBALT, 2, colors.ROSE);
 
   const svg = initSvg
     .addChild(circle)
@@ -16,7 +17,7 @@ export function createSvgSample() {
     .addChild(rectangle)
     .addChild(line);
 
-  return initSvg;
+  return svg;
 }
 export function createSvg() {
   return new Svg({ name: "svg", expanded: true, children: List([]) });

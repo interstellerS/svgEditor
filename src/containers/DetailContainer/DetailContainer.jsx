@@ -41,7 +41,7 @@ class DetailContainer extends Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.toggle = this.toggle.bind(this);
     this.onAlignPicked = this.onAlignPicked.bind(this);
-    this.state = { isOpen: false };
+    this.state = { isOpen: true };
   }
   handleOnBlur(name, attribute, value) {
     const { dispatch } = this.props;
@@ -57,9 +57,7 @@ class DetailContainer extends Component {
   }
   renderPopover() {
     const { selectedItem } = this.props;
-    const {
-      isOpen
-    } = this.state;
+    const { isOpen } = this.state;
 
     const isCircle = selectedItem instanceof Circle;
     const isRectangle = selectedItem instanceof Rectangle;

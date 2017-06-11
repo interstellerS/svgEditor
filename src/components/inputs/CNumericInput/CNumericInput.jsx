@@ -25,7 +25,8 @@ export class CNumericInput extends Component {
     this.props.onBlur(this.props.name, this.props.attribute, value);
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    if (!!$("#rectBackground")) return false;
     const { width, height } = $("#rectBackground")[0].getBoundingClientRect();
     this.setState({
       max: this.props.horizontal ? Math.round(width) : Math.round(height)
